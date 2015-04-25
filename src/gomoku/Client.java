@@ -1,5 +1,5 @@
 package gomoku;
-
+//john test commit
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
