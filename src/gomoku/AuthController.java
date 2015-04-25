@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *this is a test comment from chase
  * @author heyitsjeoff
  */
 public class AuthController implements Runnable{
