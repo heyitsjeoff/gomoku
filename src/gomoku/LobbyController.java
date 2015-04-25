@@ -11,12 +11,12 @@ public class LobbyController implements Runnable{
     
     private LobbyView theView;
     private DefaultListModel dlm;
-    private Client theClient;
+    private AuthController auth;
 
-    public LobbyController(LobbyView theView, Client theClient){
+    public LobbyController(LobbyView theView, AuthController auth){
         this.theView = theView;
         this.theView.challengePlayerListener(new ChallengeListener());
-        this.theClient = theClient;
+        this.auth = auth;
     }
     
     @Override
@@ -44,7 +44,8 @@ public class LobbyController implements Runnable{
     class ChallengeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            theClient.sendMessage("INVITETO " + theView.getSelectedUsername());
+            System.out.println(theView.getSelectedUsername());
+            //auth.sendMessageToClient("INVITETO " + theView.getSelectedUsername());
         }//actionPerformed
     }//backListener
     
