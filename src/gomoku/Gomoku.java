@@ -1,3 +1,9 @@
+/**
+ * Program to play Gomoku
+ * Usage: java Gomoku <ip of server>
+ * ip not required
+ */
+
 /*
 Group Ultron
 Chase Luplow
@@ -27,6 +33,9 @@ public class Gomoku {
     public static void main(String[] args) {
         MainView theMainView = new MainView();
         AuthController myAuthController = new AuthController(theMainView);
+        if(args.length > 0){
+            myAuthController.setIP(args[0]);
+        }
         theMainView.setVisible(true);
     } 
 }

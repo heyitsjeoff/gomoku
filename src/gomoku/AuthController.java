@@ -30,7 +30,7 @@ public class AuthController implements Runnable{
     //controllers
     private CreateAccount caController;
     
-    private String ip = "10.0.0.21";
+    private String ip = "127.0.0.1";
     private int port = 8080; //port of ip
     private Socket socket;
     private InputStream inputStream;
