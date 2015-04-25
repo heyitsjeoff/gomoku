@@ -29,6 +29,7 @@ public class AuthController implements Runnable{
     
     //controllers
     private CreateAccount caController;
+    private LobbyController theLobbyController;
     
     private String ip = "127.0.0.1";
     private int port = 8080; //port of ip
@@ -84,6 +85,8 @@ public class AuthController implements Runnable{
                         this.theView.dispose();
                         this.theLobbyView = new LobbyView();
                         this.theLobbyView.setVisible(true);
+                        this.theLobbyController = new LobbyController(theLobbyView, this);
+                        
                     }//login passed
                     else if(login.equals(notLogIn)){
                         this.theView.appendMSG(invalid);
@@ -111,6 +114,17 @@ public class AuthController implements Runnable{
             }        
         }//while
     }//run
+    
+    public void sendMessageToClient(String theMessage){
+        byte[] buffOut;
+        buffOut = theMessage.getBytes();
+        try {  
+            this.outputStream.write(buffOut, 0, theMessage.length());
+            this.outputStream.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * Creates a new thread and starts it
