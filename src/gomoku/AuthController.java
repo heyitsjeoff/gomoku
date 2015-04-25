@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *this is a test comment from chase
+ *this is a test comment from jun
  * @author heyitsjeoff
  */
 public class AuthController implements Runnable{
