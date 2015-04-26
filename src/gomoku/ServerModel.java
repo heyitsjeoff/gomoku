@@ -73,6 +73,84 @@ public class ServerModel {
      * @param check user in question
      * @return true if username is already used
      */
+    public boolean userExists(String username){
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getUsername().equalsIgnoreCase(username)){
+                return true;
+            }//if
+        }//for
+        return false;
+    }//userExists
+
+    /**
+     * adds a user to list of online users
+     * @param newOnlineUser user being added
+     */
+    public void addOnline(Client newOnlineUser){
+        this.onlineUsers.add(newOnlineUser);
+        //method asking ServerController to update all client connection lists
+    }
+    
+    /**
+     * removes a user from the list of online users
+     * @param oldOnlineUser user being removed
+     */
+    public void removeOnline(Client oldOnlineUser){
+        this.onlineUsers.remove(oldOnlineUser);
+    }
+    
+    /**
+     * adds a new user to the list and writes to data.txt
+     * @param newUser user being added
+     */
+    public void addUser(User newUser){
+        list.add(newUser);
+        System.out.println("ServerModel.addUser added a new user: " + newUser.getUsername());
+        //terrible way to do this
+        writeFile("data");
+    }//addUser
+    
+    
+
+    //file handling-----------
+    /**
+    * Reads in a file, and imports the users into a list
+    * @param filename the name of the file that is being used to import data
+    */
+    public void readFile(String filename){
+    Scanner infile = null;
+	try{
+            infile = new Scanner(new File(filename + ".txt"));
+	} catch (FileNotFoundException e){
+            System.out.println("File not found " + filename);
+            e.printStackTrace();
+	}
+	while(infile.hasNext()){
+            String userAndPass = infile.nextLine();
+            String[] split = userAndPass.split("\\s+");
+            String username = split[0];
+            String password = split[1];
+            User rUser = new User(username, password, "whocares");
+            addUser(rUser);
+        }//while
+    }//getFile
+
+    /**
+     * writes to a file the username and password of users in list
+     * @param filename the name of the file that is being created
+     */
+    public void writeFile(String filename){
+        try {
+        	PrintWriter outfile = new PrintWriter(filename + ".txt");
+		for(int i=0; i<list.size(); i++){
+                    outfile.println(list.get(i).toString());
+                }
+		outfile.close();
+            } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+            }
+	}//writeFile
     public boolean userExists(User check){
         for(int i=0; i<list.size(); i++){
             if(list.get(i).getUsername().equalsIgnoreCase(check.getUsername())){

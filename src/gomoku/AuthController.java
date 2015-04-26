@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
  *this is a test comment from jun
  * @author heyitsjeoff
  */
-public class AuthController implements Runnable{
+
+public class AuthController{
     
     //Views
     private MainView theView;
@@ -28,34 +29,24 @@ public class AuthController implements Runnable{
     private LobbyView theLobbyView;
     
     //controllers
-    private CreateAccount caController;
+    private CreateAccountController caController;
     private LobbyController theLobbyController;
     
-    private String ip = "127.0.0.1";
-    private int port = 8080; //port of ip
-    private Socket socket;
-    private InputStream inputStream;
-    private OutputStream outputStream;
-    private BufferedReader br;
-    private Thread worker;
-    private byte[] byteArray = new byte[2000];
-    private boolean streamsConnected = false;
+    private Connection theConnection;
+    private boolean streamsConnected;
     
     private static final String logIn = "y";
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
-    private static final String created = "user created";
     
     //Label messages
     private static final String dc = "Disconnected";
     private static final String invalid = "Invalid Username or Password";
-    private static final String uaeL = "User already exists";
     private static final String nuc = "New user created";
     private static final String exception = "New exception found";
     private static final String dataDialog = "is the current data of login";
     private static final String cts = "Connected to server";
     private static final String pdnm = "Passwords do not match";
-    private static final String wnct = "Will connect to: ";
     
     /**
      * Creates the main controller for Gomoku
@@ -66,13 +57,13 @@ public class AuthController implements Runnable{
         this.theView = theView;
         this.theView.loginListener(new LoginListener());
         this.theView.createAccountListener(new CAListener());
-        this.theView.passwordPFListener(new EnterListener());
+        //this.theView.passwordPFListener(new EnterListener());
         this.theView.changeIPListener(new IPListener());
     }
     
     /**
      * reads in a string from the server and acts accordingly
-     */
+
     @Override
     public void run(){
         boolean checking = true;
@@ -81,19 +72,7 @@ public class AuthController implements Runnable{
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
                     String login = new String(byteArray, 0, count);
-                    if(login.equals(logIn)){
-                        this.theView.dispose();
-                        this.theLobbyView = new LobbyView();
-                        this.theLobbyView.setVisible(true);
-                        this.theLobbyController = new LobbyController(theLobbyView, this);
-                        
-                    }//login passed
-                    else if(login.equals(notLogIn)){
-                        this.theView.appendMSG(invalid);
-                    }//login failed
-                    else if(login.equals(uae)){
-                        theCAView.message(uaeL);
-                    }//user already exists
+
                     else if(login.equals(created)){
                         theCAView.setVisible(false);
                         theView.setVisible(true);
@@ -114,25 +93,18 @@ public class AuthController implements Runnable{
             }        
         }//while
     }//run
+    */
     
-    public void sendMessageToClient(String theMessage){
-        byte[] buffOut;
-        buffOut = theMessage.getBytes();
-        try {  
-            this.outputStream.write(buffOut, 0, theMessage.length());
-            this.outputStream.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void login(){
+        this.theView.dispose();
+        this.theLobbyView = new LobbyView();
+        this.theLobbyView.setVisible(true);
+        this.theLobbyController = new LobbyController(theLobbyView, this);
     }
     
-    /**
-     * Creates a new thread and starts it
-     */
-    public void doIt(){
-        this.worker = new Thread(this);
-        worker.start();
-    }//doIt
+    public void notLogin(){
+        this.theView.appendMSG(invalid);
+    }
     
     /**
      * writes the username and password for a possible 
@@ -141,16 +113,8 @@ public class AuthController implements Runnable{
      * @param password password of new User
      */
     public void createAccount(String username, String password){
-        byte[] buffOut;
         String both = "!" + username + " " + password;
-        buffOut = both.getBytes();
-        try {
-            this.outputStream.write(buffOut, 0, both.length());
-            this.outputStream.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(AuthController.class.
-                    getName()).log(Level.SEVERE, null, ex);
-        }
+        this.theConnection.write(both);
     }//createAcccount
     
     /**
@@ -159,44 +123,17 @@ public class AuthController implements Runnable{
      * @param password username of a User's password
      */
     public void authenticate(String username, String password){
-        byte[] buffOut;
         String both = username + " " + password;
-        buffOut = both.getBytes();
-        try {
-            this.outputStream.write(buffOut, 0, both.length());
-            this.outputStream.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(AuthController.class.
-                    getName()).log(Level.SEVERE, null, ex);
-        }
+        this.theConnection.write(both);
     }//authenticate
-    
-    /**
-     * instantiates a new socket to the ip and port
-     * @throws IOException
-     */
-    public final void connect() throws IOException{
-        this.socket = new Socket(InetAddress.getByName(ip), port);
-        theView.appendMSG(cts);
-    }//connect
-    
-    /**
-     * sets the inputStream and outputStream
-     * @throws IOException
-     */
-    public void streams() throws IOException{
-        this.inputStream = socket.getInputStream();
-        this.outputStream = socket.getOutputStream();
-        this.br = new BufferedReader(new InputStreamReader(this.inputStream));
-    }//streams
     
     /**
      * sets the IP for the server that the controller will connect to
      * @param number new IP
      */
     public void setIP(String number){
-        this.ip = number;
-        theView.appendMSG(wnct + number);
+        checkConnection();
+        this.theConnection.setIP(number);
     }//setIP
     
     /**
@@ -204,8 +141,25 @@ public class AuthController implements Runnable{
      * @param number new port
      */
     public void setPort(int number){
-        this.port = number;
+        this.theConnection.setPort(number);
     }//setPort
+    
+    public void checkConnection(){
+        if(this.streamsConnected==false){
+            theConnection = new Connection("127.0.0.1");
+            theConnection.setAuthController(this);
+            theConnection.connect();
+            theConnection.startThread();
+            this.streamsConnected=true;
+        }
+    }
+    
+    public void tryLogin(){
+        checkConnection();
+        String enteredUsername = theView.getUsername();
+        String enteredPassword = theView.getPassword();
+        authenticate(enteredUsername, enteredPassword);
+    }
     
     
     //---Listeners----------------------------------------------------
@@ -217,19 +171,7 @@ public class AuthController implements Runnable{
     class LoginListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(streamsConnected==false){
-            try {     
-                connect();
-                streams();
-                doIt();
-            } catch (IOException ex) {
-                Logger.getLogger(AuthController.
-                        class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }//sets streams if it hasn't already
-            String enteredUsername = theView.getUsername();
-            String enteredPassword = theView.getPassword();
-            authenticate(enteredUsername, enteredPassword);
+            tryLogin();
         }//actionPerformed
     }//LoginListener
     
@@ -252,85 +194,19 @@ public class AuthController implements Runnable{
     class CAListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(streamsConnected==false){
-            try {     
-                connect();
-                streams();
-                doIt();
-            } catch (IOException ex) {
-                Logger.getLogger(AuthController.class.getName()).
-                        log(Level.SEVERE, null, ex);
-                }
-            }//sets streams if it hasn't already
-            
+            checkConnection();
             theView.setVisible(false);
             theCAView = new CreateAccountView();
             theCAView.setVisible(true);
-            theCAView.backListener(new backListener());
-            theCAView.createListener(new CreateListener());
-            theCAView.enterListener(new CreateEnterListener());
+            caController = new CreateAccountController(theCAView, theConnection, theView);
+            theConnection.setCreateAccountController(caController);
         }//actionPerformed
     }//CAListener
     
     /**
-     * Listener for the Create Account button of the Create Account view
-     * attempts to create an account
-     */
-    class CreateListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(!theCAView.getPassword1().equals(theCAView.getPassword2())){
-                theCAView.message(pdnm);
-            }
-            else{
-                createAccount(theCAView.getUsername(),
-                        theCAView.getPassword1());
-            }
-        }//actionPerformed
-    }//CreateListener for create account view
-    
-     /**
-     * Listener for a KeyEvent (enter) that attempts to create an account
-     */
-    class CreateEnterListener implements KeyListener{
-        @Override
-        public void keyTyped(KeyEvent e) {
-            //NA
-        }//keyTyped
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode()==KeyEvent.VK_ENTER){
-                if(!theCAView.getPassword1().equals(theCAView.getPassword2())){
-                theCAView.message(pdnm);
-                }
-                else{
-                    createAccount(theCAView.getUsername(),
-                            theCAView.getPassword1());
-                }
-            }//keyPressed
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {
-            //NA
-        }//keyReleased  
-    }//EnterListener for CreateAccount
-    
-    /**
-     * Listener for the lback button of Create Account view
-     * hides the Create Account View and displays the main view
-     */
-    class backListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            theView.setVisible(true);
-            theCAView.setVisible(false);
-        }//actionPerformed
-    }//backListener
-    
-    /**
      * Listener for a KeyEvent (enter) that sets streams and attempts
      * to login
-     */
+    */ 
     class EnterListener implements KeyListener{
         @Override
         public void keyTyped(KeyEvent e) {
@@ -339,19 +215,7 @@ public class AuthController implements Runnable{
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode()==KeyEvent.VK_ENTER){
-                if(streamsConnected==false){
-                try {     
-                    connect();
-                    streams();
-                    doIt();
-                } catch (IOException ex) {
-                    Logger.getLogger(AuthController.class.
-                            getName()).log(Level.SEVERE, null, ex);
-                    }
-                }//sets streams if it hasn't already
-                String enteredUsername = theView.getUsername();
-                String enteredPassword = theView.getPassword();
-                authenticate(enteredUsername, enteredPassword);
+                tryLogin();
             }//keyPressed
         }
         @Override

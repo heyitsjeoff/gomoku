@@ -62,59 +62,6 @@ public class Client extends Thread implements Comparable<String>{
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
-	/**
-	 * reads in, interprets, and acts upon network messages
-	 */
-	@Override
-	public void run() {
-		boolean connected = true;
-		String message = "";
-		while (connected) {
-			try {
-				int count = this.inputStream.read(byteArray);
-				if (count > 0) {
-
-					//authentication mode
-					if (!loggedIn) {
-						message = new String(byteArray, 0, count);
-						//connected = false;
-						String[] split = message.split("\\s+");
-						String uName = split[0];
-						String uPass = split[1];
-						if (message.charAt(0) == '!') {
-							sendMessage(createAccount(uName.substring(1), uPass));
-						}//called when creating new account
-						else {
-							if (authenticate(uName, uPass)) {
-								sendMessage("y");
-							} else {
-								sendMessage("n");
-							}
-						}//else authenticate
-						message = "";
-					} 
-					
-					//lobby mode
-					else {
-
-						//extract semicolon-separated commands from input stream
-						String inRaw = new String(byteArray, 0, count);
-						message = message + inRaw;
-						int deliniate = message.indexOf(";");
-						while (deliniate >= 0) {
-							String command = message.substring(0, deliniate);
-							message = message.substring(deliniate + 1);
-							interpretCommand(command);
-						}
-					}
-				}
-			} catch (IOException ex) {
-				Logger.getLogger(Client.class.
-						getName()).log(Level.SEVERE, null, ex);
-			}
-		}//while
-	}//run    
 	
 	/**
 	 * Interprets and executes a command received over the network from a Gomoku client program
@@ -258,4 +205,56 @@ public class Client extends Thread implements Comparable<String>{
 		} else return -1;
 	}
 
+	/**
+	 * reads in, interprets, and acts upon network messages
+	 */
+	public void run() {
+            boolean connected = true;
+            String message = "";
+            while (connected) {
+		try {
+                    int count = this.inputStream.read(byteArray);
+                    if (count > 0) {
+
+                    //authentication mode
+                    if (!loggedIn) {
+			message = new String(byteArray, 0, count);
+			//connected = false;
+			String[] split = message.split("\\s+");
+			String uName = split[0];
+			String uPass = split[1];
+			if (message.charAt(0) == '!') {
+                            sendMessage(createAccount(uName.substring(1), uPass));
+			}//called when creating new account
+			else {
+                            if (authenticate(uName, uPass)) {
+				sendMessage("y");
+                                                    
+                            } else {
+                                sendMessage("n");
+                            }
+			}//else authenticate
+			message = "";
+                    } 
+					
+                    //lobby mode
+                    else {
+
+                        //extract semicolon-separated commands from input stream
+                        String inRaw = new String(byteArray, 0, count);
+                        message = message + inRaw;
+                        int deliniate = message.indexOf(";");
+                        while (deliniate >= 0) {
+                            String command = message.substring(0, deliniate);
+                            message = message.substring(deliniate + 1);
+                            interpretCommand(command);
+                        }
+                    }
+				}
+                    } catch (IOException ex) {
+                        Logger.getLogger(Client.class.
+                            getName()).log(Level.SEVERE, null, ex);
+			}
+            }//while
+	}//run    
 }//Client class

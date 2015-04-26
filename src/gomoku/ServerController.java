@@ -88,6 +88,15 @@ public class ServerController implements Runnable{
      */
     public boolean checkUsers(User check){
         return theModel.userExists(check);
+	}
+	
+    /**
+     * checks to see if a user with a specific username exists
+     * @param check user in question
+     * @return true if username is being used
+     */
+    public boolean checkUsers(String username){
+        return theModel.userExists(username);
     }
     
     /**
