@@ -101,7 +101,8 @@ public class AuthController{
         this.theView.dispose();
         this.theLobbyView = new LobbyView();
         this.theLobbyView.setVisible(true);
-        this.theLobbyController = new LobbyController(theLobbyView, this);
+        this.theLobbyController = new LobbyController(theLobbyView, theConnection);
+        
     }
     
     public void notLogin(){

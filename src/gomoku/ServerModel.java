@@ -50,6 +50,15 @@ public class ServerModel {
         return onlineUsers;
     }
     
+    public String getOnlineUsernames(){
+        StringBuilder sb = new StringBuilder();
+        for(int i =0; i<this.onlineUsers.size(); i++){
+            sb.append(this.onlineUsers.get(i).getUsername() + " ");
+        }
+        return sb.toString();
+    }
+
+    
     /**
      * determines if the user with a given username and password is valid
      * @param check user object that should be in list
@@ -105,7 +114,6 @@ public class ServerModel {
      */
     public void addUser(User newUser){
         list.add(newUser);
-        System.out.println("ServerModel.addUser added a new user: " + newUser.getUsername());
         //terrible way to do this
         writeFile("data");
     }//addUser

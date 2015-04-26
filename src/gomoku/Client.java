@@ -185,6 +185,10 @@ public class Client extends Thread implements Comparable<String>{
 			return "user created";
 		}
 	}//createAccount
+        
+        public String getUsername(){
+            return this.clientUsername;
+        }
 	
 	/**
 	 * Compares to a string representing a username, to determine if this Client object

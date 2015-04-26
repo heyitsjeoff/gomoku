@@ -38,9 +38,11 @@ public class Connection implements Runnable{
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
     private static final String created = "user created";
+    private static final String LIST = "LIST";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
+    private LobbyController theLobbyController;
     
     public Connection(String ip){
         this.ip = ip;
@@ -54,19 +56,32 @@ public class Connection implements Runnable{
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
                     String messageFromInput = new String(byteArray, 0, count);
-                    if(messageFromInput.equals(logIn)){
+                    if(!inLobby){
+                        if(messageFromInput.equals(logIn)){
                             aController.login();
                             signedIn=true;
                             inLobby=true;
+                        }
+                        else if(messageFromInput.equals(notLogIn)){
+                            aController.notLogin();
+                        }
+                        else if(messageFromInput.equals(uae)){
+                            theCreateAccountController.userAlreadyExists();
+                        }
+                        else if(messageFromInput.equals("user created")){
+                            theCreateAccountController.accountCreated();
+                        }
                     }
-                    else if(messageFromInput.equals(notLogIn)){
-                        aController.notLogin();
-                    }
-                    else if(messageFromInput.equals(uae)){
-                        theCreateAccountController.userAlreadyExists();
-                    }
-                    else if(messageFromInput.equals("user created")){
-                        theCreateAccountController.accountCreated();
+                    else{
+                        String[] split = messageFromInput.split("\\s+");
+                        String code = split[0];
+                        if(code.equals(LIST)){
+                            StringBuilder sb = new StringBuilder();
+                            for(int i=0; i<split.length; i++){
+                                sb.append(i + " ");
+                            }
+                            theLobbyController.updateOnlineList(sb.toString());
+                        }
                     }
                 }//connected
                 else{
@@ -84,6 +99,10 @@ public class Connection implements Runnable{
     
     public void setCreateAccountController(CreateAccountController theCreateAccountController){
         this.theCreateAccountController = theCreateAccountController;
+    }
+    
+    public void setLobbyController(LobbyController theLobbyController){
+        this.theLobbyController= theLobbyController;
     }
     
     public void write(String message){
