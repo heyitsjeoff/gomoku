@@ -18,6 +18,8 @@ public class LobbyController{
         this.theView.challengePlayerListener(new ChallengeListener());
         this.theConnection = theConnection;
         this.theConnection.setLobbyController(this);
+        updateOnlineList("Jeoff Chase Junhao");
+        theView.updateOnlineList(dlm);
         //this.theConnection.write("REQUESTLIST ;");
     }
       

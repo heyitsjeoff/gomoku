@@ -233,17 +233,15 @@ public class Client extends Thread implements Comparable<String>{
 			else {
                             if (authenticate(uName, uPass)) {
 				sendMessage("y");
-                                                    
+                                loggedIn = true; 
                             } else {
                                 sendMessage("n");
                             }
 			}//else authenticate
 			message = "";
-                    } 
-					
+                    }
                     //lobby mode
                     else {
-
                         //extract semicolon-separated commands from input stream
                         String inRaw = new String(byteArray, 0, count);
                         message = message + inRaw;

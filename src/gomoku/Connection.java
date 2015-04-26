@@ -39,6 +39,7 @@ public class Connection implements Runnable{
     private static final String uae = "user already exists";
     private static final String created = "user created";
     private static final String LIST = "LIST";
+    private static final String INVITETO = "INVITETO";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
