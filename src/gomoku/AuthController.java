@@ -57,7 +57,7 @@ public class AuthController{
         this.theView = theView;
         this.theView.loginListener(new LoginListener());
         this.theView.createAccountListener(new CAListener());
-        //this.theView.passwordPFListener(new EnterListener());
+        this.theView.passwordPFListener(new EnterListener());
         this.theView.changeIPListener(new IPListener());
     }
     

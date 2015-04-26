@@ -113,7 +113,7 @@
               <Component id="consoleLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="messageLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -161,10 +161,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="consoleLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="System Message"/>
+        <Property name="text" type="java.lang.String" value="System Message:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="messageLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IP Not Configured"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

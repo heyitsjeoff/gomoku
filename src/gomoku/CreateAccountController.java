@@ -28,7 +28,6 @@ public class CreateAccountController {
     public void createAccount(){
         if(!theView.getPassword1().equals(theView.getPassword2())){
                 theView.message(pdnm);
-                System.out.println(pdnm);
         }
         else{
             String message = "!" + theView.getUsername()+ " " + theView.getPassword1();

@@ -71,7 +71,9 @@ public class MainView extends javax.swing.JFrame {
 
         aiBTN.setText("Play Offline");
 
-        consoleLabel.setText("System Message");
+        consoleLabel.setText("System Message:");
+
+        messageLabel.setText("IP Not Configured");
 
         jMenu1.setText("File");
 
@@ -131,7 +133,7 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(consoleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(messageLabel)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
