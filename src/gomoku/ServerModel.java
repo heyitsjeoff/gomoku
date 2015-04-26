@@ -150,4 +150,86 @@ public class ServerModel {
 		e.printStackTrace();
             }
 	}//writeFile
+	
+	/**
+	 * Processes an invitation. Used when usernameFrom invites usernameTo to a game.
+	 * @param usernameFrom The username of the inviting user
+	 * @param usernameTo The username of the invited user
+	 * @return true if invitation is sent, false if invitation not sent because
+	 *			usernameTo is offline or does not exist
+	 */
+	public boolean invite(String usernameFrom, String usernameTo){
+		Client recipient = findOnlineUser(usernameTo);
+		if(recipient != null){
+			recipient.invite(usernameFrom);
+			return true;
+		} else return false;
+	}
+	
+	/**
+	 * Processes an acceptance. Used when usernameTo has previously invited
+	 *		usernameFrom to a game, and usernameFrom accepts the invitation.
+	 * @param usernameFrom The username of the inviting user
+	 * @param usernameTo The username of the invited user
+	 * @param IP the IP address and port of usernameFrom. Required so that a
+	 *		connection can be established directly between the two users.
+	 * @return true if invitation is sent, false if invitation not sent because
+	 *			usernameTo is offline or does not exist
+	 */
+	public boolean accept(String usernameFrom, String usernameTo, String IP){
+		Client recipient = findOnlineUser(usernameTo);
+		if(recipient != null){
+			recipient.accept(usernameFrom, IP);
+			return true;
+		} else return false;
+	}
+	
+	/**
+	 * Processes a withdrawn invitation. Used when usernameFrom had previously 
+	 *		invited usernameTo to a game, but wishes to withdraw that invitation.
+	 * 
+	 * @param usernameFrom The username of the inviting user
+	 * @param usernameTo The username of the invited user
+	 * @return true if invitation is sent, false if withdrawl not sent because
+	 *		usernameTo is offline or does not exist
+	 */
+	public boolean withdraw(String usernameFrom, String usernameTo){
+		Client recipient = findOnlineUser(usernameTo);
+		if(recipient != null){
+			recipient.withdraw(usernameFrom);
+			return true;
+		} else return false;
+	}
+	
+	/**
+	 * Processes a declined invitation. Used when usernameFrom declines
+	 *		an invitation from usernameTo.
+	 * 
+	 * @param usernameFrom The username of the declining user
+	 * @param usernameTo The username of the declined user
+	 * @return true if invitation is sent, false if invitation not sent because
+	 *		usernameTo is offline or does not exist
+	 */
+	public boolean decline(String usernameFrom, String usernameTo){
+		Client recipient = findOnlineUser(usernameTo);
+		if(recipient != null){
+			recipient.decline(usernameFrom);
+			return true;
+		} else return false;
+	}
+	
+	/**
+	 * Searches for the Client object for an online user
+	 * 
+	 * @param username the name of the user being searched for
+	 * @return the Client object associated with the user in question, or null
+	 *			if the user in question is not online or does not exist.
+	 */
+	private Client findOnlineUser(String username){
+		for(Client c : onlineUsers){
+			if(c.compareTo(username) == 0)
+				return c;
+		}
+		return null;
+	}
 }//class

@@ -57,6 +57,14 @@ public class ServerController implements Runnable{
          }//while accepting
     }//run
     
+	/**
+	 * Gets the server model
+	 * @return the server model
+	 */
+	public ServerModel getModel(){
+		return theModel;
+	}
+	
     /**
      * checks if a user's credentials are valid
      * @param check user in question

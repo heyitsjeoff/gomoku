@@ -1,5 +1,5 @@
 package gomoku;
-//john test commit
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Connection object
  */
-public class Client extends Thread{
+public class Client extends Thread implements Comparable<String>{
     private InputStream inputStream;
     private OutputStream outputStream;
     private int port;
@@ -23,10 +23,9 @@ public class Client extends Thread{
     private byte[] byteArray = new byte[2000];
     private ServerController theServerController;
     private String connectionIP;
-    private String clientUsername;  //string rep of clinet object in the form of user's username
-
+    private String clientUsername;//string rep of clinet object in the form of user's username
+	private ServerModel theServerModel;
 	private boolean loggedIn;
-	private User thisUser;
 
 	/**
 	 * Creates a client object and sets the streams
@@ -45,13 +44,13 @@ public class Client extends Thread{
 		this.connectionIP = this.socket.
 				getRemoteSocketAddress().toString().substring(1);
 		this.loggedIn = false;
+		theServerModel = theServerController.getModel();
 	}//Connection
 
 	/**
 	 * Sends network message to client
 	 *
 	 * @param message Message to be sent
-	 * @throws IOException
 	 */
 	public void sendMessage(String message){
 		try {
@@ -67,6 +66,7 @@ public class Client extends Thread{
 	/**
 	 * reads in, interprets, and acts upon network messages
 	 */
+	@Override
 	public void run() {
 		boolean connected = true;
 		String message = "";
@@ -115,40 +115,91 @@ public class Client extends Thread{
 			}
 		}//while
 	}//run    
-
+	
+	/**
+	 * Interprets and executes a command received over the network from a Gomoku client program
+	 * @param command The command received from the network. Each command starts with a keyword
+	 *					identifying the command, contains a space-deliniated list of arguments,
+	 *					and terminates with a semicolon.
+	 */
 	private void interpretCommand(String command) {
 		Scanner scan = new Scanner(command);
 		String cmdKeyword = scan.next();
-		if (cmdKeyword.equals("INVITETO")) {
-			//todo invite
-		} else if (cmdKeyword.equals("ACCEPTTO")) {
-			//todo accept
-		} else if (cmdKeyword.equals("WITHDRAWTO")) {
-			//todo withdraw
-		} else if (cmdKeyword.equals("DECLINETO")) {
-			//todo decline
-		} else if (cmdKeyword.equals("REQUESTLIST")) {
-			//todo request list
-		} else {
-			//This block allows later addition of special handling
-			//for invalid network commands.
-			//As of now they are ignored.
+		switch (cmdKeyword) {
+			case "INVITETO":
+				if(!theServerModel.invite(clientUsername, scan.next()))
+					sendMessage("FAIL The targeted user does not exist or is offline;");
+				break;
+			case "ACCEPTTO":
+				if(!theServerModel.accept(scan.next(), clientUsername, connectionIP))
+					sendMessage("FAIL The targeted user does not exist or is offline;");
+				break;
+			case "WITHDRAWTO":
+				if(!theServerModel.withdraw(clientUsername, scan.next()))
+					sendMessage("FAIL The targeted user does not exist or is offline;");
+				break;
+			case "DECLINETO":
+				if(!theServerModel.decline(clientUsername, scan.next()))
+					sendMessage("FAIL The targeted user does not exist or is offline;");
+				break;
+			case "REQUESTLIST":
+				StringBuilder sb = new StringBuilder("LIST ");
+				for(Client c : theServerModel.getOnlineList()){
+					sb.append(c.clientUsername);
+					sb.append(" ");
+				}
+				sb.append(";");
+				sendMessage(sb.toString());
+				break;
+			default:
+				//This block allows later addition of special handling
+				//for invalid network commands.
+				//As of now they are ignored.
+				break;
 		}
 	}
-
+	
+	/**
+	 * Processes an incoming invitation. Called when another user has invited
+	 *		this user to a game, this method generates and sends a network
+	 *		message informing the client program of the invitation
+	 * @param fromUsername The user sending the invitation
+	 */
 	public void invite(String fromUsername) {
 		sendMessage("INVITEFROM " + fromUsername + ";");
 	}
 
+	/**
+	 * Processes an incoming acceptance. Called when this user has previously
+	 *		invited another user to a game, and the other user has accepted.
+	 *		This method generates and sends a network message informing
+	 *		the client program of the acceptance.
+	 * @param fromUsername The user accepting the invitation
+	 * @param fromIP The IP address of the user accepting the invitation
+	 */
 	public void accept(String fromUsername, String fromIP) {
 		sendMessage("ACCEPTFROM " + fromUsername + " "
 			+ fromIP + ";");
 	}
-
+	
+	/**
+	 * Processes an incoming acceptance. Called when another user has previously
+	 *		invited this user to a game, but withdraws the invitation.
+	 *		This method generates and sends a network message informing
+	 *		the client program of the withdrawl.
+	 * @param fromUsername The user accepting the invitation
+	 */
 	public void withdraw(String fromUsername) {
 		sendMessage("WITHDRAWFROM " + fromUsername + ";");
 	}
 
+	/**
+	 * Processes an incoming declination. Called when this user has previously
+	 *		invited another user to a game, and the other user has declined.
+	 *		This method generates and sends a network message informing
+	 *		the client program of the declination.
+	 * @param fromUsername The user accepting the invitation
+	 */
 	public void decline(String fromUsername) {
 		sendMessage("DECLINEFROM " + fromUsername + ";");
 	}
@@ -165,7 +216,6 @@ public class Client extends Thread{
 		User check = new User(u, p);
 		if (this.theServerController.authenticate(check)) {
 			loggedIn = true;
-			thisUser = check;
 			return true;
 		} else {
 			return false;
@@ -188,5 +238,24 @@ public class Client extends Thread{
 			return "user created";
 		}
 	}//createAccount
+	
+	/**
+	 * Compares to a string representing a username, to determine if this Client object
+	 * is associated with that user.
+	 * 
+	 * @param username the name of a user
+	 * @return	0 if this Client object is associated with user username
+	 *			1 if this Client object is associated with a different user
+	 *			-1 if this CLient object is not associated with any user
+	 *				because it is not yet logged in
+	 */
+	@Override
+	public int compareTo(String username) {
+		if(loggedIn){
+			if(username.equals(clientUsername)){
+				return 0;
+			} else return 1;
+		} else return -1;
+	}
 
 }//Client class
