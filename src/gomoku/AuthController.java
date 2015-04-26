@@ -38,6 +38,7 @@ public class AuthController{
     private static final String logIn = "y";
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
+    private static final String initialIP = "127.0.0.1";
     
     //Label messages
     private static final String dc = "Disconnected";
@@ -47,6 +48,7 @@ public class AuthController{
     private static final String dataDialog = "is the current data of login";
     private static final String cts = "Connected to server";
     private static final String pdnm = "Passwords do not match";
+    private static final String ipChanged = "IP changed to ";
     
     /**
      * Creates the main controller for Gomoku
@@ -133,6 +135,7 @@ public class AuthController{
      */
     public void setIP(String number){
         checkConnection();
+        theView.appendMSG(ipChanged + number);
         this.theConnection.setIP(number);
     }//setIP
     
@@ -146,7 +149,7 @@ public class AuthController{
     
     public void checkConnection(){
         if(this.streamsConnected==false){
-            theConnection = new Connection("127.0.0.1");
+            theConnection = new Connection(initialIP);
             theConnection.setAuthController(this);
             theConnection.connect();
             theConnection.startThread();
