@@ -15,6 +15,7 @@ public class CreateAccountController {
     private static final String uaeL = "User already exists";
     private static final String pdnm = "Passwords do not match";
     private static final String created = "user created";
+    private static final String ucs = "Username can not contain spaces";
     
     public CreateAccountController(CreateAccountView theView, Connection theConnection, MainView theMainView){
         this.theView = theView;
@@ -28,6 +29,9 @@ public class CreateAccountController {
     public void createAccount(){
         if(!theView.getPassword1().equals(theView.getPassword2())){
                 theView.message(pdnm);
+        }
+        else if(theView.getUsername().trim().contains(" ")){
+            theView.message(ucs);
         }
         else{
             String message = "!" + theView.getUsername()+ " " + theView.getPassword1();
