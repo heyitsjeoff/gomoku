@@ -250,6 +250,7 @@ public class Client extends Thread implements Comparable<String>{
                             String command = message.substring(0, deliniate);
                             message = message.substring(deliniate + 1);
                             interpretCommand(command);
+							deliniate = message.indexOf(";");
                         }
                     }
 				}
