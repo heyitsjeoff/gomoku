@@ -30,7 +30,7 @@ public class CreateAccountController {
         if(!theView.getPassword1().equals(theView.getPassword2())){
                 theView.message(pdnm);
         }
-        else if(theView.getUsername().trim().contains(" ")){
+        else if(theView.getUsername().contains(" ")){
             theView.message(ucs);
         }
         else{
