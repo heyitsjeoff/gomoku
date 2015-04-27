@@ -220,42 +220,42 @@ public class Client extends Thread implements Comparable<String>{
                     int count = this.inputStream.read(byteArray);
                     if (count > 0) {
 
-                    //authentication mode
-                    if (!loggedIn) {
-			message = new String(byteArray, 0, count);
-			//connected = false;
-			String[] split = message.split("\\s+");
-			String uName = split[0];
-			String uPass = split[1];
-			if (message.charAt(0) == '!') {
-                            sendMessage(createAccount(uName.substring(1), uPass));
-			}//called when creating new account
-			else {
-                            if (authenticate(uName, uPass)) {
-				sendMessage("y");
-                                loggedIn = true; 
-                            } else {
-                                sendMessage("n");
+                        //authentication mode
+                        if (!loggedIn) {
+                            message = new String(byteArray, 0, count);
+                            //connected = false;
+                            String[] split = message.split("\\s+");
+                            String uName = split[0];
+                            String uPass = split[1];
+                            if (message.charAt(0) == '!') {
+                                sendMessage(createAccount(uName.substring(1), uPass));
+                            }//called when creating new account
+                            else {
+                                if (authenticate(uName, uPass)) {
+                                    sendMessage("y");
+                                    loggedIn = true; 
+                                } else {
+                                    sendMessage("n");
+                                }
+                            }//else authenticate
+                            message = "";
+                        }
+                        //lobby mode
+                        else {
+                            //extract semicolon-separated commands from input stream
+                            String inRaw = new String(byteArray, 0, count);
+                            message = message + inRaw;
+                            int deliniate = message.indexOf(";");
+                            while (deliniate >= 0) {
+                                String command = message.substring(0, deliniate);
+                                message = message.substring(deliniate + 1);
+                                interpretCommand(command);
+                                                            deliniate = message.indexOf(";");
                             }
-			}//else authenticate
-			message = "";
-                    }
-                    //lobby mode
-                    else {
-                        //extract semicolon-separated commands from input stream
-                        String inRaw = new String(byteArray, 0, count);
-                        message = message + inRaw;
-                        int deliniate = message.indexOf(";");
-                        while (deliniate >= 0) {
-                            String command = message.substring(0, deliniate);
-                            message = message.substring(deliniate + 1);
-                            interpretCommand(command);
-							deliniate = message.indexOf(";");
                         }
                     }
-				}
-                    
-                    if(count == -1){
+
+                    else if(count == -1){
                         this.inputStream.close();
                         this.outputStream.close();
                         this.socket.close();
