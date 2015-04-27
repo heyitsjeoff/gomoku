@@ -54,6 +54,7 @@ public class MainView extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GOMOKU");
 
         createAccountBTN.setText("Create Account");
 
