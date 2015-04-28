@@ -173,10 +173,6 @@ public class ServerModel {
         }//for
         return false;
     }//userExists
-
-
-
-
 	
 	/**
 	 * Processes an invitation. Used when usernameFrom invites usernameTo to a game.
@@ -188,7 +184,6 @@ public class ServerModel {
 	public boolean invite(String usernameFrom, String usernameTo){
 		Client recipient = findOnlineUser(usernameTo);
 		if(recipient != null){
-                    System.out.println("Almost there");
 			recipient.invite(usernameFrom);
 			return true;
 		} else return false;

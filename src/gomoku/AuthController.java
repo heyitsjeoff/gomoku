@@ -70,8 +70,7 @@ public class AuthController{
         this.theLobbyView = new LobbyView();
         this.theLobbyView.setVisible(true);
         this.theLobbyModel = new LobbyModel();
-        this.theLobbyController = new LobbyController(theLobbyView, theLobbyModel, theConnection);
-        
+        this.theLobbyController = new LobbyController(theLobbyView, this.theLobbyModel, theConnection);
     }
     
     public void notLogin(){

@@ -42,10 +42,12 @@ public class Connection implements Runnable{
     private static final String INVITETO = "INVITETO";
     private static final String INVITEFROM = "INVITEFROM";
     private static final String REQUESTLIST = "REQUESTLIST;";
+    private static final String ACCEPTFROM = "ACCEPTFROM";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
     private LobbyController theLobbyController;
+    private GameController theGameController;
     
     public Connection(String ip){
         this.ip = ip;
@@ -87,7 +89,17 @@ public class Connection implements Runnable{
                             theLobbyController.updateOnlineList(sb.toString());
                         }
                         else if(code.equals(INVITEFROM)){
-                            
+                            String username = split[1];
+                            int semi = username.indexOf(";");
+                            username = username.substring(0, semi);
+                            theLobbyController.addToIncomingList(username);
+                        }
+                        else if(code.equals(ACCEPTFROM)){
+                            String userAcceptingInvite = split[1];
+                            String ipOfAcceptingUser = split[2];
+                            int semi = ipOfAcceptingUser.indexOf(";");
+                            ipOfAcceptingUser = ipOfAcceptingUser.substring(0, semi);
+                            theLobbyController.startGame();
                         }
                     }
                 }//connected

@@ -78,6 +78,7 @@ public class Client extends Thread implements Comparable<String>{
 					sendMessage("FAIL The targeted user does not exist or is offline;");
 				break;
 			case "ACCEPTTO":
+                                System.out.println("ACCEPTTO reached");
 				if(!theServerModel.accept(scan.next(), clientUsername, connectionIP))
 					sendMessage("FAIL The targeted user does not exist or is offline;");
 				break;
