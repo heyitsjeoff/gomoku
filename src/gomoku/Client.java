@@ -255,6 +255,13 @@ public class Client extends Thread implements Comparable<String>{
                         }
                     }
 				}
+                    else if(count==-1){
+                        this.inputStream.close();
+                        this.outputStream.close();
+                        this.socket.close();
+                        this.theServerController.removeUser(this);
+                        connected = false;
+                        }
                     } catch (IOException ex) {
                         Logger.getLogger(Client.class.
                             getName()).log(Level.SEVERE, null, ex);
