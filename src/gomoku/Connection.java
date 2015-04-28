@@ -41,6 +41,7 @@ public class Connection implements Runnable{
     private static final String LIST = "LIST";
     private static final String INVITETO = "INVITETO";
     private static final String INVITEFROM = "INVITEFROM";
+    private static final String REQUESTLIST = "REQUESTLIST;";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
@@ -63,6 +64,7 @@ public class Connection implements Runnable{
                             aController.login();
                             signedIn=true;
                             inLobby=true;
+                            write(REQUESTLIST);
                         }
                         else if(messageFromInput.equals(notLogIn)){
                             aController.notLogin();
@@ -79,7 +81,7 @@ public class Connection implements Runnable{
                         String code = split[0];
                         if(code.equals(LIST)){
                             StringBuilder sb = new StringBuilder();
-                            for(int i=1; i<split.length; i++){
+                            for(int i=1; i<split.length-1; i++){
                                 sb.append(split[i] + " ");
                             }
                             theLobbyController.updateOnlineList(sb.toString());
@@ -116,6 +118,7 @@ public class Connection implements Runnable{
             buffOut = message.getBytes();
             this.outputStream.write(buffOut, 0, message.length());
             this.outputStream.flush();
+            System.out.println(message + " has been flushed");
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }

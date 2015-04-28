@@ -96,8 +96,8 @@ public class Client extends Thread implements Comparable<String>{
 					sb.append(" ");
 				}
 				sb.append(";");
-                                System.out.println("Client.REQUESTLIST switch: "+sb.toString());
-				sendMessage(sb.toString());
+				//sendMessage(sb.toString());
+                                theServerModel.updateAllOnlineList(sb.toString());
 				break;
 			default:
 				//This block allows later addition of special handling
@@ -228,13 +228,14 @@ public class Client extends Thread implements Comparable<String>{
                             String[] split = message.split("\\s+");
                             String uName = split[0];
                             String uPass = split[1];
+                            this.clientUsername = uName;
                             if (message.charAt(0) == '!') {
                                 sendMessage(createAccount(uName.substring(1), uPass));
                             }//called when creating new account
                             else {
                                 if (authenticate(uName, uPass)) {
-                                    sendMessage("y");
                                     loggedIn = true; 
+                                    sendMessage("y");
                                 } else {
                                     sendMessage("n");
                                 }
@@ -251,7 +252,7 @@ public class Client extends Thread implements Comparable<String>{
                                 String command = message.substring(0, deliniate);
                                 message = message.substring(deliniate + 1);
                                 interpretCommand(command);
-                                                            deliniate = message.indexOf(";");
+                                deliniate = message.indexOf(";");
                             }
 			}//else authenticate
 			message = "";

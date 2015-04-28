@@ -65,40 +65,6 @@ public class AuthController{
         theConnection = new Connection(initialIP);
     }
     
-    /**
-     * reads in a string from the server and acts accordingly
-
-    @Override
-    public void run(){
-        boolean checking = true;
-        while(checking){
-            try {
-                int count = this.inputStream.read(byteArray);
-                if(count>0){
-                    String login = new String(byteArray, 0, count);
-
-                    else if(login.equals(created)){
-                        theCAView.setVisible(false);
-                        theView.setVisible(true);
-                        theView.appendMSG(nuc);
-                    }//user created
-                    else{
-                        System.out.println(exception);
-                        System.out.println(login + dataDialog);
-                    }
-                }
-                else{
-                    checking = false;
-                    theView.appendMSG(dc);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(AuthController.class.
-                        getName()).log(Level.SEVERE, null, ex);
-            }        
-        }//while
-    }//run
-    */
-    
     public void login(){
         this.theView.dispose();
         this.theLobbyView = new LobbyView();
@@ -152,7 +118,6 @@ public class AuthController{
     
     public void checkConnection(){
         if(this.streamsConnected==false){
-            
             theConnection.setAuthController(this);
             theConnection.connect();
             theConnection.startThread();

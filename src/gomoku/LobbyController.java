@@ -31,6 +31,7 @@ public class LobbyController{
         for(int i = 0; i< usernames.length; i++){
             this.dlm.addElement(usernames[i]);
         }
+        theView.updateOnlineList(dlm);
         return this.dlm;
     }
     

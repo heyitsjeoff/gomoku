@@ -73,8 +73,6 @@ public class ServerController implements Runnable{
     public boolean authenticate(User check){
         if(theModel.authenticate(check)){
             theModel.addOnline(theClient);
-            updateAllOnlineList();
-            theView.appendStringList(check.getUsername());
             return true;
         }
         else{
@@ -82,8 +80,9 @@ public class ServerController implements Runnable{
         }
     }//authenticate
     
-    public void updateAllOnlineList(){
-        this.theClient.sendMessage("REQUESTLIST");
+    public void updateAllOnlineList(String message){
+        theModel.updateAllOnlineList(message);
+        //this.theClient.sendMessage("REQUESTLIST");
     }
     
     /**

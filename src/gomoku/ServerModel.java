@@ -42,6 +42,12 @@ public class ServerModel {
         return theUser.getPassword();
     }
     
+    public void updateAllOnlineList(String message){
+        for(int i=0; i<this.onlineUsers.size(); i++){
+            onlineUsers.get(i).sendMessage(message);
+        }
+    }
+    
     /**
      * gets the list of online users
      * @return the list of online users
@@ -97,7 +103,6 @@ public class ServerModel {
      */
     public void addOnline(Client newOnlineUser){
         this.onlineUsers.add(newOnlineUser);
-        System.out.println(this.onlineUsers);
         //method asking ServerController to update all client connection lists
     }
     
