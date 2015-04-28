@@ -53,6 +53,7 @@ public class LobbyView extends javax.swing.JFrame {
         jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GUMOKU");
         setBackground(new java.awt.Color(255, 255, 255));
 
         onlineUsersLabel.setText("Online Users");

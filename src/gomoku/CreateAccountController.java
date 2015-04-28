@@ -33,6 +33,9 @@ public class CreateAccountController {
         else if(!theView.getPassword1().equals(theView.getPassword2())){
                 theView.message(pdnm);
         }
+        else if(theView.getUsername().contains(" ")){
+            theView.message(ucs);
+        }
         else{
             String message = "!" + theView.getUsername()+ " " + theView.getPassword1();
             this.theConnection.write(message);
