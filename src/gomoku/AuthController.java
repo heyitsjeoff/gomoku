@@ -27,6 +27,7 @@ public class AuthController{
     private MainView theView;
     private CreateAccountView theCAView;
     private LobbyView theLobbyView;
+    private LobbyModel theLobbyModel;
     
     //controllers
     private CreateAccountController caController;
@@ -38,7 +39,7 @@ public class AuthController{
     private static final String logIn = "y";
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
-    private static final String initialIP = "127.0.0.1";
+    private String initialIP = "127.0.0.1";
     
     //Label messages
     private static final String dc = "Disconnected";
@@ -61,6 +62,7 @@ public class AuthController{
         this.theView.createAccountListener(new CAListener());
         this.theView.passwordPFListener(new EnterListener());
         this.theView.changeIPListener(new IPListener());
+        theConnection = new Connection(initialIP);
     }
     
     /**
@@ -101,7 +103,8 @@ public class AuthController{
         this.theView.dispose();
         this.theLobbyView = new LobbyView();
         this.theLobbyView.setVisible(true);
-        this.theLobbyController = new LobbyController(theLobbyView, theConnection);
+        this.theLobbyModel = new LobbyModel();
+        this.theLobbyController = new LobbyController(theLobbyView, theLobbyModel, theConnection);
         
     }
     
@@ -135,7 +138,6 @@ public class AuthController{
      * @param number new IP
      */
     public void setIP(String number){
-        checkConnection();
         theView.appendMSG(ipChanged + number);
         this.theConnection.setIP(number);
     }//setIP
@@ -150,7 +152,7 @@ public class AuthController{
     
     public void checkConnection(){
         if(this.streamsConnected==false){
-            theConnection = new Connection(initialIP);
+            
             theConnection.setAuthController(this);
             theConnection.connect();
             theConnection.startThread();
@@ -188,6 +190,7 @@ public class AuthController{
         public void actionPerformed(ActionEvent e) {
             String newIP = JOptionPane.showInputDialog(null, "Server IP:");
             setIP(newIP);
+            initialIP = newIP;
         }//actionPerformed
     }//IPListener
     

@@ -40,6 +40,7 @@ public class Connection implements Runnable{
     private static final String created = "user created";
     private static final String LIST = "LIST";
     private static final String INVITETO = "INVITETO";
+    private static final String INVITEFROM = "INVITEFROM";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
@@ -78,10 +79,13 @@ public class Connection implements Runnable{
                         String code = split[0];
                         if(code.equals(LIST)){
                             StringBuilder sb = new StringBuilder();
-                            for(int i=0; i<split.length; i++){
-                                sb.append(i + " ");
+                            for(int i=1; i<split.length; i++){
+                                sb.append(split[i] + " ");
                             }
                             theLobbyController.updateOnlineList(sb.toString());
+                        }
+                        else if(code.equals(INVITEFROM)){
+                            
                         }
                     }
                 }//connected

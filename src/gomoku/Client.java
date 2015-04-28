@@ -96,6 +96,7 @@ public class Client extends Thread implements Comparable<String>{
 					sb.append(" ");
 				}
 				sb.append(";");
+                                System.out.println("Client.REQUESTLIST switch: "+sb.toString());
 				sendMessage(sb.toString());
 				break;
 			default:
@@ -250,7 +251,7 @@ public class Client extends Thread implements Comparable<String>{
                             String command = message.substring(0, deliniate);
                             message = message.substring(deliniate + 1);
                             interpretCommand(command);
-							deliniate = message.indexOf(";");
+                            deliniate = message.indexOf(";");
                         }
                     }
 				}

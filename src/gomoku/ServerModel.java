@@ -97,6 +97,7 @@ public class ServerModel {
      */
     public void addOnline(Client newOnlineUser){
         this.onlineUsers.add(newOnlineUser);
+        System.out.println(this.onlineUsers);
         //method asking ServerController to update all client connection lists
     }
     
@@ -182,6 +183,7 @@ public class ServerModel {
 	public boolean invite(String usernameFrom, String usernameTo){
 		Client recipient = findOnlineUser(usernameTo);
 		if(recipient != null){
+                    System.out.println("Almost there");
 			recipient.invite(usernameFrom);
 			return true;
 		} else return false;

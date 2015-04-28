@@ -19,15 +19,11 @@ Sources: cipherspeak.tk - for encryption
 
 package gomoku;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author heyitsjeoff
  */
 public class Gomoku {
-    
-    private static final String ipChanged = "IP changed to ";
 
     /**
      * @param args the command line arguments

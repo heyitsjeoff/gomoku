@@ -11,15 +11,17 @@ public class LobbyController{
     
     private LobbyView theView;
     private DefaultListModel dlm;
+    private DefaultListModel idlm;
     private Connection theConnection;
+    private LobbyModel theLobbyModel;
 
-    public LobbyController(LobbyView theView, Connection theConnection){
+    public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
         this.theView.challengePlayerListener(new ChallengeListener());
+        this.theView.acceptListener(new AcceptListener());
         this.theConnection = theConnection;
         this.theConnection.setLobbyController(this);
-        updateOnlineList("Jeoff Chase Junhao");
-        theView.updateOnlineList(dlm);
+        this.theLobbyModel = theLobbyModel;
         //this.theConnection.write("REQUESTLIST ;");
     }
       
@@ -30,6 +32,31 @@ public class LobbyController{
             this.dlm.addElement(usernames[i]);
         }
         return this.dlm;
+    }
+    
+    public DefaultListModel updateIncomingList(String manyUsernames){
+        this.idlm = new DefaultListModel();
+        String[] usernames = manyUsernames.split("\\s+");
+        for(int j = 0; j< usernames.length; j++){
+            this.idlm.addElement(usernames[j]);
+        }
+        return this.idlm;
+    }
+    
+    public void addToIncomingList(String username){
+        theLobbyModel.addToIncomingList(username);
+        theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
+    }
+    
+    public void acceptRequest(String usernameAccepted){
+        theConnection.write(usernameAccepted);
+    }
+
+    class AcceptListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            acceptRequest(theView.getIncomingUsername());
+        }
     }
     
     //Listeners

@@ -46,7 +46,7 @@ public class LobbyView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         onlineList = new javax.swing.JList();
         jScrollPane6 = new javax.swing.JScrollPane();
-        pendingRequests = new javax.swing.JList();
+        incomingList = new javax.swing.JList();
         jScrollPane7 = new javax.swing.JScrollPane();
         outgoingRequests = new javax.swing.JList();
 
@@ -87,7 +87,7 @@ public class LobbyView extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(onlineList);
 
-        jScrollPane6.setViewportView(pendingRequests);
+        jScrollPane6.setViewportView(incomingList);
 
         jScrollPane7.setViewportView(outgoingRequests);
 
@@ -201,7 +201,7 @@ public class LobbyView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LobbyView().setVisible(true);
-                dlm = new DefaultListModel();
+                //dlm = new DefaultListModel();
             }
         });
     }
@@ -210,20 +210,33 @@ public class LobbyView extends javax.swing.JFrame {
         challengeBTN.addActionListener(listenerForChallengeBTN);
     }
     
+    public void acceptListener(ActionListener listenerForAcceptBTN){
+        acceptPendingBT.addActionListener(listenerForAcceptBTN);
+    }
+    
     public String getSelectedUsername(){
         return (String) onlineList.getSelectedValue();
+    }
+    
+    public String getIncomingUsername(){
+        return (String) incomingList.getSelectedValue();
     }
     
     public void updateOnlineList(DefaultListModel dlm){
         onlineList.setModel(dlm);
     }
+    
+    public void updateIncomingList(DefaultListModel idlm){
+        incomingList.setModel(idlm);
+    }
 
-    private static DefaultListModel dlm;
+    //private static DefaultListModel dlm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptPendingBT;
     private javax.swing.JButton aiBTN;
     private javax.swing.JButton challengeBTN;
     private javax.swing.JButton declinePendingBT;
+    private javax.swing.JList incomingList;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -239,7 +252,6 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JLabel outgoingLabel;
     private javax.swing.JList outgoingRequests;
     private javax.swing.JLabel pendingLabel;
-    private javax.swing.JList pendingRequests;
     private javax.swing.JButton revokeBT;
     // End of variables declaration//GEN-END:variables
 }
