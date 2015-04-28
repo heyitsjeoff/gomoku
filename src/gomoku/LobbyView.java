@@ -215,6 +215,14 @@ public class LobbyView extends javax.swing.JFrame {
         acceptPendingBT.addActionListener(listenerForAcceptBTN);
     }
     
+    public void rejectListener(ActionListener listenerForRejectBTN){
+        declinePendingBT.addActionListener(listenerForRejectBTN);
+    }
+    
+    public void withdrawListener(ActionListener listenerForWithdrawBTN){
+        revokeBT.addActionListener(listenerForWithdrawBTN);
+    }
+    
     public String getSelectedUsername(){
         return (String) onlineList.getSelectedValue();
     }
@@ -223,12 +231,20 @@ public class LobbyView extends javax.swing.JFrame {
         return (String) incomingList.getSelectedValue();
     }
     
+    public String getOutgoingUsername(){
+        return (String) outgoingRequests.getSelectedValue();
+    }
+    
     public void updateOnlineList(DefaultListModel dlm){
         onlineList.setModel(dlm);
     }
     
     public void updateIncomingList(DefaultListModel idlm){
         incomingList.setModel(idlm);
+    }
+    
+    public void updateOutgoingList(DefaultListModel odlm){
+        outgoingRequests.setModel(odlm);
     }
 
     //private static DefaultListModel dlm;

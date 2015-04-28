@@ -43,6 +43,8 @@ public class Connection implements Runnable{
     private static final String INVITEFROM = "INVITEFROM";
     private static final String REQUESTLIST = "REQUESTLIST;";
     private static final String ACCEPTFROM = "ACCEPTFROM";
+    private static final String WITHDRAWFROM = "WITHDRAWFROM ";
+    private static final String DECLINEFROM = "DECLINEFROM ";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
@@ -100,6 +102,12 @@ public class Connection implements Runnable{
                             int semi = ipOfAcceptingUser.indexOf(";");
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, semi);
                             theLobbyController.startGame();
+                        }
+                        else if(code.equals(WITHDRAWFROM)){
+                            
+                        }
+                        else if(code.equals(DECLINEFROM)){
+                            
                         }
                     }
                 }//connected

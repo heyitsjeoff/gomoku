@@ -33,4 +33,24 @@ public class LobbyModel {
         return sb.toString();
     }
     
+    public void addToOutgoingList(String requestTo){
+        if(!this.outgoingList.contains(requestTo)){
+            this.outgoingList.add(requestTo);
+        }
+    }
+    
+    public void removeFromOutgoingList(String requestTo){
+        if(this.outgoingList.contains(requestTo)){
+            this.outgoingList.remove(requestTo);
+        }
+    }
+    
+    public String updateOutgoingList(){
+        StringBuilder sb = new StringBuilder();
+        for(int i =0; i<this.outgoingList.size(); i++){
+            sb.append(this.outgoingList.get(i) + " ");
+        }
+        return sb.toString();
+    }
+    
 }

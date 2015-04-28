@@ -12,6 +12,7 @@ public class LobbyController{
     private LobbyView theView;
     private DefaultListModel dlm;
     private DefaultListModel idlm;
+    private DefaultListModel odlm;
     private Connection theConnection;
     private LobbyModel theLobbyModel;
     private String welcome = "Welcome to the Lobby ";
@@ -24,6 +25,8 @@ public class LobbyController{
         this.theView = theView;
         this.theView.challengePlayerListener(new ChallengeListener());
         this.theView.acceptListener(new AcceptListener());
+        this.theView.rejectListener(new RejectListener());
+        this.theView.withdrawListener(new WithdrawListener());
         this.theConnection = theConnection;
         this.theConnection.setLobbyController(this);
         this.theLobbyModel = theLobbyModel;
@@ -56,12 +59,30 @@ public class LobbyController{
         this.theView.setTitle(pendingRequest);
     }
     
+    public void addToOutgoingList(String username){
+        theLobbyModel.addToOutgoingList(username);
+        theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
+    }
+    
+    public DefaultListModel updateOutgoingList(String manyUsernames){
+        this.odlm = new DefaultListModel();
+        String[] usernames = manyUsernames.split("\\s+");
+        for(int j = 0; j< usernames.length; j++){
+            this.odlm.addElement(usernames[j]);
+        }
+        return this.odlm;
+    }
+    
     public void acceptRequest(String usernameAccepted){
         theConnection.write("ACCEPTTO "+usernameAccepted+";");
     }
     
     public void rejectRequest(String usernameDeclined){
-        theConnection.write(usernameDeclined);
+        theConnection.write("DECLINEFROM "+ usernameDeclined+";");
+    }
+    
+    public void withdrawRequest(String usernameWithdrawn){
+        theConnection.write("WITHDRAWFROM " + usernameWithdrawn + ";");
     }
     
     public void startGame(){
@@ -80,7 +101,13 @@ public class LobbyController{
         }
     }
     
-    //Listeners
+    class RejectListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            rejectRequest(theView.getIncomingUsername());
+        }
+    }
+    
     /**
      * Listener for the back button of Create Account view
      * hides the Create Account View and displays the main view
@@ -90,8 +117,16 @@ public class LobbyController{
         public void actionPerformed(ActionEvent e) {
             System.out.println("LobbyController.challengeListener: "+"INVITETO " + theView.getSelectedUsername() + ";");
             theConnection.write("INVITETO " + theView.getSelectedUsername() + ";");
+            addToOutgoingList(theView.getSelectedUsername());
         }//actionPerformed
     }//backListener
     
+    
+    class WithdrawListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            withdrawRequest(theView.getOutgoingUsername());
+        }
+    }
     
 }
