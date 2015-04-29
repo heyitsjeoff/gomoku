@@ -26,5 +26,9 @@ public class GameModel {
     public String getPlayerHostName() {
         return this.playerHost;
     }
+    
+    public String getPlayerClientName(){
+        return this.playerClient;
+    }
 
 }

@@ -103,7 +103,13 @@ public class LobbyController{
         connectionToGame.setPort(8081);
         connectionToGame.connect();
         connectionToGame.startThread();
-        
+        this.theView.setVisible(false);
+        this.theGameModel = new GameModel();
+        this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
+        this.theGameView = new GameView();
+        this.theGameView.setVisible(true);
+        this.theGameView.setClientLabel(theGameModel.getPlayerClientName());
+        this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
     }
     
     //Listeners
