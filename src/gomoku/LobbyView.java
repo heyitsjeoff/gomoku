@@ -44,11 +44,11 @@ public class LobbyView extends javax.swing.JFrame {
         declinePendingBT = new javax.swing.JButton();
         revokeBT = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        onlineList = new javax.swing.JList();
+        onlineList = new javax.swing.JList<String>();
         jScrollPane6 = new javax.swing.JScrollPane();
-        incomingList = new javax.swing.JList();
+        incomingList = new javax.swing.JList<String>();
         jScrollPane7 = new javax.swing.JScrollPane();
-        outgoingRequests = new javax.swing.JList();
+        outgoingRequests = new javax.swing.JList<String>();
 
         jButton3.setText("jButton3");
 
@@ -253,7 +253,7 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JButton aiBTN;
     private javax.swing.JButton challengeBTN;
     private javax.swing.JButton declinePendingBT;
-    private javax.swing.JList incomingList;
+    private javax.swing.JList<String> incomingList;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -264,10 +264,10 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JList onlineList;
+    private javax.swing.JList<String> onlineList;
     private javax.swing.JLabel onlineUsersLabel;
     private javax.swing.JLabel outgoingLabel;
-    private javax.swing.JList outgoingRequests;
+    private javax.swing.JList<String> outgoingRequests;
     private javax.swing.JLabel pendingLabel;
     private javax.swing.JButton revokeBT;
     // End of variables declaration//GEN-END:variables
