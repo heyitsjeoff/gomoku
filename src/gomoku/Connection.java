@@ -33,6 +33,7 @@ public class Connection implements Runnable{
     private boolean streamsConnected = false;
     private boolean signedIn = false;
     private boolean inLobby = false;
+    private boolean inGame = false;
     
     private static final String logIn = "y";
     private static final String notLogIn = "n";
@@ -101,7 +102,10 @@ public class Connection implements Runnable{
                             String ipOfAcceptingUser = split[2];
                             int semi = ipOfAcceptingUser.indexOf(";");
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, semi);
-                            //theLobbyController.startGame();
+                            int colon = ipOfAcceptingUser.indexOf(":");
+                            ipOfAcceptingUser = ipOfAcceptingUser.substring(0, colon);
+                            System.out.println("Connection.run acceptfrom: "+ipOfAcceptingUser);
+                            theLobbyController.connectToHost(ipOfAcceptingUser);
                         }
                         else if(code.equals(WITHDRAWFROM)){
                             

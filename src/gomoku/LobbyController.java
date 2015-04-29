@@ -20,6 +20,7 @@ public class LobbyController{
     private GameView theGameView;
     private GameModel theGameModel;
     private GameHostController theGameController;
+    private Connection connectionToGame;
 
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
@@ -94,6 +95,13 @@ public class LobbyController{
         this.theGameView.setVisible(true);
         this.theGameView.setHostLabel(theGameModel.getPlayerHostName());
         this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
+    }
+    
+    public void connectToHost(String hostIP){
+        connectionToGame = new Connection(hostIP);
+        connectionToGame.setPort(8081);
+        connectionToGame.connect();
+        connectionToGame.startThread();
     }
     
     //Listeners

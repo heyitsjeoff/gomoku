@@ -31,7 +31,7 @@ public class GameHostController implements Runnable{
 
     public GameHostController(GameModel theModel, GameView theView){
         try {
-            serverSocket = new ServerSocket(4000);
+            serverSocket = new ServerSocket(8081);
         } catch (IOException ex) {
             Logger.getLogger(GameHostController.class.getName()).log(Level.SEVERE, null, ex);
         }
