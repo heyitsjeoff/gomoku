@@ -117,7 +117,6 @@ public class ServerController implements Runnable{
      */
     public void removeUser(Client oUser){
         theModel.removeOnline(oUser);
-        this.theView.updateOnline(theModel.getOnlineList());
     }
     
     /**
