@@ -7,6 +7,7 @@ public class LobbyModel {
     
     private ArrayList<String> incomingList;
     private ArrayList<String> outgoingList;
+    private String username;
     
     public LobbyModel(){
         this.incomingList = new ArrayList<String>();
@@ -51,6 +52,14 @@ public class LobbyModel {
             sb.append(this.outgoingList.get(i) + " ");
         }
         return sb.toString();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getUsername(){
+        return this.username;
     }
     
 }

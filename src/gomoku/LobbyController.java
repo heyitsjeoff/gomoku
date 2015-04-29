@@ -19,7 +19,7 @@ public class LobbyController{
     private String pendingRequest = "You have a pending request";
     private GameView theGameView;
     private GameModel theGameModel;
-    private GameController theGameController;
+    private GameHostController theGameController;
 
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
@@ -75,6 +75,7 @@ public class LobbyController{
     
     public void acceptRequest(String usernameAccepted){
         theConnection.write("ACCEPTTO "+usernameAccepted+";");
+        startGame();
     }
     
     public void rejectRequest(String usernameDeclined){
@@ -87,10 +88,12 @@ public class LobbyController{
     
     public void startGame(){
         this.theView.setVisible(false);
+        this.theGameModel = new GameModel();
+        this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
         this.theGameView = new GameView();
         this.theGameView.setVisible(true);
-        this.theGameModel = new GameModel();
-        this.theGameController  = new GameController(this.theGameModel, this.theGameView);
+        this.theGameView.setHostLabel(theGameModel.getPlayerHostName());
+        this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
     }
     
     //Listeners

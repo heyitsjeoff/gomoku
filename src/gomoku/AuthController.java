@@ -66,10 +66,11 @@ public class AuthController{
     }
     
     public void login(){
+        this.theLobbyModel = new LobbyModel();
+        this.theLobbyModel = new LobbyModel();this.theLobbyModel.setUsername(theView.getUsername());
         this.theView.dispose();
         this.theLobbyView = new LobbyView();
         this.theLobbyView.setVisible(true);
-        this.theLobbyModel = new LobbyModel();
         this.theLobbyController = new LobbyController(theLobbyView, this.theLobbyModel, theConnection);
     }
     

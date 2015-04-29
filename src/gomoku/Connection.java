@@ -49,7 +49,7 @@ public class Connection implements Runnable{
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
     private LobbyController theLobbyController;
-    private GameController theGameController;
+    private GameHostController theGameController;
     
     public Connection(String ip){
         this.ip = ip;
@@ -101,7 +101,7 @@ public class Connection implements Runnable{
                             String ipOfAcceptingUser = split[2];
                             int semi = ipOfAcceptingUser.indexOf(";");
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, semi);
-                            theLobbyController.startGame();
+                            //theLobbyController.startGame();
                         }
                         else if(code.equals(WITHDRAWFROM)){
                             

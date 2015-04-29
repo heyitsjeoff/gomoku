@@ -28,27 +28,42 @@ public class GameView extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        hostLabel = new javax.swing.JLabel();
+        clientLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gomoku");
 
         jButton1.setText("GAME!");
 
+        hostLabel.setText("Host Name");
+
+        clientLabel.setText("Client Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hostLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(clientLabel))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addGap(41, 41, 41))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hostLabel)
+                    .addComponent(clientLabel))
+                .addGap(33, 33, 33)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -88,8 +103,18 @@ public class GameView extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void setHostLabel(String label){
+        hostLabel.setText(label);
+    }
+    
+    public void setClientLabel(String label){
+        clientLabel.setText(label);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel clientLabel;
+    private javax.swing.JLabel hostLabel;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
