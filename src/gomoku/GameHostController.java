@@ -37,6 +37,7 @@ public class GameHostController implements Runnable{
         }
         this.theModel = theModel;
         this.theView = theView;
+        System.out.println("GameHostController created");
     }
     
     public void setUsername(String username){
