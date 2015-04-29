@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,6 +41,8 @@ public class AuthController{
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
     private String initialIP = "127.0.0.1";
+    private String anon = "anon";
+    private boolean ipChanged = false;
     
     //Label messages
     private static final String dc = "Disconnected";
@@ -49,7 +52,9 @@ public class AuthController{
     private static final String dataDialog = "is the current data of login";
     private static final String cts = "Connected to server";
     private static final String pdnm = "Passwords do not match";
-    private static final String ipChanged = "IP changed to ";
+    private static final String ipChange = "IP changed to ";
+    private static final String PCI = "Please Configure IP";
+    private static final String complete = "Please complete both fields";
     
     /**
      * Creates the main controller for Gomoku
@@ -62,6 +67,7 @@ public class AuthController{
         this.theView.createAccountListener(new CAListener());
         this.theView.passwordPFListener(new EnterListener());
         this.theView.changeIPListener(new IPListener());
+        this.theView.anonListener(new AnonListener());
         theConnection = new Connection(initialIP);
     }
     
@@ -104,7 +110,8 @@ public class AuthController{
      * @param number new IP
      */
     public void setIP(String number){
-        theView.appendMSG(ipChanged + number);
+        theView.appendMSG(ipChange + number);
+        this.ipChanged = true;
         this.theConnection.setIP(number);
     }//setIP
     
@@ -116,25 +123,55 @@ public class AuthController{
         this.theConnection.setPort(number);
     }//setPort
     
-    public void checkConnection(){
+    public boolean checkConnection(){
         if(this.streamsConnected==false){
-            theConnection.setAuthController(this);
-            theConnection.connect();
-            theConnection.startThread();
-            this.streamsConnected=true;
+            if(ipChanged){
+                theConnection.setAuthController(this);
+                theConnection.connect();
+                theConnection.startThread();
+                this.streamsConnected=true;
+                return true;
+            }
+            else{
+                theView.appendMSG(PCI);
+            }
         }
+        return false;
     }
     
     public void tryLogin(){
-        checkConnection();
-        String enteredUsername = theView.getUsername();
-        String enteredPassword = theView.getPassword();
-        authenticate(enteredUsername, enteredPassword);
+        if(!theView.getUsername().isEmpty() && !theView.getPassword().isEmpty()){
+            String enteredUsername = theView.getUsername();
+            String enteredPassword = theView.getPassword();
+            authenticate(enteredUsername, enteredPassword);
+        }
+        else{
+            theView.appendMSG(complete);
+        }
     }
     
+    public void anon(){
+        theCAView = new CreateAccountView();
+        caController = new CreateAccountController(theCAView, theConnection, theView);
+        theConnection.setCreateAccountController(caController);
+        Random rand = new Random();
+        int num = rand.nextInt(9000000) + 1000000;
+        String uAndP = "anon"+Integer.toString(num);
+        caController.createAnon(uAndP);
+    }
     
     //---Listeners----------------------------------------------------
     
+    class AnonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(checkConnection()){
+                anon();
+            }
+        }
+    }
+    
+
      /**
      * Listener for the login button
      * sets streams and attempts to login
@@ -142,7 +179,9 @@ public class AuthController{
     class LoginListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            tryLogin();
+            if(checkConnection()){
+                tryLogin();
+            }
         }//actionPerformed
     }//LoginListener
     
@@ -166,12 +205,13 @@ public class AuthController{
     class CAListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            checkConnection();
-            theView.setVisible(false);
-            theCAView = new CreateAccountView();
-            theCAView.setVisible(true);
-            caController = new CreateAccountController(theCAView, theConnection, theView);
-            theConnection.setCreateAccountController(caController);
+            if(checkConnection()){
+                theView.setVisible(false);
+                theCAView = new CreateAccountView();
+                theCAView.setVisible(true);
+                caController = new CreateAccountController(theCAView, theConnection, theView);
+                theConnection.setCreateAccountController(caController);
+            }
         }//actionPerformed
     }//CAListener
     
@@ -187,7 +227,9 @@ public class AuthController{
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode()==KeyEvent.VK_ENTER){
-                tryLogin();
+                if(checkConnection()){
+                    tryLogin();
+                }  
             }//keyPressed
         }
         @Override

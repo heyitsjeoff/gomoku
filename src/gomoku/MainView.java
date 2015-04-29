@@ -225,6 +225,10 @@ public class MainView extends javax.swing.JFrame {
         ipMI.addActionListener(ipListener);
     }
     
+    public void anonListener(ActionListener anonListener){
+        anonBTN.addActionListener(anonListener);
+    }
+    
     /**
      * listener for a KeyEvent
      * @param listen 

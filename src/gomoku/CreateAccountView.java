@@ -139,6 +139,12 @@ public class CreateAccountView extends javax.swing.JFrame {
         });
     }
     
+    //for anon use case
+    public void setUsernamePassword(String cred){
+        usernameTF.setText(cred);
+        passwordPF.setText(cred);
+    }
+    
     /**
      * returns the username
      * @return strong in usernameTF

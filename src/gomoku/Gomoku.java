@@ -2,6 +2,7 @@
  * Program to play Gomoku
  * Usage: java Gomoku <ip of server>
  * ip not required
+ * http://www.quora.com/How-do-I-generate-a-positive-7-digit-random-number-in-Java
  */
 
 /*

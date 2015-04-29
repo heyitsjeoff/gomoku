@@ -41,6 +41,12 @@ public class CreateAccountController {
             this.theConnection.write(message);
         }
     }
+    
+    public void createAnon(String anon){
+        String message = "!" + anon + " " + anon;
+        theView.setUsernamePassword(anon);
+        this.theConnection.write(message);
+    }
 
     public void userAlreadyExists() {
         theView.message(uaeL);
