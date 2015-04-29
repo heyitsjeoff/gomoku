@@ -202,7 +202,7 @@ public class ServerModel {
 	public boolean accept(String usernameFrom, String usernameTo, String IP){
 		Client recipient = findOnlineUser(usernameTo);
 		if(recipient != null){
-			recipient.accept(usernameFrom, IP);
+			recipient.accept(usernameTo, IP);
 			return true;
 		} else return false;
 	}
