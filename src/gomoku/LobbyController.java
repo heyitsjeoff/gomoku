@@ -37,7 +37,7 @@ public class LobbyController{
         //this.theConnection.write("REQUESTLIST ;");
     }
       
-    public DefaultListModel updateOnlineList(String onlineUsers){
+    public DefaultListModel<String> updateOnlineList(String onlineUsers){
         this.dlm = new DefaultListModel<String>();
         String[] usernames = onlineUsers.split("\\s+");
         for(int i = 0; i< usernames.length; i++){
@@ -47,7 +47,7 @@ public class LobbyController{
         return this.dlm;
     }
     
-    public DefaultListModel updateIncomingList(String manyUsernames){
+    public DefaultListModel<String> updateIncomingList(String manyUsernames){
         this.idlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
         for(int j = 0; j< usernames.length; j++){
@@ -77,7 +77,7 @@ public class LobbyController{
         theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
-    public DefaultListModel updateOutgoingList(String manyUsernames){
+    public DefaultListModel<String> updateOutgoingList(String manyUsernames){
         this.odlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
         for(int j = 0; j< usernames.length; j++){
