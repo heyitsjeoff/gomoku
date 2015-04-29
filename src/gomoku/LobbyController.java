@@ -17,6 +17,7 @@ public class LobbyController{
     private LobbyModel theLobbyModel;
     private String welcome = "Welcome to the Lobby ";
     private String pendingRequest = "You have a pending request";
+    private String swar = "Someone withdrew a request";
     private GameView theGameView;
     private GameModel theGameModel;
     private GameHostController theGameController;
@@ -60,8 +61,19 @@ public class LobbyController{
         this.theView.setTitle(pendingRequest);
     }
     
+    public void removeFromIncomingList(String username){
+        theLobbyModel.removeFromIncomingList(username);
+        theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
+        this.theView.setTitle(swar);
+    }
+    
     public void addToOutgoingList(String username){
         theLobbyModel.addToOutgoingList(username);
+        theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
+    }
+    
+    public void removeFromOutgoingList(String username){
+        theLobbyModel.removeFromOutgoingList(username);
         theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
@@ -84,7 +96,8 @@ public class LobbyController{
     }
     
     public void withdrawRequest(String usernameWithdrawn){
-        theConnection.write("WITHDRAWFROM " + usernameWithdrawn + ";");
+        theConnection.write("WITHDRAWTO " + usernameWithdrawn + ";");
+        removeFromOutgoingList(usernameWithdrawn);
     }
     
     public void startGame(){

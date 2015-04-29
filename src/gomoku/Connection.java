@@ -44,7 +44,7 @@ public class Connection implements Runnable{
     private static final String INVITEFROM = "INVITEFROM";
     private static final String REQUESTLIST = "REQUESTLIST;";
     private static final String ACCEPTFROM = "ACCEPTFROM";
-    private static final String WITHDRAWFROM = "WITHDRAWFROM ";
+    private static final String WITHDRAWFROM = "WITHDRAWFROM";
     private static final String DECLINEFROM = "DECLINEFROM ";
     
     private AuthController aController;
@@ -84,6 +84,7 @@ public class Connection implements Runnable{
                     else{
                         String[] split = messageFromInput.split("\\s+");
                         String code = split[0];
+                        System.out.println(code);
                         if(code.equals(LIST)){
                             StringBuilder sb = new StringBuilder();
                             for(int i=1; i<split.length-1; i++){
@@ -107,7 +108,11 @@ public class Connection implements Runnable{
                             theLobbyController.connectToHost(ipOfAcceptingUser);
                         }
                         else if(code.equals(WITHDRAWFROM)){
-                            
+                            System.out.println("WITHDRAWFROM REACHED IN CONNECTION");
+                            String userWithdrawingInvite = split[1];
+                            int semi = userWithdrawingInvite.indexOf(";");
+                            userWithdrawingInvite = userWithdrawingInvite.substring(0, semi);
+                            theLobbyController.removeFromIncomingList(userWithdrawingInvite);
                         }
                         else if(code.equals(DECLINEFROM)){
                             
