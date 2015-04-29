@@ -51,6 +51,7 @@ public class GameHostController implements Runnable{
     @Override
     public void run() {
          boolean accepting = true;
+         System.out.println("running run in GameHostController");
          while(accepting){
             try {
             this.socket = serverSocket.accept();
