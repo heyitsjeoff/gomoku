@@ -10,9 +10,9 @@ import javax.swing.DefaultListModel;
 public class LobbyController{
     
     private LobbyView theView;
-    private DefaultListModel dlm;
-    private DefaultListModel idlm;
-    private DefaultListModel odlm;
+    private DefaultListModel<String> dlm;
+    private DefaultListModel<String> idlm;
+    private DefaultListModel<String> odlm;
     private Connection theConnection;
     private LobbyModel theLobbyModel;
     private String welcome = "Welcome to the Lobby ";
@@ -38,7 +38,7 @@ public class LobbyController{
     }
       
     public DefaultListModel updateOnlineList(String onlineUsers){
-        this.dlm = new DefaultListModel();
+        this.dlm = new DefaultListModel<String>();
         String[] usernames = onlineUsers.split("\\s+");
         for(int i = 0; i< usernames.length; i++){
             this.dlm.addElement(usernames[i]);
@@ -48,7 +48,7 @@ public class LobbyController{
     }
     
     public DefaultListModel updateIncomingList(String manyUsernames){
-        this.idlm = new DefaultListModel();
+        this.idlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
         for(int j = 0; j< usernames.length; j++){
             this.idlm.addElement(usernames[j]);
@@ -78,7 +78,7 @@ public class LobbyController{
     }
     
     public DefaultListModel updateOutgoingList(String manyUsernames){
-        this.odlm = new DefaultListModel();
+        this.odlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
         for(int j = 0; j< usernames.length; j++){
             this.odlm.addElement(usernames[j]);
