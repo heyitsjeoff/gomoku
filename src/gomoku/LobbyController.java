@@ -95,6 +95,7 @@ public class LobbyController{
         this.theGameView.setVisible(true);
         this.theGameView.setHostLabel(theGameModel.getPlayerHostName());
         this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
+        this.theGameController.listen();
     }
     
     public void connectToHost(String hostIP){
@@ -102,6 +103,7 @@ public class LobbyController{
         connectionToGame.setPort(8081);
         connectionToGame.connect();
         connectionToGame.startThread();
+        
     }
     
     //Listeners

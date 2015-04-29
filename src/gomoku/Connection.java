@@ -104,7 +104,6 @@ public class Connection implements Runnable{
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, semi);
                             int colon = ipOfAcceptingUser.indexOf(":");
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, colon);
-                            System.out.println("Connection.run acceptfrom: "+ipOfAcceptingUser);
                             theLobbyController.connectToHost(ipOfAcceptingUser);
                         }
                         else if(code.equals(WITHDRAWFROM)){
