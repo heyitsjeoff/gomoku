@@ -78,12 +78,10 @@ public class Client extends Thread implements Comparable<String>{
 					sendMessage("FAIL The targeted user does not exist or is offline;");
 				break;
 			case "ACCEPTTO":
-                                System.out.println("ACCEPTTO reached");
 				if(!theServerModel.accept(scan.next(), clientUsername, connectionIP))
 					sendMessage("FAIL The targeted user does not exist or is offline;");
 				break;
 			case "WITHDRAWTO":
-                            System.out.println("w reached");
 				if(!theServerModel.withdraw(clientUsername, scan.next()))
 					sendMessage("FAIL The targeted user does not exist or is offline;");
 				break;
@@ -140,7 +138,6 @@ public class Client extends Thread implements Comparable<String>{
 	 * @param fromUsername The user accepting the invitation
 	 */
 	public void withdraw(String fromUsername) {
-                System.out.println("client.withdraw has been called and is writing: WITHDRAWFROM " + fromUsername + ";");
 		sendMessage("WITHDRAWFROM " + fromUsername + ";");
 	}
 

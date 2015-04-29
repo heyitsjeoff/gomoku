@@ -64,7 +64,6 @@ public class LobbyController{
     public void removeFromIncomingList(String username){
         theLobbyModel.removeFromIncomingList(username);
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
-        this.theView.setTitle(swar);
     }
     
     public void addToOutgoingList(String username){
@@ -92,7 +91,8 @@ public class LobbyController{
     }
     
     public void rejectRequest(String usernameDeclined){
-        theConnection.write("DECLINEFROM "+ usernameDeclined+";");
+        theConnection.write("DECLINETO "+ usernameDeclined+";");
+        removeFromIncomingList(usernameDeclined);
     }
     
     public void withdrawRequest(String usernameWithdrawn){
@@ -147,9 +147,12 @@ public class LobbyController{
     class ChallengeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("LobbyController.challengeListener: "+"INVITETO " + theView.getSelectedUsername() + ";");
-            theConnection.write("INVITETO " + theView.getSelectedUsername() + ";");
-            addToOutgoingList(theView.getSelectedUsername());
+            if(!theView.getSelectedUsername().isEmpty()){
+                if(!theView.getSelectedUsername().equals(theLobbyModel.getUsername())){
+                    theConnection.write("INVITETO " + theView.getSelectedUsername() + ";");
+                    addToOutgoingList(theView.getSelectedUsername());
+                }
+            }
         }//actionPerformed
     }//backListener
     
