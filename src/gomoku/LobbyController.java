@@ -122,7 +122,6 @@ public class LobbyController{
         this.theGameView = new GameView();
         this.theGameView.setVisible(true);
         this.theGameView.setClientLabel(theGameModel.getPlayerClientName());
-        this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
     }
     
     //Listeners
