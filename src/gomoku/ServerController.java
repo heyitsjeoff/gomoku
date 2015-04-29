@@ -126,14 +126,5 @@ public class ServerController implements Runnable{
         worker = new Thread(this);
         worker.start();
     }//listen
-    
-    /**
-     * gets the IP address of server and displays it to the GUI
-     * @throws UnknownHostException
-     */
-    public void displayIP() throws UnknownHostException{
-        theView.displayIP("Server IP: " 
-                + InetAddress.getLocalHost().getHostAddress());
-    }//displayIP
 
 }//ServerController

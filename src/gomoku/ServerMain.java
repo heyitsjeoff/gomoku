@@ -20,6 +20,5 @@ public class ServerMain {
         app.setContentPane(theView);
         app.pack();
         app.setVisible(true);
-        myServer.displayIP();
     }//psvm
 }

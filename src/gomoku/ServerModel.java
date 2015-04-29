@@ -200,7 +200,7 @@ public class ServerModel {
 	 *			usernameTo is offline or does not exist
 	 */
 	public boolean accept(String usernameFrom, String usernameTo, String IP){
-		Client recipient = findOnlineUser(usernameTo);
+		Client recipient = findOnlineUser(usernameFrom);
 		if(recipient != null){
 			recipient.accept(usernameTo, IP);
 			return true;

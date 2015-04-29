@@ -16,14 +16,6 @@ public class ServerGUI extends javax.swing.JPanel {
         initComponents();
     }
     
-    /**
-     * displays the ip address of the server
-     * @param ip string representing ip
-     */
-    public void displayIP(String ip){
-        ipLabel.setText(ip);
-    }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
