@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class GameHostController implements Runnable{
     
     private GameModel theModel;
-    private GameView theView;
+    private PotentialView theView;
     
     private String username;
     
@@ -29,7 +29,7 @@ public class GameHostController implements Runnable{
     private ServerSocket serverSocket;
     private GameConnection theGameConnection;
 
-    public GameHostController(GameModel theModel, GameView theView){
+    public GameHostController(GameModel theModel, PotentialView theView){
         try {
             serverSocket = new ServerSocket(8081);
         } catch (IOException ex) {

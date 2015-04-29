@@ -19,6 +19,7 @@ public class LobbyController{
     private String pendingRequest = "You have a pending request";
     private String swar = "Someone withdrew a request";
     private GameView theGameView;
+    private PotentialView pView;
     private GameModel theGameModel;
     private GameHostController theGameController;
     private Connection connectionToGame;
@@ -104,10 +105,8 @@ public class LobbyController{
         this.theView.setVisible(false);
         this.theGameModel = new GameModel();
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
-        this.theGameView = new GameView();
-        this.theGameView.setVisible(true);
-        this.theGameView.setHostLabel(theGameModel.getPlayerHostName());
-        this.theGameController  = new GameHostController(this.theGameModel, this.theGameView);
+        this.pView = new PotentialView();
+        this.theGameController  = new GameHostController(this.theGameModel, this.pView);
         this.theGameController.listen();
     }
     
@@ -119,9 +118,7 @@ public class LobbyController{
         this.theView.setVisible(false);
         this.theGameModel = new GameModel();
         this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
-        this.theGameView = new GameView();
-        this.theGameView.setVisible(true);
-        this.theGameView.setClientLabel(theGameModel.getPlayerClientName());
+        this.pView = new PotentialView();
     }
     
     //Listeners
