@@ -224,26 +224,26 @@ public class LobbyView extends javax.swing.JFrame {
     }
     
     public String getSelectedUsername(){
-        return (String) onlineList.getSelectedValue();
+        return onlineList.getSelectedValue();
     }
     
     public String getIncomingUsername(){
-        return (String) incomingList.getSelectedValue();
+        return incomingList.getSelectedValue();
     }
     
     public String getOutgoingUsername(){
-        return (String) outgoingRequests.getSelectedValue();
+        return outgoingRequests.getSelectedValue();
     }
     
-    public void updateOnlineList(DefaultListModel dlm){
+    public void updateOnlineList(DefaultListModel<String> dlm){
         onlineList.setModel(dlm);
     }
     
-    public void updateIncomingList(DefaultListModel idlm){
+    public void updateIncomingList(DefaultListModel<String> idlm){
         incomingList.setModel(idlm);
     }
     
-    public void updateOutgoingList(DefaultListModel odlm){
+    public void updateOutgoingList(DefaultListModel<String> odlm){
         outgoingRequests.setModel(odlm);
     }
 
