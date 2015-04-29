@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Source: Modified code of Jeoff Villanueva's submission for Lab 1 of CSCE 270 in Spring 2014
  */
 package gomoku;
 
@@ -16,17 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-/**
- *
- * @author jeffthechef14
- */
+
 public class PotentialView extends JFrame{
     
-    //GUI components of the PandemicView
-	//The BorderLayout is used with the Center panel
-	//containing the "grid" of people. 
-	//North panel contains the "step" button
-	//South panel is a JTextArea for instructions and results
+
 	private JPanel panelCenter = new JPanel();
 	private int row, col;
 	private MyJButton[][] square;
@@ -34,15 +25,7 @@ public class PotentialView extends JFrame{
 	private int count;
 	private final int MAX_COUNT=4;
 	private JButton step;
-	
-	/**
-	 * The constructor is called by PandemicController and is passed initial
-	 * state of the program using parameter cur
-	 * @param cur  PandemicModel with the current view 
-	 * @param inoc PandemicModel that stores the inoculations for
-	 *             the current round (4 GREEN cells)
-	 * @param con  handle to the controller
-	 */
+
 	public PotentialView(){
 		row = 30;
 		col = 30;
@@ -85,17 +68,6 @@ public class PotentialView extends JFrame{
 		
 	}
 	
-
-	
-
-	
-
-	/**
-	 * The actionPerformed method is called each time a button
-	 * in the center panel is selected. It allows the user to 
-	 * select MAX_COUNT	WHITE cells to inoculate (set to GREEN)
-	 * 
-	 */
 	private class SquareListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
@@ -114,12 +86,6 @@ public class PotentialView extends JFrame{
 		
 	}
 	
-	/**
-	 * The actionPerformed method is called each time the step
-	 * button in the north panel is selected. The user must have
-	 * select MAX_COUNT	WHITE cells to inoculate (set to GREEN)
-	 *
-	 */
 	private class ButtonListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
