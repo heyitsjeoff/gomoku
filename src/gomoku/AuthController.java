@@ -205,13 +205,12 @@ public class AuthController{
     class CAListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(checkConnection()){
+                checkConnection();
                 theView.setVisible(false);
                 theCAView = new CreateAccountView();
                 theCAView.setVisible(true);
                 caController = new CreateAccountController(theCAView, theConnection, theView);
                 theConnection.setCreateAccountController(caController);
-            }
         }//actionPerformed
     }//CAListener
     
