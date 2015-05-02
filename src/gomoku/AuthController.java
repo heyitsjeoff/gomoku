@@ -16,12 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *this is a test comment from chase
- *this is a test comment from jun
- * @author heyitsjeoff
- */
-
 public class AuthController{
     
     //Views
@@ -55,6 +49,8 @@ public class AuthController{
     private static final String ipChange = "IP changed to ";
     private static final String PCI = "Please Configure IP";
     private static final String complete = "Please complete both fields";
+    private static final String serverIP = "Server IP:";
+    private static final String anonString = "anon";
     
     /**
      * Creates the main controller for Gomoku
@@ -144,6 +140,7 @@ public class AuthController{
             String enteredUsername = theView.getUsername();
             String enteredPassword = theView.getPassword();
             authenticate(enteredUsername, enteredPassword);
+            this.theConnection.setUsername(enteredUsername);
         }
         else{
             theView.appendMSG(complete);
@@ -156,12 +153,12 @@ public class AuthController{
         theConnection.setCreateAccountController(caController);
         Random rand = new Random();
         int num = rand.nextInt(9000000) + 1000000;
-        String uAndP = "anon"+Integer.toString(num);
+        String uAndP = anonString+Integer.toString(num);
+        this.theConnection.setUsername(uAndP);
         caController.createAnon(uAndP);
     }
     
     //---Listeners----------------------------------------------------
-    
     class AnonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -171,10 +168,8 @@ public class AuthController{
         }
     }
     
-
      /**
      * Listener for the login button
-     * sets streams and attempts to login
      */
     class LoginListener implements ActionListener{
         @Override
@@ -192,7 +187,7 @@ public class AuthController{
     class IPListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            String newIP = JOptionPane.showInputDialog(null, "Server IP:");
+            String newIP = JOptionPane.showInputDialog(null, serverIP);
             setIP(newIP);
             initialIP = newIP;
         }//actionPerformed

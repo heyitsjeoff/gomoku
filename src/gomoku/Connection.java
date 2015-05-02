@@ -1,12 +1,3 @@
-/*
-Jeoff Villanueva
-Project
-CSCE 320 Spring
-Date
-Java used in Netbeans
-Sources:
-
- */
 package gomoku;
 
 import java.io.BufferedReader;
@@ -34,6 +25,7 @@ public class Connection implements Runnable{
     private boolean signedIn = false;
     private boolean inLobby = false;
     private boolean inGame = false;
+    private String username;
     
     private static final String logIn = "y";
     private static final String notLogIn = "n";
@@ -85,7 +77,6 @@ public class Connection implements Runnable{
                     else{
                         String[] split = messageFromInput.split("\\s+");
                         String code = split[0];
-                        System.out.println("Connection.run code: "+ code);
                         if(code.equals(LIST)){
                             StringBuilder sb = new StringBuilder();
                             for(int i=1; i<split.length-1; i++){
@@ -115,7 +106,6 @@ public class Connection implements Runnable{
                             theLobbyController.removeFromIncomingList(userWithdrawingInvite);
                         }
                         else if(code.equals(DECLINEFROM)){
-                            System.out.println("DECLNEFROM REACHED");
                             String decline = split[1];
                             int semi = decline.indexOf(";");
                             decline = decline.substring(0, semi);
@@ -130,6 +120,10 @@ public class Connection implements Runnable{
                 Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
     }
     
     public void setAuthController(AuthController aController){

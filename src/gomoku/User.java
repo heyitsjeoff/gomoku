@@ -1,9 +1,5 @@
 package gomoku;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class User {
     
     private String username, password;

@@ -6,14 +6,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class ServerModel {
     
     private ArrayList<User> list;
     private ArrayList<Client> onlineUsers;
+    private String fileName = "data";
             
     /**
      * creates a servermodel and imports stored users from data.txt
@@ -21,7 +18,7 @@ public class ServerModel {
     public ServerModel(){
         this.list = new ArrayList<User>();
         this.onlineUsers = new ArrayList<Client>();
-        readFile("data");
+        readFile(fileName);
     }
     
     /**
@@ -121,7 +118,7 @@ public class ServerModel {
     public void addUser(User newUser){
         list.add(newUser);
         //terrible way to do this
-        writeFile("data");
+        writeFile(fileName);
     }//addUser
     
     
