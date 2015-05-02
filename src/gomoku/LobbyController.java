@@ -18,11 +18,12 @@ public class LobbyController{
     private String welcome = "Welcome to the Lobby ";
     private String pendingRequest = "You have a pending request";
     private String swar = "Someone withdrew a request";
-    private GameView theGameView;
-    private PotentialView pView;
+    private GameView pView;
     private GameModel theGameModel;
-    private GameHostController theGameController;
+    private GameHostController theGameHostController;
     private Connection connectionToGame;
+    
+    private int boardSize = 30;
 
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
@@ -103,11 +104,12 @@ public class LobbyController{
     
     public void startGame(){
         this.theView.setVisible(false);
-        this.theGameModel = new GameModel();
+        this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
-        this.pView = new PotentialView();
-        this.theGameController  = new GameHostController(this.theGameModel, this.pView);
-        this.theGameController.listen();
+        this.pView = new GameView(this.theGameModel);
+        this.theGameHostController  = new GameHostController(this.theGameModel, this.pView);
+        this.theGameHostController.listen();
+        this.theGameModel.setPlayerHostName(theConnection.getUsername());
     }
     
     public void connectToHost(String hostIP){
@@ -116,9 +118,10 @@ public class LobbyController{
         connectionToGame.connect();
         connectionToGame.startThread();
         this.theView.setVisible(false);
-        this.theGameModel = new GameModel();
+        this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
-        this.pView = new PotentialView();
+        this.pView = new GameView(this.theGameModel);
+        this.theGameModel.setPlayerClientName(theConnection.getUsername());
     }
     
     //Listeners

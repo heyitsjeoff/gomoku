@@ -126,6 +126,10 @@ public class Connection implements Runnable{
         this.username = username;
     }
     
+    public String getUsername(){
+        return this.username;
+    }
+    
     public void setAuthController(AuthController aController){
         this.aController = aController;
     }

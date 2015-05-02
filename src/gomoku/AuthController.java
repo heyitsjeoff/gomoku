@@ -35,10 +35,9 @@ public class AuthController{
     private static final String notLogIn = "n";
     private static final String uae = "user already exists";
     private String initialIP = "127.0.0.1";
-    private String anon = "anon";
     private boolean ipChanged = false;
     
-    //Label messages
+    //final strings
     private static final String dc = "Disconnected";
     private static final String invalid = "Invalid Username or Password";
     private static final String nuc = "New user created";

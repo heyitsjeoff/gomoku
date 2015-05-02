@@ -1,27 +1,17 @@
-/*
-Jeoff Villanueva
-Project
-CSCE 320 Spring
-Date
-Java used in Netbeans
-Sources:
-
- */
 package gomoku;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class GameHostController implements Runnable{
     
     private GameModel theModel;
-    private PotentialView theView;
-    
-    private String username;
+    private GameView theView;
     
     //connection things
     private Thread worker;
@@ -29,7 +19,7 @@ public class GameHostController implements Runnable{
     private ServerSocket serverSocket;
     private GameConnection theGameConnection;
 
-    public GameHostController(GameModel theModel, PotentialView theView){
+    public GameHostController(GameModel theModel, GameView theView){
         try {
             serverSocket = new ServerSocket(8081);
         } catch (IOException ex) {
@@ -37,10 +27,7 @@ public class GameHostController implements Runnable{
         }
         this.theModel = theModel;
         this.theView = theView;
-    }
-    
-    public void setUsername(String username){
-        this.username = username;
+        this.theView.sendMoveListener(new SendMoveListener());
     }
     
     public void listen(){
@@ -58,10 +45,19 @@ public class GameHostController implements Runnable{
             this.theGameConnection = new GameConnection(this.socket, this);
             theGameConnection.start();
             System.out.println("GameController.run has accepted a new gameConnection");
+            accepting = false;
         } catch (IOException ex) {
             Logger.getLogger(GameHostController.class.getName()).log(Level.SEVERE, null, ex);
+          }
         }
-         }
+        //play
+    }
+
+    class SendMoveListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //sendMOve
+        }        
     }
     
 }

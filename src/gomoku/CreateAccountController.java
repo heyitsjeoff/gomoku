@@ -12,6 +12,8 @@ public class CreateAccountController {
     private CreateAccountView theView;
     private MainView theMainView;
     private Connection theConnection;
+    
+    //static variables
     private static final String uaeL = "User already exists";
     private static final String pdnm = "Passwords do not match";
     private static final String created = "user created";
@@ -59,7 +61,6 @@ public class CreateAccountController {
         theView.dispose();
     }
     
-
     class EnterListener implements KeyListener {
 
         @Override
@@ -92,7 +93,5 @@ public class CreateAccountController {
             createAccount();
         }//action
     }//CreateListener
-
-    
-    
+  
 }
