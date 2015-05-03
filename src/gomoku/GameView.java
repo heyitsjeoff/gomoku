@@ -1,5 +1,6 @@
 /*
  * Source: Modified code of Jeoff Villanueva's submission for Lab 1 of CSCE 270 in Spring 2014
+http://stackoverflow.com/questions/6835682/how-to-disable-gui-button-in-java
  */
 package gomoku;
 
@@ -24,6 +25,8 @@ public class GameView extends JFrame{
     private final int MAX_COUNT=4;
     private JButton send;
     private GameModel theModel;
+    public static final char MYTOKEN = '*';
+    public static final char THEIRTOKEN = '#';
 
     public GameView(GameModel theModel){
         this.theModel = theModel;
@@ -67,7 +70,15 @@ public class GameView extends JFrame{
 		
 	}
     
-    public void updateCell(int i, int j){
+    public void enableBTN(){
+        send.setEnabled(true);
+    }
+    
+    public void disableBTN(){
+        send.setEnabled(false);
+    }
+    
+    public void updateCellView(int i, int j){
         if(theModel.getCell(i, j)==GameModel.MYTOKEN){
             square[i][j].setBackground(Color.blue);
         }
@@ -76,13 +87,21 @@ public class GameView extends JFrame{
         }
     }
         
-    public void updateGrid(){
+    public void updateGridView(){
         for(int i = 0; i<this.row; i++){
             for(int j = 0; j<this.col; j++){
-                updateCell(i,j);
+                updateCellView(i,j);
             }
         }
         count = 0;
+    }
+    
+    public String findChange(){
+        return "what";
+    }
+    
+    public void appendMessage(String message){
+        displayArea.append(message+"\n");
     }
 	
     private class SquareListener implements ActionListener{
@@ -90,11 +109,13 @@ public class GameView extends JFrame{
             MyJButton button = (MyJButton) e.getSource();
             if(count<1 && button.getBackground().equals(Color.white)) {
 		button.setBackground(Color.green);
-                count++;
+                theModel.setCell(row, col, MYTOKEN);
+                theModel.setNextMove(row, col, MYTOKEN);
+                theModel.addToCount();
             }
             else if(button.getBackground().equals(Color.green)){
                 button.setBackground(Color.white);
-                count--;
+                theModel.subtractFromCount();
             }			 		
         }
     }

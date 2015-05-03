@@ -22,6 +22,7 @@ public class LobbyController{
     private GameModel theGameModel;
     private GameHostController theGameHostController;
     private Connection connectionToGame;
+    private GameClientController theGameClientController;
     
     private int boardSize = 30;
 
@@ -121,7 +122,9 @@ public class LobbyController{
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
         this.pView = new GameView(this.theGameModel);
+        this.pView.disableBTN();
         this.theGameModel.setPlayerClientName(theConnection.getUsername());
+        this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame);
     }
     
     //Listeners

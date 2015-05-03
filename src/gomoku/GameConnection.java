@@ -23,6 +23,8 @@ public class GameConnection extends Thread{
     private byte[] byteArray = new byte[2000];
     private String connectionIP;
     
+    public static final String nm = "NEXTMOVE";
+    
     public GameConnection(Socket player2, GameHostController theGameController) throws IOException{
         this.player2 = player2;
         this.theGameController = theGameController;
@@ -34,11 +36,18 @@ public class GameConnection extends Thread{
     
     public void run(){
         boolean connected = true;
+        String message = "";
         while(connected){
             try {
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
-                    //do the client thing
+                    message = new String(byteArray, 0, count);
+                    String[] split = message.split("\\s+");
+                    String code = split[0];
+                    if(code.equals(nm)){
+                        String move = split[1] + " " + split[2] + " " + split[3];
+                        theGameController.opponentNextMove(move);
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(GameConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,6 +65,10 @@ public class GameConnection extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void updateBoard(){
+        
     }
     
 }

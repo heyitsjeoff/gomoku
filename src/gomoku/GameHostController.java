@@ -10,22 +10,26 @@ import java.util.logging.Logger;
 
 public class GameHostController implements Runnable{
     
-    private GameModel theModel;
+    private GameModel theCurrentModel;
     private GameView theView;
+    
+    private GameModel nextModel;
     
     //connection things
     private Thread worker;
     private Socket socket;
     private ServerSocket serverSocket;
     private GameConnection theGameConnection;
+    
+    public static final String makeMove = "Please make a valid move";
 
-    public GameHostController(GameModel theModel, GameView theView){
+    public GameHostController(GameModel theCurrentModel, GameView theView){
         try {
             serverSocket = new ServerSocket(8081);
         } catch (IOException ex) {
             Logger.getLogger(GameHostController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.theModel = theModel;
+        this.theCurrentModel = theCurrentModel;
         this.theView = theView;
         this.theView.sendMoveListener(new SendMoveListener());
     }
@@ -52,11 +56,24 @@ public class GameHostController implements Runnable{
         }
         //play
     }
+    
+    public void opponentNextMove(String move){
+        String[] split = move.split("\\s+");
+        int row = Integer.parseInt(split[0]);
+        int col = Integer.parseInt(split[1]);
+        char token = split[2].charAt(0);
+        theCurrentModel.setCell(row, col, token);
+    }
 
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //sendMOve
+            if(theCurrentModel.getCount()==0){
+                theView.appendMessage(makeMove);
+            }
+            else{
+                
+            }
         }        
     }
     
