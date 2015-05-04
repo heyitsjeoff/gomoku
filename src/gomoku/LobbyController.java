@@ -127,6 +127,10 @@ public class LobbyController{
         this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame);
     }
     
+    public GameClientController getClientController(){
+        return this.theGameClientController;
+    }
+    
     //Listeners
     class AcceptListener implements ActionListener {
         @Override

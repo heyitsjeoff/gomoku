@@ -28,6 +28,16 @@ public class GameClientController {
         this.theView.sendMoveListener(new SendMoveListener());
     }
     
+    public void updateBoard(String move){
+        String[] split = move.split("\\s+");
+        int row = Integer.parseInt(split[0]);
+        int col = Integer.parseInt(split[1]);
+        char token = split[2].charAt(0);
+        theModel.setCell(row, col, token);
+        theView.updateGridView();
+        theView.enableBTN();
+    }
+    
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

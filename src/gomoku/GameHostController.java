@@ -72,7 +72,8 @@ public class GameHostController implements Runnable{
                 theView.appendMessage(makeMove);
             }
             else{
-                
+                theGameConnection.write(theCurrentModel.getNextMove());
+                theView.disableBTN();
             }
         }        
     }

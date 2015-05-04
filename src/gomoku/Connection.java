@@ -39,11 +39,13 @@ public class Connection implements Runnable{
     private static final String WITHDRAWFROM = "WITHDRAWFROM";
     private static final String DECLINETO = "DECLINETO";
     private static final String DECLINEFROM = "DECLINEFROM";
+        public static final String nm = "NEXTMOVE";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
     private LobbyController theLobbyController;
     private GameHostController theGameController;
+    private GameClientController theGameClientController;
     
     public Connection(String ip){
         this.ip = ip;
@@ -74,7 +76,7 @@ public class Connection implements Runnable{
                             theCreateAccountController.accountCreated();
                         }
                     }
-                    else{
+                    else if(!inGame){
                         String[] split = messageFromInput.split("\\s+");
                         String code = split[0];
                         if(code.equals(LIST)){
@@ -98,6 +100,8 @@ public class Connection implements Runnable{
                             int colon = ipOfAcceptingUser.indexOf(":");
                             ipOfAcceptingUser = ipOfAcceptingUser.substring(0, colon);
                             theLobbyController.connectToHost(ipOfAcceptingUser);
+                            this.inGame=true;
+                            this.theGameClientController = theLobbyController.getClientController();
                         }
                         else if(code.equals(WITHDRAWFROM)){
                             String userWithdrawingInvite = split[1];
@@ -112,6 +116,14 @@ public class Connection implements Runnable{
                             theLobbyController.removeFromOutgoingList(decline);
                         }
                     }
+                    else{
+                        String[] split = messageFromInput.split("\\s+");
+                        String code = split[0];
+                        if(code.equals(nm)){
+                            String move = split[1] + " " + split[2] + " " + split[3];               
+                            this.theGameClientController.updateBoard(move);
+                        }
+                    }//in game
                 }//connected
                 else{
                     connected = false;
