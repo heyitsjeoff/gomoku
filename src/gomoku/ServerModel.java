@@ -109,6 +109,7 @@ public class ServerModel {
      */
     public void removeOnline(Client oldOnlineUser){
         this.onlineUsers.remove(oldOnlineUser);
+        System.out.println(onlineUsers.toString());
     }
     
     /**

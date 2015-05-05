@@ -125,7 +125,7 @@ public class Connection implements Runnable{
                         }
                     }//in game
                 }//connected
-                else{
+                else {
                     connected = false;
                 }//disconnected
             } catch (IOException ex) {

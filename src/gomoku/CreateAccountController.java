@@ -18,6 +18,8 @@ public class CreateAccountController {
     private static final String pdnm = "Passwords do not match";
     private static final String created = "user created";
     private static final String ucs = "Username cannot contain spaces";
+    private static final String pcs = "Password cannot contain spaces";
+    private static final String pts = "Password too short \nMust be at least 6 characters long";
     
     public CreateAccountController(CreateAccountView theView, Connection theConnection, MainView theMainView){
         this.theView = theView;
@@ -32,11 +34,17 @@ public class CreateAccountController {
         if(theView.getUsername().contains(" ")){
             theView.message(ucs);
         }
+        else if(theView.getUsername().contains(" ")){
+            theView.message(ucs);
+        }
         else if(!theView.getPassword1().equals(theView.getPassword2())){
                 theView.message(pdnm);
         }
-        else if(theView.getUsername().contains(" ")){
-            theView.message(ucs);
+        else if(theView.getPassword1().contains(" ")){
+            theView.message(pcs);
+        }
+        else if(theView.getPassword1().length()<6){
+            theView.message(pts);
         }
         else{
             String message = "!" + theView.getUsername()+ " " + theView.getPassword1();
