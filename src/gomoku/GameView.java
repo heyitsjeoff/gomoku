@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 public class GameView extends JFrame{
     private JPanel panelCenter = new JPanel();
     private int row, col;
-    private boolean myMove;
+    private boolean myMove = false;
     private MyJButton[][] square;
     private JTextArea displayArea;
     private int count;
