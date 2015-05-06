@@ -110,7 +110,7 @@ public class GameView extends JFrame{
                 theModel.setNextMove(button.i, button.j, MYTOKEN);
                 theModel.addToCount();
             }
-            else if(theModel.getCount()==1){
+            else if(theModel.getCount()==1 && button.getBackground().equals((Color.blue))){
                 button.setBackground(Color.white);
                 theModel.subtractFromCount();
             }			 		
