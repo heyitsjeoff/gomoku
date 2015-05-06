@@ -32,6 +32,7 @@ public class GameHostController implements Runnable{
         }
         this.theCurrentModel = theCurrentModel;
         this.theView = theView;
+        this.theView.setMyMove(true);
         this.theView.sendMoveListener(new SendMoveListener());
     }
     

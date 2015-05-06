@@ -24,6 +24,7 @@ public class GameClientController {
     
     public GameClientController(GameView theView, GameModel theModel, ConnectionForGame theConnection){
         this.theView=theView;
+        this.theView.setMyMove(false);
         this.theModel=theModel;
         this.theConnection=theConnection;
         this.theView.sendMoveListener(new SendMoveListener());

@@ -70,6 +70,10 @@ public class GameView extends JFrame{
 		
 	}
     
+    public void setMyMove(boolean value){
+        this.myMove = value;
+    }
+    
     public void enableBTN(){
         send.setEnabled(true);
         this.myMove = true;
