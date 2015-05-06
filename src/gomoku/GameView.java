@@ -58,7 +58,7 @@ public class GameView extends JFrame{
 	this.add(panelCenter,BorderLayout.CENTER);
 		
 	//set up text area in the south
-	displayArea = new JTextArea( 8, 30 ); // set up JTextArea
+	displayArea = new JTextArea( 8, 15 ); // set up JTextArea
 	displayArea.setEditable( false );
 	this.add( new JScrollPane( displayArea ), BorderLayout.SOUTH );
 

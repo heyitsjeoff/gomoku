@@ -45,8 +45,8 @@ public class GameConnection extends Thread{
                     String[] split = message.split("\\s+");
                     String code = split[0];
                     if(code.equals(nm)){
-                        String move = split[1] + " " + split[2] + " " + split[3];
-                        theGameController.opponentNextMove(move);
+                        String move = split[1] + " " + split[2];
+                        theGameController.updateBoard(split[1] +" "+ split[2]);
                     }
                 }
             } catch (IOException ex) {
@@ -65,10 +65,6 @@ public class GameConnection extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void updateBoard(){
-        
     }
     
 }

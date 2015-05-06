@@ -22,6 +22,7 @@ public class GameHostController implements Runnable{
     private GameConnection theGameConnection;
     
     public static final String makeMove = "Please make a valid move";
+    public static final char THEIRTOKEN = '#';
 
     public GameHostController(GameModel theCurrentModel, GameView theView){
         try {
@@ -63,6 +64,15 @@ public class GameHostController implements Runnable{
         int col = Integer.parseInt(split[1]);
         char token = split[2].charAt(0);
         theCurrentModel.setCell(row, col, token);
+    }
+    
+    public void updateBoard(String move){
+        String[] split = move.split("\\s+");
+        int row = Integer.parseInt(split[0]);
+        int col = Integer.parseInt(split[1]);
+        theCurrentModel.setCell(row, col, THEIRTOKEN);
+        theView.updateGridView();
+        theView.enableBTN();
     }
 
     class SendMoveListener implements ActionListener {
