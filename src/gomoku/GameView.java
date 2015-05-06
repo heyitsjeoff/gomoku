@@ -22,7 +22,6 @@ public class GameView extends JFrame{
     private MyJButton[][] square;
     private JTextArea displayArea;
     private int count;
-    private final int MAX_COUNT=4;
     private JButton send;
     private GameModel theModel;
     public static final char MYTOKEN = '*';
@@ -81,6 +80,7 @@ public class GameView extends JFrame{
     public void updateCellView(int i, int j){
         if(theModel.getCell(i, j)==GameModel.MYTOKEN){
             square[i][j].setBackground(Color.blue);
+            square[i][j].setEnabled(false);
         }
         if(theModel.getCell(i, j)==GameModel.THEIRTOKEN){
             square[i][j].setBackground(Color.red);
@@ -107,13 +107,13 @@ public class GameView extends JFrame{
     private class SquareListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             MyJButton button = (MyJButton) e.getSource();
-            if(theModel.getCount()<1 && button.getBackground().equals(Color.white)) {
-		button.setBackground(Color.green);
+            if(theModel.getCount()<1) {
+		button.setBackground(Color.blue);
                 theModel.setCell(button.i, button.j, MYTOKEN);
                 theModel.setNextMove(button.i, button.j, MYTOKEN);
                 theModel.addToCount();
             }
-            else if(button.getBackground().equals(Color.green)){
+            else if(theModel.getCount()==1){
                 button.setBackground(Color.white);
                 theModel.subtractFromCount();
             }			 		
