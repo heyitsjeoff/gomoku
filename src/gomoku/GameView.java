@@ -104,7 +104,7 @@ public class GameView extends JFrame{
     private class SquareListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             MyJButton button = (MyJButton) e.getSource();
-            if(theModel.getCount()<1) {
+            if(theModel.getCount()==0) {
 		button.setBackground(Color.blue);
                 theModel.setCell(button.i, button.j, MYTOKEN);
                 theModel.setNextMove(button.i, button.j, MYTOKEN);
