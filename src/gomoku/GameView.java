@@ -84,6 +84,7 @@ public class GameView extends JFrame{
         }
         if(theModel.getCell(i, j)==GameModel.THEIRTOKEN){
             square[i][j].setBackground(Color.red);
+            square[i][j].setEnabled(false);
         }
     }
         
