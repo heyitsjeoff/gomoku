@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 public class GameView extends JFrame{
     private JPanel panelCenter = new JPanel();
     private int row, col;
+    private boolean myMove;
     private MyJButton[][] square;
     private JTextArea displayArea;
     private int count;
@@ -71,10 +72,12 @@ public class GameView extends JFrame{
     
     public void enableBTN(){
         send.setEnabled(true);
+        this.myMove = true;
     }
     
     public void disableBTN(){
         send.setEnabled(false);
+        this.myMove = false;
     }
     
     public void updateCellView(int i, int j){
@@ -104,13 +107,13 @@ public class GameView extends JFrame{
     private class SquareListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             MyJButton button = (MyJButton) e.getSource();
-            if(theModel.getCount()==0) {
+            if(theModel.getCount()==0 && myMove == true) {
 		button.setBackground(Color.blue);
                 theModel.setCell(button.i, button.j, MYTOKEN);
                 theModel.setNextMove(button.i, button.j, MYTOKEN);
                 theModel.addToCount();
             }
-            else if(theModel.getCount()==1 && button.getBackground().equals((Color.blue))){
+            else if(theModel.getCount()==1 && button.getBackground().equals((Color.blue)) && myMove == true){
                 button.setBackground(Color.white);
                 theModel.subtractFromCount();
             }			 		
