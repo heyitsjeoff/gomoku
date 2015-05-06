@@ -77,13 +77,11 @@ public class GameView extends JFrame{
     public void enableBTN(){
         send.setEnabled(true);
         this.myMove = true;
-        System.out.println(myMove);
     }
     
     public void disableBTN(){
         send.setEnabled(false);
         this.myMove = false;
-        System.out.println(myMove);
     }
     
     public void updateCellView(int i, int j){
@@ -104,6 +102,7 @@ public class GameView extends JFrame{
             }
         }
         count = 0;
+        this.myMove = true;
     }
     
     public void appendMessage(String message){
