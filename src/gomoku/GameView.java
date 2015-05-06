@@ -97,10 +97,6 @@ public class GameView extends JFrame{
         count = 0;
     }
     
-    public String findChange(){
-        return "what";
-    }
-    
     public void appendMessage(String message){
         displayArea.append(message+"\n");
     }

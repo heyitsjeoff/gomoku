@@ -106,10 +106,12 @@ public class GameModel {
     
     public void addToCount(){
         this.count++;
+        System.out.println("GM: count=" + this.count);
     }
     
     public void subtractFromCount(){
         this.count--;
+        System.out.println("GM: count=" + this.count);
     }
     
     public int getCount(){
