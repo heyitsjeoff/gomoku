@@ -21,7 +21,7 @@ public class LobbyController{
     private GameView pView;
     private GameModel theGameModel;
     private GameHostController theGameHostController;
-    private Connection connectionToGame;
+    private ConnectionForGame connectionToGame;
     private GameClientController theGameClientController;
     
     private int boardSize = 30;
@@ -114,7 +114,7 @@ public class LobbyController{
     }
     
     public void connectToHost(String hostIP){
-        connectionToGame = new Connection(hostIP);
+        connectionToGame = new ConnectionForGame(hostIP);
         connectionToGame.setPort(8081);
         connectionToGame.connect();
         connectionToGame.startThread();
@@ -125,6 +125,7 @@ public class LobbyController{
         this.pView.disableBTN();
         this.theGameModel.setPlayerClientName(theConnection.getUsername());
         this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame);
+        connectionToGame.setGameClientController(this.theGameClientController);
     }
     
     public GameClientController getClientController(){

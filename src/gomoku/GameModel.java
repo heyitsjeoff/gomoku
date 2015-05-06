@@ -12,6 +12,7 @@ public class GameModel {
     private String nextMove;
     private int count = 0;
     
+    
     public static final String nm = "NEXTMOVE";
     
     public static final char MYTOKEN = '*';
@@ -38,6 +39,58 @@ public class GameModel {
                 this.grid[i][j]=other.grid[i][j];
             }
         }
+    }
+    
+    public boolean gameOver(){
+        if(horizontal()){
+            return true;
+        }
+        else if(vertical()){
+            return true;
+        }
+        else if(leftDiag()){
+            return true;
+        }
+        else if(rightDiag()){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean vertical(){
+        for(int i = 0; i<this.rows-4; i++){
+            for(int j = 0; j<this.cols; j++){
+                if(getCell(i,j)==MYTOKEN){
+                    char foundToken = MYTOKEN;
+                    if(getCell(i+1,j)==foundToken && getCell(i+2,j)==foundToken && getCell(i+3,j)==foundToken && getCell(i+4,j)==foundToken){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean horizontal(){
+        for(int i = 0; i<this.rows; i++){
+            for(int j = 0; j<this.cols-4; j++){
+                if(getCell(i,j)==MYTOKEN){
+                    char foundToken = MYTOKEN;
+                    if(getCell(i,j+1)==foundToken && getCell(i,j+2)==foundToken && getCell(i,j+3)==foundToken && getCell(i,j=4)==foundToken){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean leftDiag(){
+        return false;
+    }
+    
+    public boolean rightDiag(){
+        return false;
     }
     
     public GameModel nextState(){

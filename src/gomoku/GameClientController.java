@@ -17,11 +17,12 @@ public class GameClientController {
     
     private GameView theView;
     private GameModel theModel;
-    private Connection theConnection;
+    private ConnectionForGame theConnection;
+    public static final char THEIRTOKEN = '#';
     
     public static final String makeMove = "Please make a valid move";
     
-    public GameClientController(GameView theView, GameModel theModel, Connection theConnection){
+    public GameClientController(GameView theView, GameModel theModel, ConnectionForGame theConnection){
         this.theView=theView;
         this.theModel=theModel;
         this.theConnection=theConnection;
@@ -32,8 +33,7 @@ public class GameClientController {
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
-        char token = split[2].charAt(0);
-        theModel.setCell(row, col, token);
+        theModel.setCell(row, col, THEIRTOKEN);
         theView.updateGridView();
         theView.enableBTN();
     }
