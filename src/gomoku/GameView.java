@@ -122,6 +122,7 @@ public class GameView extends JFrame{
             }
             else if(theModel.getCount()==1 && button.getBackground().equals((Color.blue)) && myMove == true){
                 button.setBackground(Color.white);
+                theModel.setCell(button.i, button.j, ' ');
                 theModel.subtractFromCount();
             }			 		
         }
