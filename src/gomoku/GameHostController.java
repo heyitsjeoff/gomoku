@@ -85,6 +85,9 @@ public class GameHostController implements Runnable{
             else{
                 theGameConnection.write(theCurrentModel.getNextMove());
                 theView.disableBTN();
+                if(theCurrentModel.gameOver()){
+                    System.out.println("You have won");
+                }
             }
         }        
     }
