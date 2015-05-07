@@ -148,5 +148,4 @@ public class GameView extends JFrame{
 		private int i;
 		private int j;	
 	}
-    
 }

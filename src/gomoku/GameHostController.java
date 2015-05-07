@@ -7,12 +7,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class GameHostController implements Runnable{
     
     private GameModel theModel;
     private GameView theView;
-    
+    private LobbyController theLobbyController;
     
     //connection things
     private Thread worker;
@@ -21,9 +22,10 @@ public class GameHostController implements Runnable{
     private GameConnection theGameConnection;
     
     public static final String makeMove = "Please make a valid move";
+    public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final char THEIRTOKEN = '#';
 
-    public GameHostController(GameModel theModel, GameView theView){
+    public GameHostController(GameModel theModel, GameView theView, LobbyController theLobbyController){
         try {
             serverSocket = new ServerSocket(8081);
         } catch (IOException ex) {
@@ -33,6 +35,7 @@ public class GameHostController implements Runnable{
         this.theView = theView;
         this.theView.setMyMove(true);
         this.theView.sendMoveListener(new SendMoveListener());
+        this.theLobbyController = theLobbyController;
     }
     
     public void listen(){
@@ -74,6 +77,11 @@ public class GameHostController implements Runnable{
         theView.updateGridView();
         theView.enableBTN();
     }
+    
+    public void returnToLobby(){
+        theView.dispose();
+        this.theLobbyController.showLobbyView();
+    }
 
     class SendMoveListener implements ActionListener {
         @Override
@@ -85,8 +93,8 @@ public class GameHostController implements Runnable{
                 theGameConnection.write(theModel.getNextMove());
                 theView.disableBTN();
                 if(theModel.gameOver()){
-                    System.out.println("The game has ended");
-                    theView.appendMessage("The game has ended");
+                    JOptionPane.showMessageDialog(null, gameOverWin);
+                    returnToLobby();
                 }
             }
         }        

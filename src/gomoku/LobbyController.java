@@ -90,6 +90,7 @@ public class LobbyController{
     
     public void acceptRequest(String usernameAccepted){
         theConnection.write("ACCEPTTO "+usernameAccepted+";");
+        removeFromIncomingList(usernameAccepted);
         startGame();
     }
     
@@ -103,12 +104,17 @@ public class LobbyController{
         removeFromOutgoingList(usernameWithdrawn);
     }
     
+    //adjust views
+    public void showLobbyView(){
+        this.theView.setVisible(true);
+    }
+    
     public void startGame(){
         this.theView.setVisible(false);
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
         this.pView = new GameView(this.theGameModel);
-        this.theGameHostController  = new GameHostController(this.theGameModel, this.pView);
+        this.theGameHostController  = new GameHostController(this.theGameModel, this.pView, this);
         this.theGameHostController.listen();
         this.theGameModel.setPlayerHostName(theConnection.getUsername());
     }
