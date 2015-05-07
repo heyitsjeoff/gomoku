@@ -48,6 +48,10 @@ public class GameClientController {
             else{
                 theConnection.write(theModel.getNextMove());
                 theView.disableBTN();
+                if(theModel.gameOver()){
+                    System.out.println("The game has ended");
+                    theView.appendMessage("The game has ended");
+                }
             }
         }        
     }

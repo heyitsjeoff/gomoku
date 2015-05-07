@@ -100,11 +100,11 @@ public class GameModel {
     }
     
     public boolean rightDiag(){
-        for(int i = 5; i<this.rows; i++){
+        for(int i = 4; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==MYTOKEN){
                     char foundToken = MYTOKEN;
-                    if(getCell(i+1,j-1)==foundToken && getCell(i+2,j-2)==foundToken && getCell(i+3,j-3)==foundToken && getCell(i+4,j-4)==foundToken){
+                    if(getCell(i-1,j+1)==foundToken && getCell(i-2,j+2)==foundToken && getCell(i-3,j+3)==foundToken && getCell(i-4,j+4)==foundToken){
                         return true;
                     }
                 }
