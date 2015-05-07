@@ -93,25 +93,16 @@ public class GameModel {
         return false;
     }
     
-    public GameModel nextState(){
-        GameModel temp = new GameModel(this);
-        for(int i=0; i<this.rows; i++){
-            for(int j=0;j<this.cols; j++){
-                if(this.grid[i][j]==MYTOKEN)
-                    temp.grid[i][j]=MYTOKEN;
-            }
-        }
-        return temp;
-    }
-    
     public void addToCount(){
         this.count++;
-        System.out.println("GM: count=" + this.count);
     }
     
     public void subtractFromCount(){
         this.count--;
-        System.out.println("GM: count=" + this.count);
+    }
+    
+    public void resetCount(){
+        this.count = 0;
     }
     
     public int getCount(){
@@ -130,6 +121,7 @@ public class GameModel {
         StringBuilder sb = new StringBuilder();
         sb.append(nm + " " + row + " " + col + " " + token);
         this.nextMove = sb.toString();
+        System.out.println("GM: setNextMove=" + this.nextMove);
     }
     
     public String getNextMove(){
