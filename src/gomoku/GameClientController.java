@@ -7,6 +7,7 @@ package gomoku;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -17,17 +18,22 @@ public class GameClientController {
     
     private GameView theView;
     private GameModel theModel;
+    private LobbyController theLobbyController;
     private ConnectionForGame theConnection;
+    public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
     
     public static final String makeMove = "Please make a valid move";
+    public static final String gameOverWin =  "You have won!\n Returning to the lobby";
+    public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
     
-    public GameClientController(GameView theView, GameModel theModel, ConnectionForGame theConnection){
+    public GameClientController(GameView theView, GameModel theModel, ConnectionForGame theConnection, LobbyController theLobbyController){
         this.theView=theView;
         this.theView.setMyMove(false);
         this.theModel=theModel;
         this.theConnection=theConnection;
         this.theView.sendMoveListener(new SendMoveListener());
+        this.theLobbyController = theLobbyController;
     }
     
     public void updateBoard(String move){
@@ -37,6 +43,18 @@ public class GameClientController {
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateGridView();
         theView.enableBTN();
+        System.out.println("before here");
+        System.out.println("Their token:" + theModel.gameOver(THEIRTOKEN));
+        if(theModel.gameOver(MYTOKEN)){
+            System.out.println("HERE");
+            JOptionPane.showMessageDialog(null, gameOverLose);
+            returnToLobby();
+        }
+    }
+    
+    public void returnToLobby(){
+        theView.dispose();
+        this.theLobbyController.showLobbyView();
     }
     
     class SendMoveListener implements ActionListener {
@@ -48,7 +66,7 @@ public class GameClientController {
             else{
                 theConnection.write(theModel.getNextMove());
                 theView.disableBTN();
-                if(theModel.gameOver()){
+                if(theModel.gameOver(MYTOKEN)){
                     System.out.println("The game has ended");
                     theView.appendMessage("The game has ended");
                 }

@@ -104,7 +104,6 @@ public class GameView extends JFrame{
         count = 0;
         this.theModel.resetCount();
         this.myMove = true;
-        System.out.println("updateGridView called and myMove=" + this.myMove);
     }
     
     public void appendMessage(String message){

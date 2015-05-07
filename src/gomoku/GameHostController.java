@@ -23,6 +23,8 @@ public class GameHostController implements Runnable{
     
     public static final String makeMove = "Please make a valid move";
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
+    public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
+    public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
 
     public GameHostController(GameModel theModel, GameView theView, LobbyController theLobbyController){
@@ -52,21 +54,12 @@ public class GameHostController implements Runnable{
             this.socket = serverSocket.accept();
             this.theGameConnection = new GameConnection(this.socket, this);
             theGameConnection.start();
-            System.out.println("GameController.run has accepted a new gameConnection");
             accepting = false;
         } catch (IOException ex) {
             Logger.getLogger(GameHostController.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
         //play
-    }
-    
-    public void opponentNextMove(String move){
-        String[] split = move.split("\\s+");
-        int row = Integer.parseInt(split[0]);
-        int col = Integer.parseInt(split[1]);
-        char token = split[2].charAt(0);
-        theModel.setCell(row, col, token);
     }
     
     public void updateBoard(String move){
@@ -76,6 +69,12 @@ public class GameHostController implements Runnable{
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateGridView();
         theView.enableBTN();
+        System.out.println("before here");
+        if(theModel.gameOver(THEIRTOKEN)){
+            System.out.println("HERE");
+             JOptionPane.showMessageDialog(null, gameOverLose);
+             returnToLobby();
+        }
     }
     
     public void returnToLobby(){
@@ -92,7 +91,7 @@ public class GameHostController implements Runnable{
             else{
                 theGameConnection.write(theModel.getNextMove());
                 theView.disableBTN();
-                if(theModel.gameOver()){
+                if(theModel.gameOver(MYTOKEN)){
                     JOptionPane.showMessageDialog(null, gameOverWin);
                     returnToLobby();
                 }

@@ -41,23 +41,23 @@ public class GameModel {
         }
     }
     
-    public boolean gameOver(){
-        if(horizontal()){
+    public boolean gameOver(char theToken){
+        if(horizontal(theToken)){
             return true;
         }
-        else if(vertical()){
+        else if(vertical(theToken)){
             return true;
         }
-        else if(leftDiag()){
+        else if(leftDiag(theToken)){
             return true;
         }
-        else if(rightDiag()){
+        else if(rightDiag(theToken)){
             return true;
         }
         return false;
     }
     
-    public boolean vertical(){
+    public boolean vertical(char theToken){
         for(int i = 0; i<this.rows-4; i++){
             for(int j = 0; j<this.cols; j++){
                 if(getCell(i,j)==MYTOKEN){
@@ -71,7 +71,7 @@ public class GameModel {
         return false;
     }
     
-    public boolean horizontal(){
+    public boolean horizontal(char theToken){
         for(int i = 0; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==MYTOKEN){
@@ -85,11 +85,11 @@ public class GameModel {
         return false;
     }
     
-    public boolean leftDiag(){
+    public boolean leftDiag(char theToken){
         for(int i = 0; i<this.rows-4; i++){
             for(int j = 0; j<this.cols-4; j++){
-                if(getCell(i,j)==MYTOKEN){
-                    char foundToken = MYTOKEN;
+                if(getCell(i,j)==theToken){
+                    char foundToken = theToken;
                     if(getCell(i+1,j+1)==foundToken && getCell(i+2,j+2)==foundToken && getCell(i+3,j+3)==foundToken && getCell(i+4,j+4)==foundToken){
                         return true;
                     }
@@ -99,11 +99,11 @@ public class GameModel {
         return false;
     }
     
-    public boolean rightDiag(){
+    public boolean rightDiag(char theToken){
         for(int i = 4; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
-                if(getCell(i,j)==MYTOKEN){
-                    char foundToken = MYTOKEN;
+                if(getCell(i,j)==theToken){
+                    char foundToken = theToken;
                     if(getCell(i-1,j+1)==foundToken && getCell(i-2,j+2)==foundToken && getCell(i-3,j+3)==foundToken && getCell(i-4,j+4)==foundToken){
                         return true;
                     }
@@ -141,7 +141,6 @@ public class GameModel {
         StringBuilder sb = new StringBuilder();
         sb.append(nm + " " + row + " " + col + " " + token);
         this.nextMove = sb.toString();
-        System.out.println("GM: setNextMove=" + this.nextMove);
     }
     
     public String getNextMove(){

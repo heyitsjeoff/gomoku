@@ -130,7 +130,7 @@ public class LobbyController{
         this.pView = new GameView(this.theGameModel);
         this.pView.disableBTN();
         this.theGameModel.setPlayerClientName(theConnection.getUsername());
-        this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame);
+        this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame, this);
         connectionToGame.setGameClientController(this.theGameClientController);
     }
     
