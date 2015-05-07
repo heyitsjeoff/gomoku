@@ -89,8 +89,8 @@ public class LobbyController{
     }
     
     public void acceptRequest(String usernameAccepted){
-        theConnection.write("ACCEPTTO "+usernameAccepted+";");
         removeFromIncomingList(usernameAccepted);
+        theConnection.write("ACCEPTTO "+usernameAccepted+";");
         startGame();
     }
     

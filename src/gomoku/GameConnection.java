@@ -22,7 +22,8 @@ public class GameConnection extends Thread{
     private BufferedReader br;
     private byte[] byteArray = new byte[2000];
     private String connectionIP;
-    
+   
+    public static final String YOULOSE = "YOULOSE";
     public static final String nm = "NEXTMOVE";
     
     public GameConnection(Socket player2, GameHostController theGameController) throws IOException{

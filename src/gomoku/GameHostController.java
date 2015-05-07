@@ -24,6 +24,7 @@ public class GameHostController implements Runnable{
     public static final String makeMove = "Please make a valid move";
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
+    public static final String YOULOSE = "YOULOSE";
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
 
@@ -48,7 +49,6 @@ public class GameHostController implements Runnable{
     @Override
     public void run() {
          boolean accepting = true;
-         System.out.println("running run in GameHostController");
          while(accepting){
             try {
             this.socket = serverSocket.accept();
@@ -69,17 +69,16 @@ public class GameHostController implements Runnable{
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateGridView();
         theView.enableBTN();
-        System.out.println("before here");
-        if(theModel.gameOver(THEIRTOKEN)){
-            System.out.println("HERE");
-             JOptionPane.showMessageDialog(null, gameOverLose);
-             returnToLobby();
-        }
     }
     
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.showLobbyView();
+    }
+    
+    public void youLose(){
+        JOptionPane.showMessageDialog(null, gameOverLose);
+        returnToLobby();
     }
 
     class SendMoveListener implements ActionListener {
@@ -89,12 +88,15 @@ public class GameHostController implements Runnable{
                 theView.appendMessage(makeMove);
             }
             else{
-                theGameConnection.write(theModel.getNextMove());
-                theView.disableBTN();
-                if(theModel.gameOver(MYTOKEN)){
-                    JOptionPane.showMessageDialog(null, gameOverWin);
-                    returnToLobby();
-                }
+                //if(theModel.gameOver(MYTOKEN)){
+                //    theGameConnection.write(YOULOSE + " " + theModel.getNextMove());
+                //    JOptionPane.showMessageDialog(null, gameOverWin);
+                 //   returnToLobby();
+                //}
+                //else{
+                    theGameConnection.write(theModel.getNextMove());
+                    theView.disableBTN();
+                //}
             }
         }        
     }

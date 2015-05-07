@@ -59,10 +59,9 @@ public class GameModel {
     
     public boolean vertical(char theToken){
         for(int i = 0; i<this.rows-4; i++){
-            for(int j = 0; j<this.cols; j++){
-                if(getCell(i,j)==MYTOKEN){
-                    char foundToken = MYTOKEN;
-                    if(getCell(i+1,j)==foundToken && getCell(i+2,j)==foundToken && getCell(i+3,j)==foundToken && getCell(i+4,j)==foundToken){
+            for(int j = 0; j<this.cols-1; j++){
+                if(getCell(i,j)==theToken){
+                    if(getCell(i+1,j)==theToken && getCell(i+2,j)==theToken && getCell(i+3,j)==theToken && getCell(i+4,j)==theToken){
                         return true;
                     }
                 }
@@ -74,9 +73,8 @@ public class GameModel {
     public boolean horizontal(char theToken){
         for(int i = 0; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
-                if(getCell(i,j)==MYTOKEN){
-                    char foundToken = MYTOKEN;
-                    if(getCell(i,j+1)==foundToken && getCell(i,j+2)==foundToken && getCell(i,j+3)==foundToken && getCell(i,j=4)==foundToken){
+                if(getCell(i,j)==theToken){
+                    if(getCell(i,j+1)==theToken && getCell(i,j+2)==theToken && getCell(i,j+3)==theToken && getCell(i,j=4)==theToken){
                         return true;
                     }
                 }
@@ -89,8 +87,7 @@ public class GameModel {
         for(int i = 0; i<this.rows-4; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==theToken){
-                    char foundToken = theToken;
-                    if(getCell(i+1,j+1)==foundToken && getCell(i+2,j+2)==foundToken && getCell(i+3,j+3)==foundToken && getCell(i+4,j+4)==foundToken){
+                    if(getCell(i+1,j+1)==theToken && getCell(i+2,j+2)==theToken && getCell(i+3,j+3)==theToken && getCell(i+4,j+4)==theToken){
                         return true;
                     }
                 }
@@ -103,8 +100,7 @@ public class GameModel {
         for(int i = 4; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==theToken){
-                    char foundToken = theToken;
-                    if(getCell(i-1,j+1)==foundToken && getCell(i-2,j+2)==foundToken && getCell(i-3,j+3)==foundToken && getCell(i-4,j+4)==foundToken){
+                    if(getCell(i-1,j+1)==theToken && getCell(i-2,j+2)==theToken && getCell(i-3,j+3)==theToken && getCell(i-4,j+4)==theToken){
                         return true;
                     }
                 }
