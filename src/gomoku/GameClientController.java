@@ -61,6 +61,7 @@ public class GameClientController {
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.showLobbyView();
+        
     }
     
     class SendMoveListener implements ActionListener {

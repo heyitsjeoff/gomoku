@@ -74,6 +74,11 @@ public class GameHostController implements Runnable{
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.showLobbyView();
+        try {
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(GameHostController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void lose(){

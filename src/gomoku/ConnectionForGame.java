@@ -109,6 +109,17 @@ public class ConnectionForGame implements Runnable {
         }
     }
     
+    public void disconnect(){
+        try {
+            this.inputStream.close();
+            this.outputStream.close();
+            this.socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionForGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void setIP(String number){
         this.ip = number;
     }
