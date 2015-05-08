@@ -50,6 +50,7 @@ public class GameConnection extends Thread{
                         theGameHostController.updateBoard(split[1] +" "+ split[2]);
                     }
                     else if(code.equals(YOULOSE)){
+                        theGameHostController.updateBoard(split[1] +" "+ split[2]);
                         this.theGameHostController.lose();
                     }
                 }

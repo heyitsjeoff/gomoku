@@ -44,8 +44,6 @@ public class GameClientController {
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateGridView();
         theView.enableBTN();
-        System.out.println("before here");
-        System.out.println("Their token:" + theModel.gameOver(THEIRTOKEN));
     }
     
     public void lose(){
