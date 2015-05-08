@@ -25,6 +25,7 @@ public class GameHostController implements Runnable{
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
     public static final String YOULOSE = "YOULOSE";
+    private static final String REQUESTLIST = "REQUESTLIST;";
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
 
@@ -76,6 +77,7 @@ public class GameHostController implements Runnable{
         LobbyView newView = new LobbyView();
         newView.setVisible(true);
         this.theLobbyController.setNewView(newView);
+        this.theLobbyController.writeToConnection(REQUESTLIST);
         try {
             serverSocket.close();
         } catch (IOException ex) {

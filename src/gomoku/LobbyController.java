@@ -36,7 +36,10 @@ public class LobbyController{
         this.theConnection.setLobbyController(this);
         this.theLobbyModel = theLobbyModel;
         this.theView.setTitle(welcome);
-        //this.theConnection.write("REQUESTLIST ;");
+    }
+    
+    public void writeToConnection(String message){
+        this.theConnection.write(message);
     }
       
     public DefaultListModel<String> updateOnlineList(String onlineUsers){

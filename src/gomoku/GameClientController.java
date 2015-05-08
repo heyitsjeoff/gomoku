@@ -22,7 +22,7 @@ public class GameClientController {
     private ConnectionForGame theConnection;
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
-    
+    private static final String REQUESTLIST = "REQUESTLIST;";
     public static final String makeMove = "Please make a valid move";
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
@@ -61,6 +61,7 @@ public class GameClientController {
         LobbyView newView = new LobbyView();
         newView.setVisible(true);
         this.theLobbyController.setNewView(newView);
+        this.theLobbyController.writeToConnection(REQUESTLIST);
     }
     
     class SendMoveListener implements ActionListener {

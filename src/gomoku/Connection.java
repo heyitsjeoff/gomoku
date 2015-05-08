@@ -116,14 +116,6 @@ public class Connection implements Runnable{
                             theLobbyController.removeFromOutgoingList(decline);
                         }
                     }
-                    else{
-                        String[] split = messageFromInput.split("\\s+");
-                        String code = split[0];
-                        if(code.equals(nm)){
-                            String move = split[1] + " " + split[2] + " " + split[3];               
-                            this.theGameClientController.updateBoard(move);
-                        }
-                    }//in game
                 }//connected
                 else {
                     connected = false;
