@@ -48,10 +48,10 @@ public class GameModel {
         else if(vertical(theToken)){
             return true;
         }
-        else if(leftDiag(theToken)){
+        else if(upDiag(theToken)){
             return true;
         }
-        else if(rightDiag(theToken)){
+        else if(downDiag(theToken)){
             return true;
         }
         return false;
@@ -59,7 +59,7 @@ public class GameModel {
     
     public boolean vertical(char theToken){
         for(int i = 0; i<this.rows-4; i++){
-            for(int j = 0; j<this.cols-1; j++){
+            for(int j = 0; j<this.cols; j++){
                 if(getCell(i,j)==theToken){
                     if(getCell(i+1,j)==theToken && getCell(i+2,j)==theToken && getCell(i+3,j)==theToken && getCell(i+4,j)==theToken){
                         return true;
@@ -74,7 +74,7 @@ public class GameModel {
         for(int i = 0; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==theToken){
-                    if(getCell(i,j+1)==theToken && getCell(i,j+2)==theToken && getCell(i,j+3)==theToken && getCell(i,j=4)==theToken){
+                    if(getCell(i,j+1)==theToken && getCell(i,j+2)==theToken && getCell(i,j+3)==theToken && getCell(i,j+4)==theToken){
                         return true;
                     }
                 }
@@ -83,7 +83,7 @@ public class GameModel {
         return false;
     }
     
-    public boolean leftDiag(char theToken){
+    public boolean upDiag(char theToken){
         for(int i = 0; i<this.rows-4; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==theToken){
@@ -96,7 +96,7 @@ public class GameModel {
         return false;
     }
     
-    public boolean rightDiag(char theToken){
+    public boolean downDiag(char theToken){
         for(int i = 4; i<this.rows; i++){
             for(int j = 0; j<this.cols-4; j++){
                 if(getCell(i,j)==theToken){

@@ -209,6 +209,10 @@ public class MainView extends javax.swing.JFrame {
         loginBTN.addActionListener(listenerForLoginBTN);
     }
     
+    public void offlineListener(ActionListener listenerForOfflineBTN){
+        aiBTN.addActionListener(listenerForOfflineBTN);
+    }
+    
     /**
      * listener for the createaccount btn
      * @param listenerForCABTN

@@ -23,10 +23,12 @@ public class AuthController{
     private CreateAccountView theCAView;
     private LobbyView theLobbyView;
     private LobbyModel theLobbyModel;
+    private offlineDiff theOfflineDiff;
     
     //controllers
     private CreateAccountController caController;
     private LobbyController theLobbyController;
+    private OfflineController theOfflineController;
     
     private Connection theConnection;
     private boolean streamsConnected;
@@ -63,6 +65,7 @@ public class AuthController{
         this.theView.passwordPFListener(new EnterListener());
         this.theView.changeIPListener(new IPListener());
         this.theView.anonListener(new AnonListener());
+        this.theView.offlineListener(new OfflineListener());
         theConnection = new Connection(initialIP);
     }
     
@@ -164,6 +167,16 @@ public class AuthController{
             if(checkConnection()){
                 anon();
             }
+        }
+    }
+    
+    class OfflineListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            theOfflineDiff = new offlineDiff();
+            theView.setVisible(false);
+            theOfflineDiff.setVisible(true);
+            theOfflineController = new OfflineController(theOfflineDiff);
         }
     }
     
