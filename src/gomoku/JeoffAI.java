@@ -4,6 +4,7 @@
 
 package gomoku;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,6 +15,7 @@ public class JeoffAI {
     
     private String diff;
     private GameModel theModel;
+    private int mediumCount = 0;
     
     public static final String EASY = "Easy";
     public static final String MEDIUM = "Medium";
@@ -26,27 +28,45 @@ public class JeoffAI {
     
     public String easyMove(){
         int row = (int)(Math.random() * theModel.getRows()-1);
-        System.out.println(row);
         int col = (int)(Math.random() * theModel.getCols()-1);
-        System.out.println(col);
-        StringBuilder sb = new StringBuilder();
-        if(theModel.getCell(row, col)==' '){
-            sb.append(row+ " " + col);
-            return sb.toString();
+        if(theModel.isMoveValid(row, col)){
+            return row + " " + col;
         }
         else{
-            easyMove();
+            boolean temp = false;
+            while(!temp){
+                System.out.println(row + " " + col + " is invalid");
+                row = (int)(Math.random() * theModel.getRows()-1);
+                col = (int)(Math.random() * theModel.getCols()-1);
+                temp = theModel.isMoveValid(row, col);
+            }
+            return row + " " + col;
         }
-        System.out.println(sb.toString());
-        return sb.toString();
+    }
+    
+    public String mediumMove(){
+        if(this.mediumCount%3==0){
+            return easyMove();
+        }
+        else{
+            this.mediumCount++;
+            return hardMove();
+        }
+    }
+    
+    public String hardMove(){
+        return null;
     }
     
     public String getNextMove(){
         if(this.diff.equals(EASY)){
             return easyMove();
         }
+        else if(this.diff.equals(MEDIUM)){
+            return mediumMove();
+        }
         else{
-            return "hello";
+            return hardMove();
         }
     }
     

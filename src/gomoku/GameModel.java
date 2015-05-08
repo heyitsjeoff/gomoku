@@ -12,12 +12,10 @@ public class GameModel {
     private String nextMove;
     private int count = 0;
     
-    
     public static final String nm = "NEXTMOVE";
     
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
-    
     
     public GameModel(int rows, int cols){
         this.rows = rows;
@@ -29,6 +27,7 @@ public class GameModel {
             }
         }
     }
+    
     
     public GameModel(GameModel other){
         this.rows = other.rows;
@@ -165,6 +164,14 @@ public class GameModel {
     
     public String getPlayerClientName(){
         return this.playerClient;
+    }
+    
+    public boolean isMoveValid(int row, int col){
+        if(getCell(row, col)=='-'){
+            return true;
+        }
+        else
+            return false;
     }
 
 }
