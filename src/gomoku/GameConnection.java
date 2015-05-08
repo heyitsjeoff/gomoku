@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class GameConnection extends Thread{
     
-    private GameHostController theGameController;
+    private GameHostController theGameHostController;
     private InputStream inputStream;
     private OutputStream outputStream;
     private int port;
@@ -26,9 +26,9 @@ public class GameConnection extends Thread{
     public static final String YOULOSE = "YOULOSE";
     public static final String nm = "NEXTMOVE";
     
-    public GameConnection(Socket player2, GameHostController theGameController) throws IOException{
+    public GameConnection(Socket player2, GameHostController theGameHostController) throws IOException{
         this.player2 = player2;
-        this.theGameController = theGameController;
+        this.theGameHostController = theGameHostController;
         this.inputStream = player2.getInputStream();
         this.outputStream = player2.getOutputStream();
         this.br = new BufferedReader(new InputStreamReader(inputStream));
@@ -47,7 +47,10 @@ public class GameConnection extends Thread{
                     String code = split[0];
                     if(code.equals(nm)){
                         String move = split[1] + " " + split[2];
-                        theGameController.updateBoard(split[1] +" "+ split[2]);
+                        theGameHostController.updateBoard(split[1] +" "+ split[2]);
+                    }
+                    else if(code.equals(YOULOSE)){
+                        this.theGameHostController.lose();
                     }
                 }
             } catch (IOException ex) {

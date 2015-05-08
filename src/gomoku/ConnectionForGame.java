@@ -37,6 +37,7 @@ public class ConnectionForGame implements Runnable {
     private String username;
     
     public static final String nm = "NEXTMOVE";
+    public static final String YOULOSE = "YOULOSE";
     
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
@@ -62,6 +63,9 @@ public class ConnectionForGame implements Runnable {
                     String code = split[0];
                     if(code.equals(nm)){
                         this.theGameClientController.updateBoard(split[1] +" "+ split[2]);
+                    }
+                    else if(code.equals(YOULOSE)){
+                        this.theGameClientController.lose();
                     }
                 }//connected
                 else {

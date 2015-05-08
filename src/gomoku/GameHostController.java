@@ -76,8 +76,13 @@ public class GameHostController implements Runnable{
         this.theLobbyController.showLobbyView();
     }
     
-    public void youLose(){
+    public void lose(){
         JOptionPane.showMessageDialog(null, gameOverLose);
+        returnToLobby();
+    }
+    
+    public void win(){
+        JOptionPane.showMessageDialog(null, gameOverWin);
         returnToLobby();
     }
 
@@ -88,15 +93,14 @@ public class GameHostController implements Runnable{
                 theView.appendMessage(makeMove);
             }
             else{
-                //if(theModel.gameOver(MYTOKEN)){
-                //    theGameConnection.write(YOULOSE + " " + theModel.getNextMove());
-                //    JOptionPane.showMessageDialog(null, gameOverWin);
-                 //   returnToLobby();
-                //}
-                //else{
+                if(theModel.gameOver(MYTOKEN)){
+                    theGameConnection.write(YOULOSE + " " + theModel.getNextMove());
+                    win();
+                }
+                else{
                     theGameConnection.write(theModel.getNextMove());
                     theView.disableBTN();
-                //}
+                }
             }
         }        
     }
