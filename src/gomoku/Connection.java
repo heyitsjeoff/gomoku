@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 
 public class Connection implements Runnable{
-    
+    //Variables for Connection
     private String ip = "127.0.0.1";
     private int port = 8080; //port of ip
     private Socket socket;
@@ -27,25 +27,31 @@ public class Connection implements Runnable{
     private boolean inGame = false;
     private String username;
     
-    private static final String logIn = "y";
-    private static final String notLogIn = "n";
-    private static final String uae = "user already exists";
-    private static final String created = "user created";
-    private static final String LIST = "LIST";
-    private static final String INVITETO = "INVITETO";
-    private static final String INVITEFROM = "INVITEFROM";
-    private static final String REQUESTLIST = "REQUESTLIST;";
-    private static final String ACCEPTFROM = "ACCEPTFROM";
-    private static final String WITHDRAWFROM = "WITHDRAWFROM";
-    private static final String DECLINETO = "DECLINETO";
-    private static final String DECLINEFROM = "DECLINEFROM";
-        public static final String nm = "NEXTMOVE";
+    //Final values
+    public static final String logIn = "y";
+    public static final String notLogIn = "n";
+    public static final String uae = "user already exists";
+    public static final String created = "user created";
+    public static final String LIST = "LIST";
+    public static final String INVITETO = "INVITETO";
+    public static final String INVITEFROM = "INVITEFROM";
+    public static final String REQUESTLIST = "REQUESTLIST;";
+    public static final String ACCEPTFROM = "ACCEPTFROM";
+    public static final String WITHDRAWFROM = "WITHDRAWFROM";
+    public static final String DECLINETO = "DECLINETO";
+    public static final String DECLINEFROM = "DECLINEFROM";
+    public static final String nm = "NEXTMOVE";
     
-    private AuthController aController;
+    //Controllers
+    private AuthController theAuthController;
     private CreateAccountController theCreateAccountController;
     private LobbyController theLobbyController;
-    private GameHostController theGameController;
+    private GameHostController theGameHostController;
     private GameClientController theGameClientController;
+    
+    //Views
+    
+    //Models
     
     public Connection(String ip){
         this.ip = ip;
@@ -61,13 +67,13 @@ public class Connection implements Runnable{
                     String messageFromInput = new String(byteArray, 0, count);
                     if(!inLobby){
                         if(messageFromInput.equals(logIn)){
-                            aController.login();
+                            theAuthController.login();
                             signedIn=true;
                             inLobby=true;
                             write(REQUESTLIST);
                         }
                         else if(messageFromInput.equals(notLogIn)){
-                            aController.notLogin();
+                            theAuthController.notLogin();
                         }
                         else if(messageFromInput.equals(uae)){
                             theCreateAccountController.userAlreadyExists();
@@ -84,7 +90,7 @@ public class Connection implements Runnable{
                             for(int i=1; i<split.length-1; i++){
                                 sb.append(split[i] + " ");
                             }
-                            theLobbyController.updateOnlineList(sb.toString());
+                            theLobbyController.constructOnlineListDLM(sb.toString());
                         }
                         else if(code.equals(INVITEFROM)){
                             String username = split[1];
@@ -134,8 +140,8 @@ public class Connection implements Runnable{
         return this.username;
     }
     
-    public void setAuthController(AuthController aController){
-        this.aController = aController;
+    public void setAuthController(AuthController theAuthController){
+        this.theAuthController = theAuthController;
     }
     
     public void setCreateAccountController(CreateAccountController theCreateAccountController){

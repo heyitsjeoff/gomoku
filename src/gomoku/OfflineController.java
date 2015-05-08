@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class OfflineController {
     
-    private offlineDiff theDiffView;
+    private OfflineDifficultyView theDiffView;
     private JeoffAI theAI;
-    private OGameView theView;
+    private OfflineGameView theView;
     private GameModel theModel;
     private AuthController theAuthController;
     
@@ -27,7 +27,7 @@ public class OfflineController {
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
     
-    public OfflineController(offlineDiff theDiffView){
+    public OfflineController(OfflineDifficultyView theDiffView){
         this.theDiffView = theDiffView;
         this.theDiffView.startListener(new StartListener());
     }
@@ -38,7 +38,7 @@ public class OfflineController {
             theModel = new GameModel(30, 30);
             theAI = new JeoffAI(theDiffView.getDiff(), theModel);
             theDiffView.dispose();
-            theView = new OGameView(theModel);
+            theView = new OfflineGameView(theModel);
             theView.moveListener(new MoveListener());
         }
     }

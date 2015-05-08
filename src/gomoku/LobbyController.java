@@ -42,7 +42,7 @@ public class LobbyController{
         this.theConnection.write(message);
     }
       
-    public DefaultListModel<String> updateOnlineList(String onlineUsers){
+    public DefaultListModel<String> constructOnlineListDLM(String onlineUsers){
         this.dlm = new DefaultListModel<String>();
         String[] usernames = onlineUsers.split("\\s+");
         for(int i = 0; i< usernames.length; i++){

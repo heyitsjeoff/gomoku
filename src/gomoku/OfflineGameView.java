@@ -21,7 +21,7 @@ import javax.swing.JTextArea;
  *
  * @author PLUCSCE
  */
-public class OGameView extends JFrame{
+public class OfflineGameView extends JFrame{
     private JPanel panelCenter = new JPanel();
     private int row, col;
     private boolean myMove = true;
@@ -33,7 +33,7 @@ public class OGameView extends JFrame{
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
 
-    public OGameView(GameModel theModel){
+    public OfflineGameView(GameModel theModel){
         this.theModel = theModel;
 	this.row = theModel.getRows();
 	this.col = theModel.getCols();
@@ -63,9 +63,9 @@ public class OGameView extends JFrame{
 	this.add(panelCenter,BorderLayout.CENTER);
 		
 	//set up text area in the south
-	displayArea = new JTextArea( 8, 15 ); // set up JTextArea
-	displayArea.setEditable( false );
-	this.add( new JScrollPane( displayArea ), BorderLayout.SOUTH );
+	//displayArea = new JTextArea( 8, 15 ); // set up JTextArea
+	//displayArea.setEditable( false );
+	//this.add( new JScrollPane( displayArea ), BorderLayout.SOUTH );
 
 	//setup for display
 	setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

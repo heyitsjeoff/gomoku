@@ -23,7 +23,7 @@ public class AuthController{
     private CreateAccountView theCAView;
     private LobbyView theLobbyView;
     private LobbyModel theLobbyModel;
-    private offlineDiff theOfflineDiff;
+    private OfflineDifficultyView theOfflineDiff;
     
     //controllers
     private CreateAccountController caController;
@@ -173,7 +173,7 @@ public class AuthController{
     class OfflineListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            theOfflineDiff = new offlineDiff();
+            theOfflineDiff = new OfflineDifficultyView();
             theView.setVisible(false);
             theOfflineDiff.setVisible(true);
             theOfflineController = new OfflineController(theOfflineDiff);
