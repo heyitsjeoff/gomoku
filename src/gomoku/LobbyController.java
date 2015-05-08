@@ -105,12 +105,12 @@ public class LobbyController{
     }
     
     //adjust views
-    public void showLobbyView(){
-        this.theView.setVisible(true);
-    }
+   public void setNewView(LobbyView newView){
+       this.theView = newView;
+   }
     
     public void startGame(){
-        this.theView.setVisible(false);
+        this.theView.dispose();
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
         this.pView = new GameView(this.theGameModel);
@@ -124,7 +124,7 @@ public class LobbyController{
         connectionToGame.setPort(8081);
         connectionToGame.connect();
         connectionToGame.startThread();
-        this.theView.setVisible(false);
+        this.theView.dispose();
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
         this.pView = new GameView(this.theGameModel);

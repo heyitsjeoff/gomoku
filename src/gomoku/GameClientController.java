@@ -58,8 +58,9 @@ public class GameClientController {
     
     public void returnToLobby(){
         theView.dispose();
-        this.theLobbyController.showLobbyView();
-        
+        LobbyView newView = new LobbyView();
+        newView.setVisible(true);
+        this.theLobbyController.setNewView(newView);
     }
     
     class SendMoveListener implements ActionListener {

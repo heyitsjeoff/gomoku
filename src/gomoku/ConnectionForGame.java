@@ -65,7 +65,7 @@ public class ConnectionForGame implements Runnable {
                         this.theGameClientController.updateBoard(split[1] +" "+ split[2]);
                     }
                     else if(code.equals(YOULOSE)){
-                        this.theGameClientController.updateBoard(split[1] +" "+ split[2]);
+                        this.theGameClientController.updateBoard(split[2] +" "+ split[3]);
                         this.theGameClientController.lose();
                     }
                 }//connected
