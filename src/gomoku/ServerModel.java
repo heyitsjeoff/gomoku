@@ -8,15 +8,16 @@ import java.util.Scanner;
 
 public class ServerModel {
     
-    private ArrayList<User> list;
+    private ArrayList<User> userList;
     private ArrayList<Client> onlineUsers;
+    private ArrayList<Score> theScore;
     private String fileName = "data";
             
     /**
      * creates a servermodel and imports stored users from data.txt
      */
     public ServerModel(){
-        this.list = new ArrayList<User>();
+        this.userList = new ArrayList<User>();
         this.onlineUsers = new ArrayList<Client>();
         readFile(fileName);
     }
@@ -64,15 +65,15 @@ public class ServerModel {
     
     /**
      * determines if the user with a given username and password is valid
-     * @param check user object that should be in list
+     * @param check user object that should be in userList
      * @return true if username and password match
      */
     public boolean authenticate(User check){
         String theUsername = check.getUsername();
         String thePassword = check.getPassword();
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getUsername().equals(theUsername)){
-                if(list.get(i).getPassword().equals(thePassword)){
+        for(int i=0; i<userList.size(); i++){
+            if(userList.get(i).getUsername().equals(theUsername)){
+                if(userList.get(i).getPassword().equals(thePassword)){
                     return true;
                 }
             }
@@ -86,8 +87,8 @@ public class ServerModel {
      * @return true if username is already used
      */
     public boolean userExists(String username){
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getUsername().equalsIgnoreCase(username)){
+        for(int i=0; i<userList.size(); i++){
+            if(userList.get(i).getUsername().equalsIgnoreCase(username)){
                 return true;
             }//if
         }//for
@@ -117,7 +118,7 @@ public class ServerModel {
      * @param newUser user being added
      */
     public void addUser(User newUser){
-        list.add(newUser);
+        userList.add(newUser);
         //terrible way to do this
         writeFile(fileName);
     }//addUser
@@ -154,8 +155,8 @@ public class ServerModel {
     public void writeFile(String filename){
         try {
         	PrintWriter outfile = new PrintWriter(filename + ".txt");
-		for(int i=0; i<list.size(); i++){
-                    outfile.println(list.get(i).toString());
+		for(int i=0; i<userList.size(); i++){
+                    outfile.println(userList.get(i).toString());
                 }
 		outfile.close();
             } catch (FileNotFoundException e) {
@@ -164,13 +165,43 @@ public class ServerModel {
             }
 	}//writeFile
     public boolean userExists(User check){
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getUsername().equalsIgnoreCase(check.getUsername())){
+        for(int i=0; i<userList.size(); i++){
+            if(userList.get(i).getUsername().equalsIgnoreCase(check.getUsername())){
                 return true;
             }//if
         }//for
         return false;
     }//userExists
+    
+    public void readScoreFile(String filename){
+    Scanner infile = null;
+	try{
+            infile = new Scanner(new File(filename + ".txt"));
+	} catch (FileNotFoundException e){
+            System.out.println("File not found " + filename);
+            e.printStackTrace();
+	}
+	while(infile.hasNext()){
+            String scoreLine = infile.nextLine();
+            String[] split = scoreLine.split("\\s+");
+            Score newScore = new Score(split[1] + " " + split[2] + " " + split[3]);
+            newScore.setUsername(split[0]);
+            this.theScore.add(newScore);
+        }//while
+    }//getFile
+    
+    public void writeScoreFile(String filename){
+        try {
+        	PrintWriter outfile = new PrintWriter(filename + ".txt");
+		for(int i=0; i<theScore.size(); i++){
+                    outfile.println(theScore.get(i).toString());
+                }
+		outfile.close();
+            } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+            }
+	}//writeFile
 	
 	/**
 	 * Processes an invitation. Used when usernameFrom invites usernameTo to a game.

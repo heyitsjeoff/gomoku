@@ -5,6 +5,7 @@ public class User {
     private String username, password;
     private int key;
     private String theCode = "ultron";
+    private Score theScore;
     //private int wins, losses, ties, games;
     
     /**
@@ -16,7 +17,7 @@ public class User {
         this.username = username;
         createKey(theCode);
         this.password = encrypt(password);
-        //this.wins = 0; this.losses = 0; this.ties = 0; this.games = 0;
+        this.theScore= new Score();
     }
     
     /**
@@ -29,6 +30,10 @@ public class User {
     public User(String username, String password, String whoCares){
         this.username = username;
         this.password = password;
+    }
+    
+    public void setUserScore(String scoreString){
+        this.theScore = new Score(scoreString);
     }
 
     /**
