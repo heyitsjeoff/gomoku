@@ -1,5 +1,6 @@
 package gomoku;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class LobbyController{
     private String welcome = "Welcome to the Lobby ";
     private String pendingRequest = "You have a pending request";
     private String swar = "Someone withdrew a request";
-    private GameView pView;
+    private GameView2 pView;
     private GameModel theGameModel;
     private GameHostController theGameHostController;
     private ConnectionForGame connectionToGame;
@@ -116,8 +117,11 @@ public class LobbyController{
         this.theView.dispose();
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
-        this.pView = new GameView(this.theGameModel);
+        this.pView = new GameView2();
+        //this.pView.drawBoard(boardSize, boardSize);
+        //this.pView.setVisible(true);
         this.theGameHostController  = new GameHostController(this.theGameModel, this.pView, this);
+        this.theGameHostController.drawBoard();
         this.theGameHostController.listen();
         this.theGameModel.setPlayerHostName(theConnection.getUsername());
     }
@@ -130,10 +134,12 @@ public class LobbyController{
         this.theView.dispose();
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerClientName(theLobbyModel.getUsername());
-        this.pView = new GameView(this.theGameModel);
-        this.pView.disableBTN();
+        this.pView = new GameView2();
+        //this.pView.drawBoard(boardSize, boardSize);
+        this.pView.disableSend();
         this.theGameModel.setPlayerClientName(theConnection.getUsername());
         this.theGameClientController = new GameClientController(this.pView, this.theGameModel, this.connectionToGame, this);
+        this.theGameClientController.drawBoard();
         connectionToGame.setGameClientController(this.theGameClientController);
     }
     

@@ -36,5 +36,6 @@ public class Gomoku {
             myAuthController.setIP(args[0]);
         }
         theMainView.setVisible(true);
+        GameView2 theView = new GameView2();
     } 
 }

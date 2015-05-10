@@ -5,6 +5,7 @@
  */
 package gomoku;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -16,8 +17,14 @@ import javax.swing.JOptionPane;
  */
 public class GameClientController {
     
-    private GameView theView;
+    private GameView2 theView;
     private GameModel theModel;
+    private boolean myMove;
+    
+    private Color myColor = Color.blue;
+    private Color enemyColor = Color.orange;
+    private Color blank = Color.white;
+    
     private LobbyController theLobbyController;
     private ConnectionForGame theConnection;
     public static final char MYTOKEN = '*';
@@ -28,9 +35,9 @@ public class GameClientController {
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
     public static final String YOULOSE = "YOULOSE";
     
-    public GameClientController(GameView theView, GameModel theModel, ConnectionForGame theConnection, LobbyController theLobbyController){
+    public GameClientController(GameView2 theView, GameModel theModel, ConnectionForGame theConnection, LobbyController theLobbyController){
         this.theView=theView;
-        this.theView.setMyMove(false);
+        //this.theView.setMyMove(false);
         this.theModel=theModel;
         this.theConnection=theConnection;
         this.theView.sendMoveListener(new SendMoveListener());
@@ -42,8 +49,9 @@ public class GameClientController {
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
         theModel.setCell(row, col, THEIRTOKEN);
-        theView.updateGridView();
-        theView.enableBTN();
+        theView.updateCell(row, col, enemyColor);
+        //theView.updateGridView();
+        theView.enableSend();
     }
     
     public void lose(){
@@ -64,6 +72,12 @@ public class GameClientController {
         this.theLobbyController.writeToConnection(REQUESTLIST);
     }
     
+    public void drawBoard(){
+        CellListener listener = new CellListener();
+        this.theView.drawBoard(this.theModel.getRows(), this.theModel.getCols(), listener);
+        this.theView.setVisible(true);
+    }
+    
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -77,8 +91,26 @@ public class GameClientController {
                 }
                 else{
                     theConnection.write(theModel.getNextMove());
-                    theView.disableBTN();
+                    theView.disableSend();
                 }
+            }
+        }        
+    }
+    
+    class CellListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Cell cell  = (Cell) e.getSource();
+            if(theModel.getCount()==0 && myMove==true){
+                cell.click();
+                theModel.setCell(cell.getRow(), cell.getCol(), MYTOKEN);
+                theModel.setNextMove(cell.getRow(), cell.getCol(), MYTOKEN);
+                theModel.addToCount();
+            }
+            else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
+                cell.click();
+                theModel.setCell(cell.getRow(), cell.getCol(), ' ');
+                theModel.subtractFromCount();
             }
         }        
     }

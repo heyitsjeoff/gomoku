@@ -3,50 +3,69 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gomoku;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
- * @author PLUCSCE
+ * @author jeffthechef14
  */
-public class Cell {
+public class Cell extends JButton{
+    private int row, col;
+        private boolean locked;
+        private Color theColor;
+        private boolean clicked;
     
-    private int row;
-    private int col;
-    private Cell one;
-    private Cell two;
-    private Cell three;
-    private Cell four;
-    private Cell six;
-    private Cell seven;
-    private Cell eight;
-    private Cell nine;
-    private Cell topLeft;
+        private Color myColor = Color.blue;
+        private Color enemyColor = Color.orange;
+        private Color blank = Color.white;
     
-    private Cell[][] board = new Cell[30][30];
+        public Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+            this.locked = false;
+            this.theColor = Color.white;
+            this.clicked = false;
+            //actual button
+            this.setSize(28, 28);
+            this.setBackground(blank);
+        }
     
-    public Cell(int r, int c){
-        this.row = r;
-        this.col = c;
-    }
+        public int getRow(){
+            return this.row;
+        }
     
-    public void makeBoard(){
-        topLeft = new Cell(0,0);
-        board[0][0] = topLeft;
-        for(int i=0; i<30; i++){
-            for(int j=0; j<30; j++){
-                
+        public int getCol(){
+            return this.col;
+        }
+    
+        public void lockCell(){
+            this.locked = true;
+        }
+    
+        public boolean isLocked(){
+            return this.locked;
+        }
+    
+        public boolean isClicked(){
+            return this.clicked;
+        }
+        
+        public void click(){
+            if(this.clicked){
+                this.setBackground(blank);
+                this.clicked = false;
+            }
+            else{
+                this.setBackground(myColor);
+                this.clicked = true;
             }
         }
-    }
-    
-    public int getRow(){
-        return this.row;
-    }
-    
-    public int getCol(){
-        return this.col;
-    }
-    
+        
+        public void cellListener(ActionListener listenerForCell){
+            this.addActionListener(listenerForCell);
+        }
 }
