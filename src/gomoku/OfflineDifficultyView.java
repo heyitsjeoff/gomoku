@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
  */
 public class OfflineDifficultyView extends javax.swing.JFrame {
 
+    public static final String EASY = "Easy";
+    public static final String MEDIUM = "Medium";
+    public static final String HARD = "HARD";
+    
     /**
      * Creates new form offlineDiff
      */
@@ -42,6 +46,11 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
         diffLABEL.setText("Difficulty");
 
         diffBOX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Easy", "Medium", "Hard" }));
+        diffBOX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diffBOXActionPerformed(evt);
+            }
+        });
 
         startBTN.setText("Start");
 
@@ -73,6 +82,10 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void diffBOXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diffBOXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_diffBOXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,8 +127,17 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
         startBTN.addActionListener(listenerForStartBTN);
     }
     
-    public String getDiff(){
-        return (String) diffBOX.getSelectedItem();
+    public double getDiff(){
+        String selectedDiff =  (String) diffBOX.getSelectedItem();
+        if(selectedDiff.equals(EASY)){
+            return 0.3;
+        }  
+        else if(selectedDiff.equals(MEDIUM)){
+            return 1.0;
+        }
+        else{
+            return 2.0;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

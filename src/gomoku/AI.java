@@ -26,8 +26,8 @@ public class AI {
 	};
 	
 	public static final double DIFFICULTY_EASY = 0.3;
-	public static final double DIFFICULTY_MEDIUM = 1;
-	public static final double DIFFICULTY_HARD = 2;
+	public static final double DIFFICULTY_MEDIUM = 1.0;
+	public static final double DIFFICULTY_HARD = 2.0;
 	
 	private static final int WEIGHT_OWN_4 = 100;
 	private static final int WEIGHT_OPPONENT_4 = 70;

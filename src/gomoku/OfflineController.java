@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class OfflineController {
     
     private OfflineDifficultyView theDiffView;
-    private JeoffAI theAI;
+    private AI theAI;
     private OfflineGameView theView;
     private GameModel theModel;
     private AuthController theAuthController;
@@ -36,7 +36,7 @@ public class OfflineController {
         @Override
         public void actionPerformed(ActionEvent e) {
             theModel = new GameModel(30, 30);
-            theAI = new JeoffAI(theDiffView.getDiff(), theModel);
+            theAI = new AI(30, 30, theDiffView.getDiff());
             theDiffView.dispose();
             theView = new OfflineGameView(theModel);
             theView.moveListener(new MoveListener());
@@ -71,9 +71,9 @@ public class OfflineController {
                     theView.appendMessage(makeMove);
                 }
                 else{
-                    String[] move = theAI.getNextMove().split("\\s+");
-                    int row = Integer.parseInt(move[0]);
-                    int col = Integer.parseInt(move[1]);
+                    int[] theMoveCoordinates = theAI.makeMove(theModel.getGrid());
+                    int row = theMoveCoordinates[0];
+                    int col = theMoveCoordinates[1];
                     theModel.setCell(row, col, ENEMY);
                     theView.updateGridView();
                     if(theModel.gameOver(ENEMY)){

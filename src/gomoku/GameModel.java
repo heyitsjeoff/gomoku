@@ -40,6 +40,10 @@ public class GameModel {
         }
     }
     
+    public char[][] getGrid(){
+        return this.grid;
+    }
+    
     public boolean gameOver(char theToken){
         if(horizontal(theToken)){
             return true;
