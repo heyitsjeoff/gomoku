@@ -9,23 +9,30 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 public class LobbyController{
+    //Models
+    private LobbyModel theLobbyModel;
+    private GameModel theGameModel;
     
+    //Views
     private LobbyView theView;
+    private GameView2 pView;
+    
+    //Controllers
+    private GameHostController theGameHostController;
+    private GameClientController theGameClientController;
+    
+    //variables for class
     private DefaultListModel<String> dlm;
     private DefaultListModel<String> idlm;
     private DefaultListModel<String> odlm;
     private Connection theConnection;
-    private LobbyModel theLobbyModel;
+    private int boardSize = 30;
+    //Strings
     private String welcome = "Welcome to the Lobby ";
     private String pendingRequest = "You have a pending request";
     private String swar = "Someone withdrew a request";
-    private GameView2 pView;
-    private GameModel theGameModel;
-    private GameHostController theGameHostController;
+
     private ConnectionForGame connectionToGame;
-    private GameClientController theGameClientController;
-    
-    private int boardSize = 30;
 
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;

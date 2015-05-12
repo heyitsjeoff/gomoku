@@ -15,6 +15,10 @@ public class Score {
         this.username = username;
     }
     
+    public String getUsername(){
+        return this.username;
+    }
+    
     public Score(String scoreString){
         String[] split = scoreString.split("\\s+");
         this.win = Integer.parseInt(split[0]);

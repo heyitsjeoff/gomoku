@@ -12,15 +12,21 @@ public class ServerModel {
     private ArrayList<Client> onlineUsers;
     private ArrayList<Score> theScore;
     private String fileName = "data";
-            
+    private String scoreFileName = "scoreData";
+    public static final String ude = "User does not exist";
+    
     /**
      * creates a servermodel and imports stored users from data.txt
      */
     public ServerModel(){
         this.userList = new ArrayList<User>();
         this.onlineUsers = new ArrayList<Client>();
+        this.theScore = new ArrayList<Score>();
         readFile(fileName);
+        readScoreFile(scoreFileName);
     }
+    
+    //User methods
     
     /**
      * gets username of User object
@@ -62,7 +68,6 @@ public class ServerModel {
         return sb.toString();
     }
 
-    
     /**
      * determines if the user with a given username and password is valid
      * @param check user object that should be in userList
@@ -123,9 +128,33 @@ public class ServerModel {
         writeFile(fileName);
     }//addUser
     
+    //score methods
     
+    public void updateUserScore(String username, int option){
+        if(userScoreLocation(username)!=-1){
+            int location = userScoreLocation(username);
+            this.theScore.get(location).manipulateScore(option);
+            writeScoreFile(scoreFileName);
+        }
+        else{
+            Score newScore = new Score();
+            newScore.setUsername(username);
+            this.theScore.add(newScore);
+            this.theScore.get(this.theScore.size()-1).manipulateScore(option);
+            writeScoreFile(scoreFileName);
+        }
+    }
+    
+    public int userScoreLocation(String username){
+        for(int i=0; i<theScore.size(); i++){
+            if(theScore.get(i).getUsername().equals(username)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
-    //file handling-----------
+    //file methods
     /**
     * Reads in a file, and imports the users into a list
     * @param filename the name of the file that is being used to import data
@@ -203,6 +232,7 @@ public class ServerModel {
             }
 	}//writeFile
 	
+    //John methods
 	/**
 	 * Processes an invitation. Used when usernameFrom invites usernameTo to a game.
 	 * @param usernameFrom The username of the inviting user

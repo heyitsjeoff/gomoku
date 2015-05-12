@@ -77,8 +77,10 @@ public class GameHostController implements Runnable{
         int col = Integer.parseInt(split[1]);
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateCell(row, col, enemyColor);
+        this.theModel.resetCount();
         //theView.updateGridView();
         theView.enableSend();
+        this.myMove = true;
     }
     
     public void returnToLobby(){
@@ -119,10 +121,12 @@ public class GameHostController implements Runnable{
             else{
                 if(theModel.gameOver(MYTOKEN)){
                     theGameConnection.write(YOULOSE + " " + theModel.getNextMove());
+                    myMove = false;
                     win();
                 }
                 else{
                     theGameConnection.write(theModel.getNextMove());
+                    myMove = false;
                     theView.disableSend();
                 }
             }

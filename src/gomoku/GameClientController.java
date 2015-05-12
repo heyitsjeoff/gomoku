@@ -50,6 +50,8 @@ public class GameClientController {
         int col = Integer.parseInt(split[1]);
         theModel.setCell(row, col, THEIRTOKEN);
         theView.updateCell(row, col, enemyColor);
+        this.myMove = true;
+        this.theModel.resetCount();
         //theView.updateGridView();
         theView.enableSend();
     }
@@ -87,11 +89,13 @@ public class GameClientController {
             else{
                 if(theModel.gameOver(MYTOKEN)){
                     theConnection.write(YOULOSE + " " + theModel.getNextMove());
+                    myMove = false;
                     win();
                 }
                 else{
                     theConnection.write(theModel.getNextMove());
                     theView.disableSend();
+                    myMove = false;
                 }
             }
         }        
