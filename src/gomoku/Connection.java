@@ -84,7 +84,7 @@ public class Connection implements Runnable{
                             theCreateAccountController.accountCreated();
                         }
                     }
-                    else if(!inGame){
+                    else{
                         String[] split = messageFromInput.split("\\s+");
                         String code = split[0];
                         if(code.equals(LIST)){

@@ -70,6 +70,12 @@ public class LobbyController{
         return this.idlm;
     }
     
+    public void clearIncomingOutgoing(){
+        theLobbyModel.clearIncomingOutgoing();
+        theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
+        theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
+    }
+    
     public void addToIncomingList(String username){
         theLobbyModel.addToIncomingList(username);
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
@@ -101,7 +107,7 @@ public class LobbyController{
     }
     
     public void acceptRequest(String usernameAccepted){
-        removeFromIncomingList(usernameAccepted);
+        //removeFromIncomingList(usernameAccepted);
         theConnection.write("ACCEPTTO "+usernameAccepted+";");
         startGame();
     }
