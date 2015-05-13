@@ -85,9 +85,7 @@ public class GameHostController implements Runnable{
     
     public void returnToLobby(){
         theView.dispose();
-        LobbyView newView = new LobbyView();
-        newView.setVisible(true);
-        this.theLobbyController.setNewView(newView);
+        this.theLobbyController.setView(true);
         this.theLobbyController.writeToConnection(REQUESTLIST);
         try {
             serverSocket.close();
