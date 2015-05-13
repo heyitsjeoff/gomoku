@@ -164,9 +164,8 @@ public class AuthController{
     class AnonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(checkConnection()){
-                anon();
-            }
+            checkConnection();
+            anon();
         }
     }
     
