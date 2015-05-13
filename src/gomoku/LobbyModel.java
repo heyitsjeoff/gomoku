@@ -7,6 +7,7 @@ public class LobbyModel {
     
     private ArrayList<String> incomingList;
     private ArrayList<String> outgoingList;
+    private ArrayList<String> listOfStats;
     private String username;
     
     public LobbyModel(){
@@ -67,4 +68,7 @@ public class LobbyModel {
         return this.username;
     }
     
+    public void storeInitStats(String list){
+        
+    }
 }
