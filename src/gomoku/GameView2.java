@@ -46,8 +46,6 @@ public class GameView2 extends javax.swing.JFrame {
         sendBTN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        messageTF = new javax.swing.JTextField();
-        messageBTN = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -58,19 +56,19 @@ public class GameView2 extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(910, 910));
 
         boardPANEL.setBackground(new java.awt.Color(40, 240, 240));
-        boardPANEL.setMaximumSize(new java.awt.Dimension(2520, 2520));
-        boardPANEL.setMinimumSize(new java.awt.Dimension(840, 840));
-        boardPANEL.setPreferredSize(new java.awt.Dimension(840, 840));
+        boardPANEL.setMaximumSize(new java.awt.Dimension(420, 420));
+        boardPANEL.setMinimumSize(new java.awt.Dimension(420, 420));
+        boardPANEL.setPreferredSize(new java.awt.Dimension(420, 420));
 
         javax.swing.GroupLayout boardPANELLayout = new javax.swing.GroupLayout(boardPANEL);
         boardPANEL.setLayout(boardPANELLayout);
         boardPANELLayout.setHorizontalGroup(
             boardPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
         boardPANELLayout.setVerticalGroup(
             boardPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
 
         sendBTN.setBackground(new java.awt.Color(0, 255, 255));
@@ -86,28 +84,21 @@ public class GameView2 extends javax.swing.JFrame {
         jTextPane1.setText("  Gomoku");
         jScrollPane1.setViewportView(jTextPane1);
 
-        messageTF.setFont(new java.awt.Font("Gotham Black", 0, 18)); // NOI18N
-
-        messageBTN.setFont(new java.awt.Font("Gotham Bold", 0, 18)); // NOI18N
-        messageBTN.setForeground(new java.awt.Color(255, 255, 255));
-        messageBTN.setText("Send Message");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(messageTF, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(messageBTN))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(230, 230, 230)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sendBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,11 +108,7 @@ public class GameView2 extends javax.swing.JFrame {
                     .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(messageTF)
-                    .addComponent(messageBTN, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,8 +203,6 @@ public class GameView2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JButton messageBTN;
-    private javax.swing.JTextField messageTF;
     private javax.swing.JButton sendBTN;
     // End of variables declaration//GEN-END:variables
 }
