@@ -155,6 +155,10 @@ public class LobbyController{
         return this.theGameClientController;
     }
     
+    public void storeStats(String fullList){
+        this.theLobbyModel.storeInitStats(fullList);
+    }
+    
     //Listeners
     class AcceptListener implements ActionListener {
         @Override

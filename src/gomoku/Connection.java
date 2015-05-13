@@ -41,7 +41,7 @@ public class Connection implements Runnable{
     public static final String DECLINETO = "DECLINETO";
     public static final String DECLINEFROM = "DECLINEFROM";
     public static final String nm = "NEXTMOVE";
-    public static final String STATS = "STATSRETURN";
+    public static final String STATSRETURN = "STATSRETURN";
     
     //Controllers
     private AuthController theAuthController;
@@ -123,7 +123,8 @@ public class Connection implements Runnable{
                             decline = decline.substring(0, semi);
                             theLobbyController.removeFromOutgoingList(decline);
                         }
-                        else if(code.equals(STATS)){
+                        else if(code.equals(STATSRETURN)){
+                            theLobbyController.storeStats(code.subSequence(11, code.length()).toString());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //CHASE WILL FINISH THIS//
