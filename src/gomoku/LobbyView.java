@@ -85,8 +85,10 @@ public class LobbyView extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(onlineList);
 
+        incomingList.setFixedCellHeight(17);
         jScrollPane6.setViewportView(incomingList);
 
+        outgoingRequests.setFixedCellHeight(17);
         jScrollPane7.setViewportView(outgoingRequests);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

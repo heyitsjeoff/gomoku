@@ -73,7 +73,7 @@ public class LobbyController{
     public void clearIncomingOutgoing(){
         theLobbyModel.clearIncomingOutgoing();
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
-        theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
+        theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
     public void addToIncomingList(String username){
@@ -128,6 +128,7 @@ public class LobbyController{
    }
     
     public void startGame(){
+        clearIncomingOutgoing();
         this.theView.setVisible(false);
         this.theGameModel = new GameModel(this.boardSize, this.boardSize);
         this.theGameModel.setPlayerHostName(theLobbyModel.getUsername());
@@ -141,6 +142,7 @@ public class LobbyController{
     }
     
     public void connectToHost(String hostIP){
+        clearIncomingOutgoing();
         connectionToGame = new ConnectionForGame(hostIP);
         connectionToGame.setPort(8081);
         connectionToGame.connect();
