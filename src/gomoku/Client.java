@@ -99,6 +99,16 @@ public class Client extends Thread implements Comparable<String>{
 				//sendMessage(sb.toString());
                                 theServerModel.updateAllOnlineList(sb.toString());
 				break;
+                        case "STATS":
+                                String nameAndScores = theServerModel.getStats();
+                                System.out.println(nameAndScores);
+                                try {
+                                    Thread.sleep(100);
+                                    sendMessage("STATSRETURN "+nameAndScores);
+                                } catch(InterruptedException ex) {
+                                    Thread.currentThread().interrupt();
+                                }
+                                break;
 			default:
 				//This block allows later addition of special handling
 				//for invalid network commands.
@@ -220,7 +230,6 @@ public class Client extends Thread implements Comparable<String>{
 		try {
                     int count = this.inputStream.read(byteArray);
                     if (count > 0) {
-
                         //authentication mode
                         if (!loggedIn) {
                             message = new String(byteArray, 0, count);

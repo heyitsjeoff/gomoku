@@ -41,6 +41,7 @@ public class Connection implements Runnable{
     public static final String DECLINETO = "DECLINETO";
     public static final String DECLINEFROM = "DECLINEFROM";
     public static final String nm = "NEXTMOVE";
+    public static final String STATS = "STATSRETURN";
     
     //Controllers
     private AuthController theAuthController;
@@ -65,6 +66,7 @@ public class Connection implements Runnable{
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
                     String messageFromInput = new String(byteArray, 0, count);
+                    System.out.println(messageFromInput);
                     if(!inLobby){
                         if(messageFromInput.equals(logIn)){
                             theAuthController.login();
@@ -120,6 +122,13 @@ public class Connection implements Runnable{
                             int semi = decline.indexOf(";");
                             decline = decline.substring(0, semi);
                             theLobbyController.removeFromOutgoingList(decline);
+                        }
+                        else if(code.equals(STATS)){
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            //CHASE WILL FINISH THIS//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         }
                     }
                 }//connected

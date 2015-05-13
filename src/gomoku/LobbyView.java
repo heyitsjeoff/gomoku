@@ -33,10 +33,10 @@ public class LobbyView extends javax.swing.JFrame {
         challengeBTN = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        myStatsTA = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        otherPlayersStatsTA = new javax.swing.JTextArea();
         pendingLabel = new javax.swing.JLabel();
         outgoingLabel = new javax.swing.JLabel();
         acceptPendingBT = new javax.swing.JButton();
@@ -61,17 +61,17 @@ public class LobbyView extends javax.swing.JFrame {
 
         jLabel1.setText("Your Stats");
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(14);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        myStatsTA.setEditable(false);
+        myStatsTA.setColumns(14);
+        myStatsTA.setRows(5);
+        jScrollPane2.setViewportView(myStatsTA);
 
         jLabel2.setText("Selected Player's Stats");
 
-        jTextArea3.setEditable(false);
-        jTextArea3.setColumns(14);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        otherPlayersStatsTA.setEditable(false);
+        otherPlayersStatsTA.setColumns(14);
+        otherPlayersStatsTA.setRows(5);
+        jScrollPane3.setViewportView(otherPlayersStatsTA);
 
         pendingLabel.setText("Pending Requests");
 
@@ -259,10 +259,10 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea myStatsTA;
     private javax.swing.JList<String> onlineList;
     private javax.swing.JLabel onlineUsersLabel;
+    private javax.swing.JTextArea otherPlayersStatsTA;
     private javax.swing.JLabel outgoingLabel;
     private javax.swing.JList<String> outgoingRequests;
     private javax.swing.JLabel pendingLabel;

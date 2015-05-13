@@ -44,6 +44,7 @@ public class LobbyController{
         this.theConnection.setLobbyController(this);
         this.theLobbyModel = theLobbyModel;
         this.theView.setTitle(welcome);
+        this.theConnection.write("STATS;");
     }
     
     public void writeToConnection(String message){

@@ -11,19 +11,19 @@ public class Score {
         this.tie = 0;
     }
     
+    public Score(String scoreString){
+        String[] split = scoreString.split("\\s+");
+        this.win = Integer.parseInt(split[0]);
+        this.lose = Integer.parseInt(split[1]);
+        this.tie = Integer.parseInt(split[2]);
+    }
+    
     public void setUsername(String username){
         this.username = username;
     }
     
     public String getUsername(){
         return this.username;
-    }
-    
-    public Score(String scoreString){
-        String[] split = scoreString.split("\\s+");
-        this.win = Integer.parseInt(split[0]);
-        this.lose = Integer.parseInt(split[1]);
-        this.tie = Integer.parseInt(split[2]);
     }
     
     public void manipulateScore(int option){

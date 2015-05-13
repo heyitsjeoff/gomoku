@@ -52,6 +52,17 @@ public class ServerModel {
         }
     }
     
+    public String getStats(){
+        String stats = "";
+        for(int i=0; i<theScore.size();i++){
+            if(i!=theScore.size()-1)
+                stats += theScore.get(i).toString()+",";
+            else
+                stats += theScore.get(i).toString();
+        }
+        return stats;
+    }
+        
     /**
      * gets the list of online users
      * @return the list of online users
