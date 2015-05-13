@@ -27,6 +27,11 @@ public class LobbyModel {
         }
     }
     
+    public void clearIncomingOutgoing(){
+        this.incomingList.clear();
+        this.outgoingList.clear();
+    }
+    
     public String updateIncomingList(){
         StringBuilder sb = new StringBuilder();
         for(int i =0; i<this.incomingList.size(); i++){
