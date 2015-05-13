@@ -186,9 +186,8 @@ public class AuthController{
     class LoginListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(checkConnection()){
-                tryLogin();
-            }
+            checkConnection();
+            tryLogin();
         }//actionPerformed
     }//LoginListener
     
