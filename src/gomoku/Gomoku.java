@@ -20,20 +20,12 @@ Sources: cipherspeak.tk - for encryption
 
 package gomoku;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import static javax.swing.UIManager.getSystemLookAndFeelClassName;
-import javax.swing.UnsupportedLookAndFeelException;
-
 /**
  *
  * @author heyitsjeoff
  */
 public class Gomoku {
     
-    
-
     /**
      * @param args the command line arguments
      */

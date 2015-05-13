@@ -51,6 +51,7 @@ public class ServerController implements Runnable{
                 this.socket = serverSocket.accept();
                 this.theClient = new Client(this.socket, this);
                 theClient.start();
+                this.theView.append("New client added");
             } catch (IOException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             }  
@@ -73,9 +74,11 @@ public class ServerController implements Runnable{
     public boolean authenticate(User check){
         if(theModel.authenticate(check)){
             theModel.addOnline(theClient);
+            this.theView.append("Login succesful for " + check);
             return true;
         }
         else{
+            this.theView.append("login failed for " + check);
             return false;
         }
     }//authenticate
@@ -120,6 +123,7 @@ public class ServerController implements Runnable{
         StringBuilder sb = new StringBuilder("LIST ");
         sb.append(theModel.getOnlineUsernames()+";");
         theModel.updateAllOnlineList(sb.toString());
+        this.theView.append("removing " + oUser + " from onlineList");
     }
     
     /**
