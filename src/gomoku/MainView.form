@@ -32,6 +32,11 @@
                 <Property name="text" type="java.lang.String" value="Change IP"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="changePortMI">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Change Port"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

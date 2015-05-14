@@ -34,6 +34,7 @@ public class AuthController{
     private boolean streamsConnected;
     
     private String initialIP = "127.0.0.1";
+    private int initialPort = 8080;
     private boolean ipChanged = false;
     
     /**
@@ -49,7 +50,8 @@ public class AuthController{
         this.theView.changeIPListener(new IPListener());
         this.theView.anonListener(new AnonListener());
         this.theView.offlineListener(new OfflineListener());
-        theConnection = new Connection(initialIP);
+        this.theView.changePortListener(new PortListener());
+        theConnection = new Connection(initialIP, initialPort);
     }
     
     public void login(){
@@ -91,9 +93,14 @@ public class AuthController{
      * @param number new IP
      */
     public void setIP(String number){
-        theView.appendMSG(GomokuVariables.ipChange + number);
-        this.ipChanged = true;
-        this.theConnection.setIP(number);
+        if(number==null){
+            theView.appendMSG(GomokuVariables.PCI);
+        }
+        else{
+            theView.appendMSG(GomokuVariables.ipChange + number);
+            this.ipChanged = true;
+            this.theConnection.setIP(number);
+        }
     }//setIP
     
     /**
@@ -183,6 +190,17 @@ public class AuthController{
             String newIP = JOptionPane.showInputDialog(null, GomokuVariables.serverIP);
             setIP(newIP);
             initialIP = newIP;
+        }//actionPerformed
+    }//IPListener
+    
+    class PortListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String newPort = JOptionPane.showInputDialog(null, GomokuVariables.portNumber);
+            if(newPort!=null){
+                setPort(Integer.parseInt(newPort));
+                initialPort = Integer.parseInt(newPort);
+            }
         }//actionPerformed
     }//IPListener
     

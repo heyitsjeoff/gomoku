@@ -47,6 +47,7 @@ public class GameView2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         gameFeedTA = new javax.swing.JTextArea();
         gameFeedLABEL = new javax.swing.JLabel();
+        turnLabel = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -83,6 +84,10 @@ public class GameView2 extends javax.swing.JFrame {
         gameFeedLABEL.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         gameFeedLABEL.setText("Game Feed");
 
+        turnLabel.setBackground(new java.awt.Color(255, 255, 255));
+        turnLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        turnLabel.setText("My Turn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,14 +95,21 @@ public class GameView2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 74, Short.MAX_VALUE))
-                    .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(5, 5, 5))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 75, Short.MAX_VALUE))
+                            .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +117,11 @@ public class GameView2 extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sendBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,10 +208,12 @@ public class GameView2 extends javax.swing.JFrame {
     
     public void enableSend(){
         sendBTN.setEnabled(true);
+        turnLabel.setText(GomokuVariables.MYTURN);
     }
     
     public void disableSend(){
         sendBTN.setEnabled(false);
+        turnLabel.setText(GomokuVariables.THEIRTURN);
     }
     
     public void appendTitle(String message){
@@ -219,5 +235,6 @@ public class GameView2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton sendBTN;
+    private javax.swing.JLabel turnLabel;
     // End of variables declaration//GEN-END:variables
 }

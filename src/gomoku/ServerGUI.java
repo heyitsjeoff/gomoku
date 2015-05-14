@@ -28,7 +28,7 @@ public class ServerGUI extends javax.swing.JPanel {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        ipLabel = new javax.swing.JLabel();
+        feedLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         feedTA = new javax.swing.JTextArea();
 
@@ -36,7 +36,7 @@ public class ServerGUI extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        ipLabel.setText("Online Users");
+        feedLabel.setText("Server Feed");
 
         feedTA.setEditable(false);
         feedTA.setColumns(20);
@@ -48,20 +48,22 @@ public class ServerGUI extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ipLabel))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(feedLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(ipLabel)
+                .addContainerGap()
+                .addComponent(feedLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -70,8 +72,8 @@ public class ServerGUI extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel feedLabel;
     private javax.swing.JTextArea feedTA;
-    private javax.swing.JLabel ipLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

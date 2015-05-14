@@ -39,6 +39,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         ipMI = new javax.swing.JMenuItem();
+        changePortMI = new javax.swing.JMenuItem();
 
         jInternalFrame1.setVisible(true);
 
@@ -81,6 +82,9 @@ public class MainView extends javax.swing.JFrame {
 
         ipMI.setText("Change IP");
         jMenu1.add(ipMI);
+
+        changePortMI.setText("Change Port");
+        jMenu1.add(changePortMI);
 
         jMenuBar1.add(jMenu1);
 
@@ -229,6 +233,10 @@ public class MainView extends javax.swing.JFrame {
         ipMI.addActionListener(ipListener);
     }
     
+    public void changePortListener(ActionListener portListener){
+        changePortMI.addActionListener(portListener);
+    }
+    
     public void anonListener(ActionListener anonListener){
         anonBTN.addActionListener(anonListener);
     }
@@ -244,6 +252,7 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aiBTN;
     private javax.swing.JButton anonBTN;
+    private javax.swing.JMenuItem changePortMI;
     private javax.swing.JLabel consoleLabel;
     private javax.swing.JButton createAccountBTN;
     private javax.swing.JMenuItem ipMI;

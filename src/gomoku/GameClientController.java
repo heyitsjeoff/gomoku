@@ -44,12 +44,12 @@ public class GameClientController {
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
-        theModel.setCell(row, col, THEIRTOKEN);
+        theModel.setCell(row, col, GomokuVariables.THEIRTOKEN);
         theView.updateCell(row, col, GomokuVariables.enemyColor);
-        this.myMove = true;
         this.theModel.resetCount();
-        //theView.updateGridView();
         theView.enableSend();
+        theView.append(GomokuVariables.THEYMADEAMOVEAT + row + GomokuVariables.ANDCOL + col);
+        this.myMove = true;
     }
     
     public void lose(){

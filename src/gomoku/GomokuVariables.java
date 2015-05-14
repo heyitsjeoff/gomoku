@@ -16,6 +16,7 @@ public class GomokuVariables {
     public static final String PCI = "Please Configure IP";
     public static final String complete = "Please complete both fields";
     public static final String serverIP = "Server IP:";
+    public static final String portNumber = "Port Number:";
     public static final String anonString = "anon";
     
     //Strings for Client/Connection
@@ -47,4 +48,7 @@ public class GomokuVariables {
     public static final char THEIRTOKEN = '#';
     public static final String IMADEAMOVEAT = "I made a move at row ";
     public static final String ANDCOL = " and column ";
+    public static final String THEYMADEAMOVEAT = "They made a move at row ";
+    public static final String MYTURN = "My Turn";
+    public static final String THEIRTURN = "Their Turn";
 }

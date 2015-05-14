@@ -43,16 +43,27 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="boardPANEL" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="gameFeedLABEL" min="-2" pref="166" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="sendBTN" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="sendBTN" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="gameFeedLABEL" min="-2" pref="166" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="turnLabel" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,9 +73,11 @@
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="turnLabel" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="gameFeedLABEL" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="616" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="559" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sendBTN" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
@@ -135,6 +148,17 @@
           <Font name="Tahoma" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Game Feed"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="turnLabel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="36" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="My Turn"/>
       </Properties>
     </Component>
   </SubComponents>

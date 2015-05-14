@@ -38,8 +38,9 @@ public class Connection implements Runnable{
     
     //Models
     
-    public Connection(String ip){
+    public Connection(String ip, int port){
         this.ip = ip;
+        this.port = port;
     }
 
     @Override

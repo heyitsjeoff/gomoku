@@ -13,7 +13,7 @@ John Lyon
 Jeoff Villanueva
 Authentication
 CSCE 320 Spring
-Date 6 April 2015
+Date 20 May 2015
 Java used in Netbeans
 Sources: cipherspeak.tk - for encryption
 */
@@ -50,6 +50,7 @@ public class Gomoku {
         AuthController myAuthController = new AuthController(theMainView);
         if(args.length > 0){
             myAuthController.setIP(args[0]);
+            myAuthController.setPort(Integer.parseInt(args[1]));
         }
         theMainView.setVisible(true);
     } 

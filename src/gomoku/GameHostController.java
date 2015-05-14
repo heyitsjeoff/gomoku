@@ -67,8 +67,8 @@ public class GameHostController implements Runnable{
         theModel.setCell(row, col, GomokuVariables.THEIRTOKEN);
         theView.updateCell(row, col, GomokuVariables.enemyColor);
         this.theModel.resetCount();
-        //theView.updateGridView();
         theView.enableSend();
+        theView.append(GomokuVariables.THEYMADEAMOVEAT + row + GomokuVariables.ANDCOL + col);
         this.myMove = true;
     }
     

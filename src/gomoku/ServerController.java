@@ -24,15 +24,16 @@ public class ServerController implements Runnable{
     private ServerGUI theView;
     private AuthController theAuthController;
     private Client theClient;
+    private int serverPort;
     
     /**
      * Creates a ServerController object 
      * @param theModel
      * @param theView
      */
-    public ServerController(ServerModel theModel, ServerGUI theView){
+    public ServerController(ServerModel theModel, ServerGUI theView, int theServerPort){
         try {
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(theServerPort);
         } catch (IOException ex) {
             Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
         }//try catch
