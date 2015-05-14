@@ -146,6 +146,11 @@ public class GameModel {
         return this.nextMove;
     }
     
+    public String myMoveToString(){
+        String[] split = this.nextMove.split("\\s+");
+        return GomokuVariables.IMADEAMOVEAT + split[1] + GomokuVariables.ANDCOL + split[2]; 
+    }
+    
     public int getRows(){
         return this.rows;
     }

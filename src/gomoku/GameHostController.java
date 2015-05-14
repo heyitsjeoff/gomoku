@@ -25,14 +25,6 @@ public class GameHostController implements Runnable{
     
     private boolean myMove;
     
-    public static final String makeMove = "Please make a valid move";
-    public static final String gameOverWin =  "You have won!\n Returning to the lobby";
-    public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
-    public static final String YOULOSE = "YOULOSE";
-    private static final String REQUESTLIST = "REQUESTLIST;";
-    public static final char MYTOKEN = '*';
-    public static final char THEIRTOKEN = '#';
-    
 
     public GameHostController(GameModel theModel, GameView2 theView, LobbyController theLobbyController){
         try {
@@ -72,7 +64,7 @@ public class GameHostController implements Runnable{
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
-        theModel.setCell(row, col, THEIRTOKEN);
+        theModel.setCell(row, col, GomokuVariables.THEIRTOKEN);
         theView.updateCell(row, col, GomokuVariables.enemyColor);
         this.theModel.resetCount();
         //theView.updateGridView();
@@ -83,7 +75,7 @@ public class GameHostController implements Runnable{
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.setView(true);
-        this.theLobbyController.writeToConnection(REQUESTLIST);
+        this.theLobbyController.writeToConnection(GomokuVariables.REQUESTLIST);
         try {
             serverSocket.close();
         } catch (IOException ex) {
@@ -92,12 +84,12 @@ public class GameHostController implements Runnable{
     }
     
     public void lose(){
-        JOptionPane.showMessageDialog(null, gameOverLose);
+        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverLose);
         returnToLobby();
     }
     
     public void win(){
-        JOptionPane.showMessageDialog(null, gameOverWin);
+        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverWin);
         returnToLobby();
     }
     
@@ -118,11 +110,11 @@ public class GameHostController implements Runnable{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(theModel.getCount()==0){
-                theView.append(makeMove);
+                theView.append(GomokuVariables.makeMove);
             }
             else{
-                if(theModel.gameOver(MYTOKEN)){
-                    theGameConnection.write(YOULOSE + " " + theModel.getNextMove());
+                if(theModel.gameOver(GomokuVariables.MYTOKEN)){
+                    theGameConnection.write(GomokuVariables.YOULOSE + " " + theModel.getNextMove());
                     myMove = false;
                     win();
                 }
@@ -130,6 +122,7 @@ public class GameHostController implements Runnable{
                     theGameConnection.write(theModel.getNextMove());
                     myMove = false;
                     theView.disableSend();
+                    theView.append(theModel.myMoveToString());
                     disableMyMoveCell(theModel.getNextMove());
                 }
             }
@@ -142,8 +135,8 @@ public class GameHostController implements Runnable{
             Cell cell  = (Cell) e.getSource();
             if(theModel.getCount()==0 && myMove==true){
                 cell.click();
-                theModel.setCell(cell.getRow(), cell.getCol(), MYTOKEN);
-                theModel.setNextMove(cell.getRow(), cell.getCol(), MYTOKEN);
+                theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
+                theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.addToCount();
             }
             else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){

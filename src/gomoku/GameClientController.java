@@ -95,8 +95,9 @@ public class GameClientController {
                 }
                 else{
                     theConnection.write(theModel.getNextMove());
-                    theView.disableSend();
                     myMove = false;
+                    theView.disableSend();
+                    theView.append(theModel.myMoveToString());
                     disableMyMoveCell(theModel.getNextMove());
                 }
             }

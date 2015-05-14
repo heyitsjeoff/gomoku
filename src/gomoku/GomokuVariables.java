@@ -45,4 +45,6 @@ public class GomokuVariables {
     public static final String YOULOSE = "YOULOSE";
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
+    public static final String IMADEAMOVEAT = "I made a move at row ";
+    public static final String ANDCOL = " and column ";
 }
