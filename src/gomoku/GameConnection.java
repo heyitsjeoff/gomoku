@@ -66,7 +66,6 @@ public class GameConnection extends Thread{
             buffOut = message.getBytes();
             this.outputStream.write(buffOut, 0, message.length());
             this.outputStream.flush();
-            System.out.println(message + " has been flushed by GameConnection");
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }

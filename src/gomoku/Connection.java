@@ -51,7 +51,6 @@ public class Connection implements Runnable{
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
                     String messageFromInput = new String(byteArray, 0, count);
-                    System.out.println(messageFromInput);
                     if(!inLobby){
                         if(messageFromInput.equals(GomokuVariables.logIn)){
                             theAuthController.login();
@@ -148,7 +147,6 @@ public class Connection implements Runnable{
             buffOut = message.getBytes();
             this.outputStream.write(buffOut, 0, message.length());
             this.outputStream.flush();
-            System.out.println(message + " has been flushed");
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }

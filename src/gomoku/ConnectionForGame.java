@@ -57,7 +57,6 @@ public class ConnectionForGame implements Runnable {
                 int count = this.inputStream.read(byteArray);
                 if(count>0){
                     String message = new String(byteArray, 0, count);
-                    System.out.println(message + " received");
                     String[] split = message.split("\\s+");
                     String code = split[0];
                     if(code.equals(nm)){
@@ -83,7 +82,6 @@ public class ConnectionForGame implements Runnable {
             buffOut = message.getBytes();
             this.outputStream.write(buffOut, 0, message.length());
             this.outputStream.flush();
-            System.out.println(message + " has been flushed");
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }

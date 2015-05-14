@@ -30,6 +30,8 @@ public class AuthController{
     private LobbyController theLobbyController;
     private OfflineController theOfflineController;
     
+    private GameModel theOfflineGameModel;
+    
     private Connection theConnection;
     private boolean streamsConnected;
     
@@ -165,7 +167,8 @@ public class AuthController{
             theOfflineDiff = new OfflineDifficultyView();
             theView.setVisible(false);
             theOfflineDiff.setVisible(true);
-            theOfflineController = new OfflineController(theOfflineDiff);
+            theOfflineGameModel = new GameModel(30, 30);
+            theOfflineController = new OfflineController(theOfflineDiff, theOfflineGameModel);
         }
     }
     

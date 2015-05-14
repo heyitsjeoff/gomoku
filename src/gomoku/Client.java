@@ -101,7 +101,6 @@ public class Client extends Thread implements Comparable<String>{
 				break;
                         case "STATS":
                                 String nameAndScores = theServerModel.getStats();
-                                System.out.println(nameAndScores);
                                 try {
                                     Thread.sleep(100);
                                     sendMessage("STATSRETURN "+nameAndScores);

@@ -74,7 +74,6 @@ public class LobbyModel {
         for(String line:temp){
             listOfStats.add(line);
         }
-        System.out.println(listOfStats);
     }
     
     public String getStats(String userid){
