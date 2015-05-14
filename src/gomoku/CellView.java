@@ -52,14 +52,14 @@ public class CellView extends javax.swing.JPanel {
 
         cellBTN = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(14, 14));
-        setMinimumSize(new java.awt.Dimension(14, 14));
-        setPreferredSize(new java.awt.Dimension(14, 14));
+        setMaximumSize(new java.awt.Dimension(24, 24));
+        setMinimumSize(new java.awt.Dimension(24, 24));
+        setPreferredSize(new java.awt.Dimension(24, 24));
 
         cellBTN.setBackground(new java.awt.Color(200, 200, 200));
-        cellBTN.setMaximumSize(new java.awt.Dimension(14, 14));
-        cellBTN.setMinimumSize(new java.awt.Dimension(14, 14));
-        cellBTN.setPreferredSize(new java.awt.Dimension(14, 14));
+        cellBTN.setMaximumSize(new java.awt.Dimension(24, 24));
+        cellBTN.setMinimumSize(new java.awt.Dimension(24, 24));
+        cellBTN.setPreferredSize(new java.awt.Dimension(24, 24));
         cellBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cellBTNActionPerformed(evt);
@@ -71,13 +71,13 @@ public class CellView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cellBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cellBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cellBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cellBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

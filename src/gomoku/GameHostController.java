@@ -36,6 +36,7 @@ public class GameHostController implements Runnable{
     private static final String REQUESTLIST = "REQUESTLIST;";
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
+    
 
     public GameHostController(GameModel theModel, GameView2 theView, LobbyController theLobbyController){
         try {

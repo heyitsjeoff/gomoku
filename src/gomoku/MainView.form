@@ -40,6 +40,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Gomoku"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -64,30 +65,28 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="passwordPF" max="32767" attributes="0"/>
-                      <Component id="usernameTF" max="32767" attributes="0"/>
-                      <Component id="createAccountBTN" alignment="0" max="32767" attributes="0"/>
-                      <Component id="loginBTN" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="anonBTN" alignment="0" max="32767" attributes="0"/>
-                      <Component id="aiBTN" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                  <Component id="createAccountBTN" max="32767" attributes="0"/>
+                  <Component id="usernameTF" alignment="0" max="32767" attributes="0"/>
+                  <Component id="passwordPF" alignment="0" max="32767" attributes="0"/>
+                  <Component id="loginBTN" alignment="0" max="32767" attributes="0"/>
+                  <Component id="anonBTN" alignment="0" pref="194" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="messageLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="consoleLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="aiBTN" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,11 +109,11 @@
               <Component id="anonBTN" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="aiBTN" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="consoleLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="messageLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

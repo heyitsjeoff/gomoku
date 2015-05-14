@@ -44,74 +44,77 @@ public class GameView2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         boardPANEL = new javax.swing.JPanel();
         sendBTN = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        gameFeedTA = new javax.swing.JTextArea();
+        gameFeedLABEL = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
-        setMaximumSize(new java.awt.Dimension(910, 910));
-        setMinimumSize(new java.awt.Dimension(910, 910));
-        setPreferredSize(new java.awt.Dimension(910, 910));
+        setMaximumSize(new java.awt.Dimension(975, 768));
+        setMinimumSize(new java.awt.Dimension(975, 768));
+        setPreferredSize(new java.awt.Dimension(975, 768));
+        setResizable(false);
 
         boardPANEL.setBackground(new java.awt.Color(40, 240, 240));
-        boardPANEL.setMaximumSize(new java.awt.Dimension(420, 420));
-        boardPANEL.setMinimumSize(new java.awt.Dimension(420, 420));
-        boardPANEL.setPreferredSize(new java.awt.Dimension(420, 420));
+        boardPANEL.setMaximumSize(new java.awt.Dimension(720, 720));
+        boardPANEL.setMinimumSize(new java.awt.Dimension(720, 720));
+        boardPANEL.setPreferredSize(new java.awt.Dimension(720, 720));
 
         javax.swing.GroupLayout boardPANELLayout = new javax.swing.GroupLayout(boardPANEL);
         boardPANEL.setLayout(boardPANELLayout);
         boardPANELLayout.setHorizontalGroup(
             boardPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
         boardPANELLayout.setVerticalGroup(
             boardPANELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
-        sendBTN.setBackground(new java.awt.Color(0, 255, 255));
         sendBTN.setFont(new java.awt.Font("Gotham Black", 0, 24)); // NOI18N
-        sendBTN.setForeground(new java.awt.Color(255, 255, 255));
         sendBTN.setText("Send Move");
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setBackground(new java.awt.Color(0, 255, 255));
-        jTextPane1.setBorder(null);
-        jTextPane1.setFont(new java.awt.Font("Gotham Bold", 0, 48)); // NOI18N
-        jTextPane1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextPane1.setText("  Gomoku");
-        jScrollPane1.setViewportView(jTextPane1);
+        gameFeedTA.setEditable(false);
+        gameFeedTA.setColumns(20);
+        gameFeedTA.setRows(5);
+        jScrollPane2.setViewportView(gameFeedTA);
+
+        gameFeedLABEL.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        gameFeedLABEL.setText("Game Feed");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sendBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boardPANEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -200,9 +203,10 @@ public class GameView2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPANEL;
+    private javax.swing.JLabel gameFeedLABEL;
+    private javax.swing.JTextArea gameFeedTA;
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton sendBTN;
     // End of variables declaration//GEN-END:variables
 }
