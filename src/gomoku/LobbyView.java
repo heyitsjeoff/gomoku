@@ -48,6 +48,7 @@ public class LobbyView extends javax.swing.JFrame {
         incomingList = new javax.swing.JList<String>();
         jScrollPane7 = new javax.swing.JScrollPane();
         outgoingRequests = new javax.swing.JList<String>();
+        opponentStatsBTN = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
 
@@ -63,14 +64,17 @@ public class LobbyView extends javax.swing.JFrame {
 
         myStatsTA.setEditable(false);
         myStatsTA.setColumns(14);
-        myStatsTA.setRows(5);
+        myStatsTA.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
+        myStatsTA.setRows(4);
+        myStatsTA.setMinimumSize(new java.awt.Dimension(4, 22));
         jScrollPane2.setViewportView(myStatsTA);
 
         jLabel2.setText("Selected Player's Stats");
 
         otherPlayersStatsTA.setEditable(false);
         otherPlayersStatsTA.setColumns(14);
-        otherPlayersStatsTA.setRows(5);
+        otherPlayersStatsTA.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
+        otherPlayersStatsTA.setRows(4);
         jScrollPane3.setViewportView(otherPlayersStatsTA);
 
         pendingLabel.setText("Pending Requests");
@@ -91,6 +95,8 @@ public class LobbyView extends javax.swing.JFrame {
         outgoingRequests.setFixedCellHeight(17);
         jScrollPane7.setViewportView(outgoingRequests);
 
+        opponentStatsBTN.setText("Get Stats");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,13 +107,18 @@ public class LobbyView extends javax.swing.JFrame {
                     .addComponent(onlineUsersLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(opponentStatsBTN)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -153,16 +164,16 @@ public class LobbyView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(outgoingLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(revokeBT)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3)))))
+                                .addComponent(jScrollPane3))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(revokeBT)
+                            .addComponent(opponentStatsBTN))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -170,6 +181,7 @@ public class LobbyView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     /**
      * @param args the command line arguments
      */
@@ -205,6 +217,10 @@ public class LobbyView extends javax.swing.JFrame {
                 //dlm = new DefaultListModel();
             }
         });
+    }
+    
+    public void opponentStatsListener(ActionListener listenerForOpponentStatsBTN){
+        opponentStatsBTN.addActionListener(listenerForOpponentStatsBTN);
     }
     
     public void challengePlayerListener(ActionListener listenerForChallengeBTN){
@@ -247,6 +263,18 @@ public class LobbyView extends javax.swing.JFrame {
         outgoingRequests.setModel(odlm);
     }
 
+    public void displayMyStats(String stats){
+        myStatsTA.append(stats+"\n");
+    }
+
+    public void clearOppStats(){
+        otherPlayersStatsTA.setText("");
+    }
+
+    public void displayOppStats(String stats){
+        otherPlayersStatsTA.append(stats+"\n");
+    }
+    
     //private static DefaultListModel dlm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptPendingBT;
@@ -264,6 +292,7 @@ public class LobbyView extends javax.swing.JFrame {
     private javax.swing.JTextArea myStatsTA;
     private javax.swing.JList<String> onlineList;
     private javax.swing.JLabel onlineUsersLabel;
+    private javax.swing.JButton opponentStatsBTN;
     private javax.swing.JTextArea otherPlayersStatsTA;
     private javax.swing.JLabel outgoingLabel;
     private javax.swing.JList<String> outgoingRequests;

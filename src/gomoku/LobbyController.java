@@ -36,6 +36,7 @@ public class LobbyController{
 
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
+        this.theView.opponentStatsListener(new StatListener());
         this.theView.challengePlayerListener(new ChallengeListener());
         this.theView.acceptListener(new AcceptListener());
         this.theView.rejectListener(new RejectListener());
@@ -165,6 +166,22 @@ public class LobbyController{
     
     public void storeStats(String fullList){
         this.theLobbyModel.storeInitStats(fullList);
+        displayMyStats(this.theLobbyModel.getStats(this.theLobbyModel.getUsername()));
+    }
+    
+    public void displayMyStats(String stats){
+        String[] temp = stats.split("\\s+");
+        this.theView.displayMyStats("WINS: \t"+temp[0]);
+        this.theView.displayMyStats("LOSSES: "+temp[1]);
+        this.theView.displayMyStats("DRAWS: \t"+temp[2]);
+    }
+    
+    public void displayOppStats(String stats){
+        String[] temp = stats.split("\\s+");
+        this.theView.clearOppStats();
+        this.theView.displayOppStats("WINS: \t"+temp[0]);
+        this.theView.displayOppStats("LOSSES: "+temp[1]);
+        this.theView.displayOppStats("DRAWS: \t"+temp[2]);
     }
     
     //Listeners
@@ -182,6 +199,14 @@ public class LobbyController{
         }
     }
     
+    class StatListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String oppStats = theLobbyModel.getStats(theView.getSelectedUsername());
+            displayOppStats(oppStats);
+        }
+    }
+        
     /**
      * Listener for the back button of Create Account view
      * hides the Create Account View and displays the main view

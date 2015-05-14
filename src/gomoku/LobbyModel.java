@@ -13,6 +13,7 @@ public class LobbyModel {
     public LobbyModel(){
         this.incomingList = new ArrayList<String>();
         this.outgoingList = new ArrayList<String>();
+        this.listOfStats = new ArrayList<String>();
     }
     
     public void addToIncomingList(String requestFrom){
@@ -69,6 +70,23 @@ public class LobbyModel {
     }
     
     public void storeInitStats(String list){
+        String[] temp = list.split(",");
+        for(String line:temp){
+            listOfStats.add(line);
+        }
+        System.out.println(listOfStats);
+    }
+    
+    public String getStats(String userid){
+        String wld = "";    //winslossesdraws
+        int usernameLen = userid.length();
+        for(String id:listOfStats){
+            String temp = id.substring(0,usernameLen);
+            if(temp.equals(userid)&&id.substring(usernameLen, usernameLen+1).equals(" ")){
+                wld=id.substring(usernameLen+1,id.length());
+            }
+        }
+        return wld;
         
     }
 }
