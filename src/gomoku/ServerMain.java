@@ -25,6 +25,7 @@ public class ServerMain {
         JFrame app = new JFrame("Gomoku Server Feed");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setContentPane(theView);
+        app.getContentPane().setBackground(GomokuVariables.blank);
         app.pack();
         app.setVisible(true);
     }//psvm

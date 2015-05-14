@@ -14,6 +14,8 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
+        this.getContentPane().setBackground(GomokuVariables.blank);
+        jMenuBar1.setBackground(GomokuVariables.blank);
     }
 
     /**

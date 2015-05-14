@@ -20,16 +20,13 @@ public class GameView2 extends javax.swing.JFrame {
     private Cell[][] theBoard;
     private Cell theCell;
     private int row, col;
-    private Color myColor = Color.blue;
-    private Color enemyColor = Color.orange;
-    private Color blank = Color.white;
     
     /**
      * Creates new form GameView2
      */
     public GameView2() {
         initComponents();
-        this.getContentPane().setBackground(blank);
+        this.getContentPane().setBackground(GomokuVariables.blank);
     }
 
     /**
@@ -193,12 +190,12 @@ public class GameView2 extends javax.swing.JFrame {
     
     public void clickCell(int row, int col){
         if(!theBoard[row][col].isClicked()){
-            theBoard[row][col].setBackground(myColor);
-            theBoard[row][col].setForeground(myColor);
+            theBoard[row][col].setBackground(GomokuVariables.myColor);
+            theBoard[row][col].setForeground(GomokuVariables.myColor);
         }
         else{
-            theBoard[row][col].setBackground(blank);
-            theBoard[row][col].setForeground(blank);
+            theBoard[row][col].setBackground(GomokuVariables.blank);
+            theBoard[row][col].setForeground(GomokuVariables.blank);
         }
     }
     

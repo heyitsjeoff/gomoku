@@ -51,4 +51,9 @@ public class GomokuVariables {
     public static final String THEYMADEAMOVEAT = "They made a move at row ";
     public static final String MYTURN = "My Turn";
     public static final String THEIRTURN = "Their Turn";
+    
+    //Strings for OfflineDiff
+    public static final String EASY = "Easy";
+    public static final String MEDIUM = "Medium";
+    public static final String HARD = "HARD";
 }

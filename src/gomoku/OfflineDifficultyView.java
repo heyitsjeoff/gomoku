@@ -13,16 +13,13 @@ import java.awt.event.ActionListener;
  * @author PLUCSCE
  */
 public class OfflineDifficultyView extends javax.swing.JFrame {
-
-    public static final String EASY = "Easy";
-    public static final String MEDIUM = "Medium";
-    public static final String HARD = "HARD";
     
     /**
      * Creates new form offlineDiff
      */
     public OfflineDifficultyView() {
         initComponents();
+        this.getContentPane().setBackground(GomokuVariables.blank);
     }
 
     /**
@@ -129,10 +126,10 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
     
     public double getDiff(){
         String selectedDiff =  (String) diffBOX.getSelectedItem();
-        if(selectedDiff.equals(EASY)){
+        if(selectedDiff.equals(GomokuVariables.EASY)){
             return AI.DIFFICULTY_EASY;
         }  
-        else if(selectedDiff.equals(MEDIUM)){
+        else if(selectedDiff.equals(GomokuVariables.MEDIUM)){
             return AI.DIFFICULTY_MEDIUM;
         }
         else{

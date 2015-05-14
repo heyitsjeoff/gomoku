@@ -17,6 +17,7 @@ public class LobbyView extends javax.swing.JFrame {
      */
     public LobbyView() {
         initComponents();
+        this.getContentPane().setBackground(GomokuVariables.blank);
     }
 
     /**

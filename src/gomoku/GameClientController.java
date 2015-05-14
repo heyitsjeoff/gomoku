@@ -23,13 +23,6 @@ public class GameClientController {
     
     private LobbyController theLobbyController;
     private ConnectionForGame theConnection;
-    public static final char MYTOKEN = '*';
-    public static final char THEIRTOKEN = '#';
-    private static final String REQUESTLIST = "REQUESTLIST;";
-    public static final String makeMove = "Please make a valid move";
-    public static final String gameOverWin =  "You have won!\n Returning to the lobby";
-    public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
-    public static final String YOULOSE = "YOULOSE";
     
     public GameClientController(GameView2 theView, GameModel theModel, ConnectionForGame theConnection, LobbyController theLobbyController){
         this.theView=theView;
@@ -53,12 +46,12 @@ public class GameClientController {
     }
     
     public void lose(){
-        JOptionPane.showMessageDialog(null, gameOverLose);
+        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverLose);
         returnToLobby();
     }
     
     public void win(){
-        JOptionPane.showMessageDialog(null, gameOverWin);
+        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverWin);
         returnToLobby();
     }
     
@@ -72,7 +65,7 @@ public class GameClientController {
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.setView(true);
-        this.theLobbyController.writeToConnection(REQUESTLIST);
+        this.theLobbyController.writeToConnection(GomokuVariables.REQUESTLIST);
     }
     
     public void drawBoard(){
@@ -85,11 +78,11 @@ public class GameClientController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(theModel.getCount()==0){
-                theView.append(makeMove);
+                theView.append(GomokuVariables.makeMove);
             }
             else{
-                if(theModel.gameOver(MYTOKEN)){
-                    theConnection.write(YOULOSE + " " + theModel.getNextMove());
+                if(theModel.gameOver(GomokuVariables.MYTOKEN)){
+                    theConnection.write(GomokuVariables.YOULOSE + " " + theModel.getNextMove());
                     myMove = false;
                     win();
                 }
@@ -110,8 +103,8 @@ public class GameClientController {
             Cell cell  = (Cell) e.getSource();
             if(theModel.getCount()==0 && myMove==true){
                 cell.click();
-                theModel.setCell(cell.getRow(), cell.getCol(), MYTOKEN);
-                theModel.setNextMove(cell.getRow(), cell.getCol(), MYTOKEN);
+                theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
+                theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.addToCount();
             }
             else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
