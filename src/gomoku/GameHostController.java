@@ -23,10 +23,6 @@ public class GameHostController implements Runnable{
     private ServerSocket serverSocket;
     private GameConnection theGameConnection;
     
-    private Color myColor = Color.blue;
-    private Color enemyColor = Color.orange;
-    private Color blank = Color.white;
-    
     private boolean myMove;
     
     public static final String makeMove = "Please make a valid move";
@@ -77,7 +73,7 @@ public class GameHostController implements Runnable{
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
         theModel.setCell(row, col, THEIRTOKEN);
-        theView.updateCell(row, col, enemyColor);
+        theView.updateCell(row, col, GomokuVariables.enemyColor);
         this.theModel.resetCount();
         //theView.updateGridView();
         theView.enableSend();
@@ -115,7 +111,7 @@ public class GameHostController implements Runnable{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(theModel.getCount()==0){
-                theView.appendMessage(makeMove);
+                theView.append(makeMove);
             }
             else{
                 if(theModel.gameOver(MYTOKEN)){

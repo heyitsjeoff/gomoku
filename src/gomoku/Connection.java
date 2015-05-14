@@ -27,22 +27,6 @@ public class Connection implements Runnable{
     private boolean inGame = false;
     private String username;
     
-    //Final values
-    public static final String logIn = "y";
-    public static final String notLogIn = "n";
-    public static final String uae = "user already exists";
-    public static final String created = "user created";
-    public static final String LIST = "LIST";
-    public static final String INVITETO = "INVITETO";
-    public static final String INVITEFROM = "INVITEFROM";
-    public static final String REQUESTLIST = "REQUESTLIST;";
-    public static final String ACCEPTFROM = "ACCEPTFROM";
-    public static final String WITHDRAWFROM = "WITHDRAWFROM";
-    public static final String DECLINETO = "DECLINETO";
-    public static final String DECLINEFROM = "DECLINEFROM";
-    public static final String nm = "NEXTMOVE";
-    public static final String STATSRETURN = "STATSRETURN";
-    
     //Controllers
     private AuthController theAuthController;
     private CreateAccountController theCreateAccountController;
@@ -68,16 +52,16 @@ public class Connection implements Runnable{
                     String messageFromInput = new String(byteArray, 0, count);
                     System.out.println(messageFromInput);
                     if(!inLobby){
-                        if(messageFromInput.equals(logIn)){
+                        if(messageFromInput.equals(GomokuVariables.logIn)){
                             theAuthController.login();
                             signedIn=true;
                             inLobby=true;
-                            write(REQUESTLIST);
+                            write(GomokuVariables.REQUESTLIST);
                         }
-                        else if(messageFromInput.equals(notLogIn)){
+                        else if(messageFromInput.equals(GomokuVariables.notLogIn)){
                             theAuthController.notLogin();
                         }
-                        else if(messageFromInput.equals(uae)){
+                        else if(messageFromInput.equals(GomokuVariables.uae)){
                             theCreateAccountController.userAlreadyExists();
                         }
                         else if(messageFromInput.equals("user created")){
@@ -87,20 +71,20 @@ public class Connection implements Runnable{
                     else{
                         String[] split = messageFromInput.split("\\s+");
                         String code = split[0];
-                        if(code.equals(LIST)){
+                        if(code.equals(GomokuVariables.LIST)){
                             StringBuilder sb = new StringBuilder();
                             for(int i=1; i<split.length-1; i++){
                                 sb.append(split[i] + " ");
                             }
                             theLobbyController.constructOnlineListDLM(sb.toString());
                         }
-                        else if(code.equals(INVITEFROM)){
+                        else if(code.equals(GomokuVariables.INVITEFROM)){
                             String username = split[1];
                             int semi = username.indexOf(";");
                             username = username.substring(0, semi);
                             theLobbyController.addToIncomingList(username);
                         }
-                        else if(code.equals(ACCEPTFROM)){
+                        else if(code.equals(GomokuVariables.ACCEPTFROM)){
                             String userAcceptingInvite = split[1];
                             String ipOfAcceptingUser = split[2];
                             int semi = ipOfAcceptingUser.indexOf(";");
@@ -111,19 +95,19 @@ public class Connection implements Runnable{
                             this.inGame=true;
                             this.theGameClientController = theLobbyController.getClientController();
                         }
-                        else if(code.equals(WITHDRAWFROM)){
+                        else if(code.equals(GomokuVariables.WITHDRAWFROM)){
                             String userWithdrawingInvite = split[1];
                             int semi = userWithdrawingInvite.indexOf(";");
                             userWithdrawingInvite = userWithdrawingInvite.substring(0, semi);
                             theLobbyController.removeFromIncomingList(userWithdrawingInvite);
                         }
-                        else if(code.equals(DECLINEFROM)){
+                        else if(code.equals(GomokuVariables.DECLINEFROM)){
                             String decline = split[1];
                             int semi = decline.indexOf(";");
                             decline = decline.substring(0, semi);
                             theLobbyController.removeFromOutgoingList(decline);
                         }
-                        else if(code.equals(STATSRETURN)){
+                        else if(code.equals(GomokuVariables.STATSRETURN)){
                             theLobbyController.storeStats(code.subSequence(11, code.length()).toString());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

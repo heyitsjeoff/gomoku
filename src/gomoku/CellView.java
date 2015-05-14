@@ -20,10 +20,6 @@ public class CellView extends javax.swing.JPanel {
     private boolean locked;
     private Color theColor;
     private boolean clicked;
-    
-    private Color myColor = Color.blue;
-    private Color enemyColor = Color.orange;
-    private Color blank = Color.white;
 
     /**
      * Creates new form CellView
@@ -37,7 +33,7 @@ public class CellView extends javax.swing.JPanel {
         this.row = row;
         this.col = col;
         this.locked = false;
-        this.theColor = Color.white;
+        this.theColor = GomokuVariables.blank;
         this.clicked = false;
     }
 
@@ -120,12 +116,12 @@ public class CellView extends javax.swing.JPanel {
     
     public void click(){
         if(this.clicked = true){
-            setCellColor(blank);
+            setCellColor(GomokuVariables.blank);
             this.clicked = false;
         }
         else{
             this.clicked = true;
-            setCellColor(myColor);
+            setCellColor(GomokuVariables.myColor);
         }
     }
     

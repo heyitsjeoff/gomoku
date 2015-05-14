@@ -77,7 +77,7 @@ public class GameView2 extends javax.swing.JFrame {
         sendBTN.setText("Send Move");
 
         gameFeedTA.setEditable(false);
-        gameFeedTA.setColumns(20);
+        gameFeedTA.setColumns(15);
         gameFeedTA.setRows(5);
         jScrollPane2.setViewportView(gameFeedTA);
 
@@ -94,8 +94,8 @@ public class GameView2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(gameFeedLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(sendBTN, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,8 +193,12 @@ public class GameView2 extends javax.swing.JFrame {
         sendBTN.setEnabled(false);
     }
     
-    public void appendMessage(String message){
+    public void appendTitle(String message){
         this.setTitle(message);
+    }
+    
+    public void append(String message){
+        this.gameFeedTA.append(message + "\n");
     }
 
     public void sendMoveListener(ActionListener listenerForSendBTN){

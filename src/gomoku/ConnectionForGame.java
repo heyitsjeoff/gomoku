@@ -5,7 +5,6 @@
  */
 package gomoku;
 
-import static gomoku.Connection.nm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

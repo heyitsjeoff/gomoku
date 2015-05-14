@@ -49,8 +49,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="gameFeedLABEL" min="-2" pref="166" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" alignment="0" pref="210" max="32767" attributes="0"/>
-                  <Component id="sendBTN" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="sendBTN" alignment="0" pref="210" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
@@ -123,7 +123,7 @@
         <Component class="javax.swing.JTextArea" name="gameFeedTA">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="columns" type="int" value="20"/>
+            <Property name="columns" type="int" value="15"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
         </Component>

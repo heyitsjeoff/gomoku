@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import java.awt.Color;
@@ -14,24 +9,20 @@ import javax.swing.JButton;
  * @author jeffthechef14
  */
 public class Cell extends JButton{
-    private int row, col;
+        private int row, col;
         private boolean locked;
         private Color theColor;
         private boolean clicked;
-    
-        private Color myColor = Color.blue;
-        private Color enemyColor = Color.orange;
-        private Color blank = Color.white;
     
         public Cell(int row, int col) {
             this.row = row;
             this.col = col;
             this.locked = false;
-            this.theColor = Color.white;
+            this.theColor = GomokuVariables.blank;
             this.clicked = false;
             //actual button
             this.setSize(28, 28);
-            this.setBackground(blank);
+            this.setBackground(GomokuVariables.blank);
         }
     
         public int getRow(){
@@ -56,11 +47,11 @@ public class Cell extends JButton{
         
         public void click(){
             if(this.clicked){
-                this.setBackground(blank);
+                this.setBackground(GomokuVariables.blank);
                 this.clicked = false;
             }
             else{
-                this.setBackground(myColor);
+                this.setBackground(GomokuVariables.myColor);
                 this.clicked = true;
             }
         }

@@ -21,10 +21,6 @@ public class GameClientController {
     private GameModel theModel;
     private boolean myMove;
     
-    private Color myColor = Color.blue;
-    private Color enemyColor = Color.orange;
-    private Color blank = Color.white;
-    
     private LobbyController theLobbyController;
     private ConnectionForGame theConnection;
     public static final char MYTOKEN = '*';
@@ -49,7 +45,7 @@ public class GameClientController {
         int row = Integer.parseInt(split[0]);
         int col = Integer.parseInt(split[1]);
         theModel.setCell(row, col, THEIRTOKEN);
-        theView.updateCell(row, col, enemyColor);
+        theView.updateCell(row, col, GomokuVariables.enemyColor);
         this.myMove = true;
         this.theModel.resetCount();
         //theView.updateGridView();
@@ -82,7 +78,7 @@ public class GameClientController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(theModel.getCount()==0){
-                theView.appendMessage(makeMove);
+                theView.append(makeMove);
             }
             else{
                 if(theModel.gameOver(MYTOKEN)){
