@@ -130,13 +130,13 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
     public double getDiff(){
         String selectedDiff =  (String) diffBOX.getSelectedItem();
         if(selectedDiff.equals(EASY)){
-            return 0.3;
+            return AI.DIFFICULTY_EASY;
         }  
         else if(selectedDiff.equals(MEDIUM)){
-            return 1.0;
+            return AI.DIFFICULTY_MEDIUM;
         }
         else{
-            return 2.0;
+            return AI.DIFFICULTY_HARD;
         }
     }
 

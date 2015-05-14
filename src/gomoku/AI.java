@@ -25,12 +25,12 @@ public class AI {
 		DIRECTION_DOWN
 	};
 	
-	public static final double DIFFICULTY_EASY = 0.3;
-	public static final double DIFFICULTY_MEDIUM = 1.0;
-	public static final double DIFFICULTY_HARD = 2.0;
+	public static final double DIFFICULTY_EASY = 1.0;
+	public static final double DIFFICULTY_MEDIUM = 1.5;
+	public static final double DIFFICULTY_HARD = 2.5;
 	
-	private static final int WEIGHT_OWN_4 = 100;
-	private static final int WEIGHT_OPPONENT_4 = 70;
+	private static final int WEIGHT_OWN_4 = 200;
+	private static final int WEIGHT_OPPONENT_4 = 150;
 	private static final int WEIGHT_OWN_3 = 30;
 	private static final int WEIGHT_OPPONENT_3 = 25;
 	private static final int WEIGHT_OWN_2 = 10;
@@ -88,7 +88,7 @@ public class AI {
 		ArrayList<Move> rankedMoves = new ArrayList<Move>();
 		for(Move[] row : moves){
 			for(Move m : row){
-				if(m.location.value == ' '){
+				if(m.location.value == '-'){
 					rankedMoves.add(m);
 				}
 			}
@@ -98,14 +98,27 @@ public class AI {
 		//Idea comes from conversation with Jim Lyon
 		rankedMoves.sort(null);
 		double totalWeight = 0;
-		for(Move m : rankedMoves){
+		//for(Move m : rankedMoves){
+		//	m.weight = Math.pow(m.weight, difficulty);
+		//	totalWeight += m.weight;
+		//}
+		for(int i = 0; i < 10; i++){
+			if(i >= rankedMoves.size())
+				break;
+			Move m = rankedMoves.get(i);
 			m.weight = Math.pow(m.weight, difficulty);
 			totalWeight += m.weight;
 		}
 		
+		
 		double moveChoice = Math.random() * totalWeight;
 		Move chosenMove = rankedMoves.get(0);
-		for(Move m : rankedMoves){
+		//for(Move m : rankedMoves){
+		for(int i = 0; i < 10; i++){
+			if(i >= rankedMoves.size()){
+				break;
+			}
+			Move m = rankedMoves.get(i);
 			moveChoice -= m.weight;
 			if(moveChoice <= 0.0){
 				chosenMove = m;
@@ -143,9 +156,9 @@ public class AI {
 		@Override
 		public int compareTo(Move other){
 			if(this.weight > other.weight)
-				return 1;
-			else if(this.weight < other.weight)
 				return -1;
+			else if(this.weight < other.weight)
+				return 1;
 			else return 0;
 		}
 	}
@@ -186,7 +199,7 @@ public void analyzeRow(int row, int col, int dir){
 		int myCells = 0;
 		int opponentCells = 0;
 		int weight = 0;
-		cells[1] = new Cell(row,col,board[row][col]);
+		cells[0] = new Cell(row,col,board[row][col]);
 		for(int i = 1; i < 5; i++){
 			cells[i] = getNextCell(cells[i-1],dir);
 			if(cells[i] == null){
