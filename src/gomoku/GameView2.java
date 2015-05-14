@@ -185,6 +185,10 @@ public class GameView2 extends javax.swing.JFrame {
         }
     }
     
+    public void disableCell(int row, int col){
+        theBoard[row][col].setEnabled(false);
+    }
+    
     public void enableSend(){
         sendBTN.setEnabled(true);
     }

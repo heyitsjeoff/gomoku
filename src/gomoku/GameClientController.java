@@ -62,6 +62,13 @@ public class GameClientController {
         returnToLobby();
     }
     
+    public void disableMyMoveCell(String move){
+        String[] split = move.split("\\s+");
+        int row = Integer.parseInt(split[1]);
+        int col = Integer.parseInt(split[2]);
+        theView.disableCell(row, col);
+    }
+    
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.setView(true);
@@ -90,6 +97,7 @@ public class GameClientController {
                     theConnection.write(theModel.getNextMove());
                     theView.disableSend();
                     myMove = false;
+                    disableMyMoveCell(theModel.getNextMove());
                 }
             }
         }        

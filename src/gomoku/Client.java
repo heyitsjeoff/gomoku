@@ -190,10 +190,10 @@ public class Client extends Thread implements Comparable<String>{
 	public String createAccount(String username, String password) {
 		User newUser = new User(username, password);
 		if (theServerController.checkUsers(newUser)) {
-			return "user already exists";
+			return GomokuVariables.uae;
 		} else {
 			theServerController.addUser(newUser);
-			return "user created";
+			return GomokuVariables.created;
 		}
 	}//createAccount
         

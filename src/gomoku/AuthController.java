@@ -33,25 +33,8 @@ public class AuthController{
     private Connection theConnection;
     private boolean streamsConnected;
     
-    private static final String logIn = "y";
-    private static final String notLogIn = "n";
-    private static final String uae = "user already exists";
     private String initialIP = "127.0.0.1";
     private boolean ipChanged = false;
-    
-    //final strings
-    private static final String dc = "Disconnected";
-    private static final String invalid = "Invalid Username or Password";
-    private static final String nuc = "New user created";
-    private static final String exception = "New exception found";
-    private static final String dataDialog = "is the current data of login";
-    private static final String cts = "Connected to server";
-    private static final String pdnm = "Passwords do not match";
-    private static final String ipChange = "IP changed to ";
-    private static final String PCI = "Please Configure IP";
-    private static final String complete = "Please complete both fields";
-    private static final String serverIP = "Server IP:";
-    private static final String anonString = "anon";
     
     /**
      * Creates the main controller for Gomoku
@@ -71,7 +54,6 @@ public class AuthController{
     
     public void login(){
         this.theLobbyModel = new LobbyModel();
-        //this.theLobbyModel = new LobbyModel();
         this.theLobbyModel.setUsername(theView.getUsername());
         this.theView.dispose();
         this.theLobbyView = new LobbyView();
@@ -80,7 +62,7 @@ public class AuthController{
     }
     
     public void notLogin(){
-        this.theView.appendMSG(invalid);
+        this.theView.appendMSG(GomokuVariables.invalid);
     }
     
     /**
@@ -109,7 +91,7 @@ public class AuthController{
      * @param number new IP
      */
     public void setIP(String number){
-        theView.appendMSG(ipChange + number);
+        theView.appendMSG(GomokuVariables.ipChange + number);
         this.ipChanged = true;
         this.theConnection.setIP(number);
     }//setIP
@@ -132,7 +114,7 @@ public class AuthController{
                 return true;
             }
             else{
-                theView.appendMSG(PCI);
+                theView.appendMSG(GomokuVariables.PCI);
             }
         }
         return false;
@@ -146,7 +128,7 @@ public class AuthController{
             this.theConnection.setUsername(enteredUsername);
         }
         else{
-            theView.appendMSG(complete);
+            theView.appendMSG(GomokuVariables.complete);
         }
     }
     
@@ -156,7 +138,7 @@ public class AuthController{
         theConnection.setCreateAccountController(caController);
         Random rand = new Random();
         int num = rand.nextInt(9000000) + 1000000;
-        String uAndP = anonString+Integer.toString(num);
+        String uAndP = GomokuVariables.anonString+Integer.toString(num);
         this.theConnection.setUsername(uAndP);
         caController.createAnon(uAndP);
     }
@@ -198,7 +180,7 @@ public class AuthController{
     class IPListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            String newIP = JOptionPane.showInputDialog(null, serverIP);
+            String newIP = JOptionPane.showInputDialog(null, GomokuVariables.serverIP);
             setIP(newIP);
             initialIP = newIP;
         }//actionPerformed

@@ -4,6 +4,20 @@ import java.awt.Color;
 
 public class GomokuVariables {
     
+    //Strings for AuthController
+    public static final String dc = "Disconnected";
+    public static final String invalid = "Invalid Username or Password";
+    public static final String nuc = "New user created";
+    public static final String exception = "New exception found";
+    public static final String dataDialog = "is the current data of login";
+    public static final String cts = "Connected to server";
+    public static final String pdnm = "Passwords do not match";
+    public static final String ipChange = "IP changed to ";
+    public static final String PCI = "Please Configure IP";
+    public static final String complete = "Please complete both fields";
+    public static final String serverIP = "Server IP:";
+    public static final String anonString = "anon";
+    
     //Strings for Client/Connection
     public static final String logIn = "y";
     public static final String notLogIn = "n";

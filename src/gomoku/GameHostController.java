@@ -101,6 +101,13 @@ public class GameHostController implements Runnable{
         returnToLobby();
     }
     
+    public void disableMyMoveCell(String move){
+        String[] split = move.split("\\s+");
+        int row = Integer.parseInt(split[1]);
+        int col = Integer.parseInt(split[2]);
+        theView.disableCell(row, col);
+    }
+    
     public void drawBoard(){
         CellListener listener = new CellListener();
         this.theView.drawBoard(this.theModel.getRows(), this.theModel.getCols(), listener);
@@ -123,6 +130,7 @@ public class GameHostController implements Runnable{
                     theGameConnection.write(theModel.getNextMove());
                     myMove = false;
                     theView.disableSend();
+                    disableMyMoveCell(theModel.getNextMove());
                 }
             }
         }        

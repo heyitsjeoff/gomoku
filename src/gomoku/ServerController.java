@@ -74,11 +74,11 @@ public class ServerController implements Runnable{
     public boolean authenticate(User check){
         if(theModel.authenticate(check)){
             theModel.addOnline(theClient);
-            this.theView.append("Login succesful for " + check);
+            this.theView.append("Login succesful for " + check.getUsername());
             return true;
         }
         else{
-            this.theView.append("login failed for " + check);
+            this.theView.append("login failed for " + check.getUsername());
             return false;
         }
     }//authenticate
