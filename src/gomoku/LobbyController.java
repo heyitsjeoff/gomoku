@@ -26,11 +26,7 @@ public class LobbyController{
     private DefaultListModel<String> idlm;
     private DefaultListModel<String> odlm;
     private Connection theConnection;
-    private int boardSize = 30;
-    //Strings
-    private String welcome = "Welcome to the Lobby ";
-    private String pendingRequest = "You have a pending request";
-    private String swar = "Someone withdrew a request";
+    private int boardSize = GomokuVariables.boardSize;
 
     private ConnectionForGame connectionToGame;
 
@@ -44,7 +40,7 @@ public class LobbyController{
         this.theConnection = theConnection;
         this.theConnection.setLobbyController(this);
         this.theLobbyModel = theLobbyModel;
-        this.theView.setTitle(welcome);
+        this.theView.setTitle(GomokuVariables.welcome);
         this.theConnection.write("STATS;");
     }
     
@@ -80,7 +76,7 @@ public class LobbyController{
     public void addToIncomingList(String username){
         theLobbyModel.addToIncomingList(username);
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
-        this.theView.setTitle(pendingRequest);
+        this.theView.setTitle(GomokuVariables.pendingRequest);
     }
     
     public void removeFromIncomingList(String username){

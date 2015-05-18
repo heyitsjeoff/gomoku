@@ -25,8 +25,6 @@ public class GameView extends JFrame{
     private int count;
     private JButton send;
     private GameModel theModel;
-    public static final char MYTOKEN = '*';
-    public static final char THEIRTOKEN = '#';
 
     public GameView(GameModel theModel){
         this.theModel = theModel;
@@ -85,11 +83,11 @@ public class GameView extends JFrame{
     }
     
     public void updateCellView(int i, int j){
-        if(theModel.getCell(i, j)==GameModel.MYTOKEN){
+        if(theModel.getCell(i, j)==GomokuVariables.MYTOKEN){
             square[i][j].setBackground(Color.blue);
             square[i][j].setEnabled(false);
         }
-        if(theModel.getCell(i, j)==GameModel.THEIRTOKEN){
+        if(theModel.getCell(i, j)==GomokuVariables.THEIRTOKEN){
             square[i][j].setBackground(Color.red);
             square[i][j].setEnabled(false);
         }
@@ -115,8 +113,8 @@ public class GameView extends JFrame{
             MyJButton button = (MyJButton) e.getSource();
             if(theModel.getCount()==0 && myMove == true) {
 		button.setBackground(Color.blue);
-                theModel.setCell(button.i, button.j, MYTOKEN);
-                theModel.setNextMove(button.i, button.j, MYTOKEN);
+                theModel.setCell(button.i, button.j, GomokuVariables.MYTOKEN);
+                theModel.setNextMove(button.i, button.j, GomokuVariables.MYTOKEN);
                 theModel.addToCount();
             }
             else if(theModel.getCount()==1 && button.getBackground().equals((Color.blue)) && myMove == true){

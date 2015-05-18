@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 public class Connection implements Runnable{
     //Variables for Connection
-    private String ip = "127.0.0.1";
-    private int port = 8080; //port of ip
+    private String ip = GomokuVariables.initialIP;
+    private int port = GomokuVariables.initialPort;
     private Socket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
@@ -33,10 +33,6 @@ public class Connection implements Runnable{
     private LobbyController theLobbyController;
     private GameHostController theGameHostController;
     private GameClientController theGameClientController;
-    
-    //Views
-    
-    //Models
     
     public Connection(String ip, int port){
         this.ip = ip;

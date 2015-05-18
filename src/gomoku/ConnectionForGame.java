@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  */
 public class ConnectionForGame implements Runnable {
     
-    private String ip = "127.0.0.1";
-    private int port = 8080; //port of ip
+    private String ip = GomokuVariables.initialIP;
+    private int port = GomokuVariables.initialPort;
     private Socket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
@@ -35,9 +35,7 @@ public class ConnectionForGame implements Runnable {
     private boolean inGame = false;
     private String username;
     
-    public static final String nm = "NEXTMOVE";
-    public static final String YOULOSE = "YOULOSE";
-    
+    //Controllers
     private AuthController aController;
     private CreateAccountController theCreateAccountController;
     private LobbyController theLobbyController;
@@ -59,10 +57,10 @@ public class ConnectionForGame implements Runnable {
                     String message = new String(byteArray, 0, count);
                     String[] split = message.split("\\s+");
                     String code = split[0];
-                    if(code.equals(nm)){
+                    if(code.equals(GomokuVariables.nm)){
                         this.theGameClientController.updateBoard(split[1] +" "+ split[2]);
                     }
-                    else if(code.equals(YOULOSE)){
+                    else if(code.equals(GomokuVariables.YOULOSE)){
                         this.theGameClientController.updateBoard(split[2] +" "+ split[3]);
                         this.theGameClientController.lose();
                     }

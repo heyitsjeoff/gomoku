@@ -23,9 +23,9 @@ public class Client extends Thread implements Comparable<String>{
     private byte[] byteArray = new byte[2000];
     private ServerController theServerController;
     private String connectionIP;
-    private String clientUsername;//string rep of clinet object in the form of user's username
-	private ServerModel theServerModel;
-	private boolean loggedIn;
+    private String clientUsername;
+    private ServerModel theServerModel;
+    private boolean loggedIn;
 
 	/**
 	 * Creates a client object and sets the streams

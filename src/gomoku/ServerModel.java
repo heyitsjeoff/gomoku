@@ -11,9 +11,6 @@ public class ServerModel {
     private ArrayList<User> userList;
     private ArrayList<Client> onlineUsers;
     private ArrayList<Score> theScore;
-    private String fileName = "data";
-    private String scoreFileName = "scoreData";
-    public static final String ude = "User does not exist";
     
     /**
      * creates a servermodel and imports stored users from data.txt
@@ -22,8 +19,8 @@ public class ServerModel {
         this.userList = new ArrayList<User>();
         this.onlineUsers = new ArrayList<Client>();
         this.theScore = new ArrayList<Score>();
-        readFile(fileName);
-        readScoreFile(scoreFileName);
+        readFile(GomokuVariables.fileName);
+        readScoreFile(GomokuVariables.scoreFileName);
     }
     
     //User methods
@@ -135,7 +132,7 @@ public class ServerModel {
     public void addUser(User newUser){
         userList.add(newUser);
         //terrible way to do this
-        writeFile(fileName);
+        writeFile(GomokuVariables.fileName);
     }//addUser
     
     //score methods
@@ -144,14 +141,14 @@ public class ServerModel {
         if(userScoreLocation(username)!=-1){
             int location = userScoreLocation(username);
             this.theScore.get(location).manipulateScore(option);
-            writeScoreFile(scoreFileName);
+            writeScoreFile(GomokuVariables.scoreFileName);
         }
         else{
             Score newScore = new Score();
             newScore.setUsername(username);
             this.theScore.add(newScore);
             this.theScore.get(this.theScore.size()-1).manipulateScore(option);
-            writeScoreFile(scoreFileName);
+            writeScoreFile(GomokuVariables.scoreFileName);
         }
     }
     

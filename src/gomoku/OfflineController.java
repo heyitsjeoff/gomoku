@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gomoku;
 
 import java.awt.Color;
@@ -22,8 +16,8 @@ public class OfflineController {
     private GameView2 theView;
     private GameModel theModel;
     private AuthController theAuthController;
-    private int row = 30;
-    private int col = 30;
+    private int row = GomokuVariables.row;
+    private int col = GomokuVariables.col;
     
     public OfflineController(OfflineDifficultyView theDiffView, GameModel theModel){
         this.theDiffView = theDiffView;
@@ -46,12 +40,12 @@ public class OfflineController {
     }
     
     public void win(){
-        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverWin);
+        JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverWin);
         returnToMainView();
     }
     
     public void lose(){
-        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverLose);
+        JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverLose);
         returnToMainView();
     }
     

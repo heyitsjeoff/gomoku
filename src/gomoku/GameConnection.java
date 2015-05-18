@@ -22,9 +22,6 @@ public class GameConnection extends Thread{
     private BufferedReader br;
     private byte[] byteArray = new byte[2000];
     private String connectionIP;
-   
-    public static final String YOULOSE = "YOULOSE";
-    public static final String nm = "NEXTMOVE";
     
     public GameConnection(Socket player2, GameHostController theGameHostController) throws IOException{
         this.player2 = player2;
@@ -45,11 +42,11 @@ public class GameConnection extends Thread{
                     message = new String(byteArray, 0, count);
                     String[] split = message.split("\\s+");
                     String code = split[0];
-                    if(code.equals(nm)){
+                    if(code.equals(GomokuVariables.nm)){
                         String move = split[1] + " " + split[2];
                         theGameHostController.updateBoard(split[1] +" "+ split[2]);
                     }
-                    else if(code.equals(YOULOSE)){
+                    else if(code.equals(GomokuVariables.YOULOSE)){
                         theGameHostController.updateBoard(split[2] +" "+ split[3]);
                         this.theGameHostController.lose();
                     }

@@ -34,10 +34,9 @@ public class AuthController{
     
     private Connection theConnection;
     private boolean streamsConnected;
-    
-    private String initialIP = "127.0.0.1";
-    private int initialPort = 8080;
     private boolean ipChanged = false;
+    private String ip = GomokuVariables.initialIP;
+    private int port = GomokuVariables.initialPort;
     
     /**
      * Creates the main controller for Gomoku
@@ -53,7 +52,7 @@ public class AuthController{
         this.theView.anonListener(new AnonListener());
         this.theView.offlineListener(new OfflineListener());
         this.theView.changePortListener(new PortListener());
-        theConnection = new Connection(initialIP, initialPort);
+        theConnection = new Connection(ip, port);
     }
     
     public void login(){
@@ -192,7 +191,7 @@ public class AuthController{
         public void actionPerformed(ActionEvent e) {
             String newIP = JOptionPane.showInputDialog(null, GomokuVariables.serverIP);
             setIP(newIP);
-            initialIP = newIP;
+            ip = newIP;
         }//actionPerformed
     }//IPListener
     
@@ -202,7 +201,7 @@ public class AuthController{
             String newPort = JOptionPane.showInputDialog(null, GomokuVariables.portNumber);
             if(newPort!=null){
                 setPort(Integer.parseInt(newPort));
-                initialPort = Integer.parseInt(newPort);
+                port = Integer.parseInt(newPort);
             }
         }//actionPerformed
     }//IPListener

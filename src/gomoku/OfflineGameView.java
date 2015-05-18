@@ -80,11 +80,11 @@ public class OfflineGameView extends JFrame{
     }
     
     public void updateCellView(int i, int j){
-        if(theModel.getCell(i, j)==GameModel.MYTOKEN){
+        if(theModel.getCell(i, j)==GomokuVariables.MYTOKEN){
             square[i][j].setBackground(Color.blue);
             square[i][j].setEnabled(false);
         }
-        if(theModel.getCell(i, j)==GameModel.THEIRTOKEN){
+        if(theModel.getCell(i, j)==GomokuVariables.THEIRTOKEN){
             square[i][j].setBackground(Color.red);
             square[i][j].setEnabled(false);
         }

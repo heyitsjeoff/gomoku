@@ -6,7 +6,6 @@ public class User {
     private int key;
     private String theCode = "ultron";
     private Score theScore;
-    //private int wins, losses, ties, games;
     
     /**
      * creates a user with username and encrypted password
@@ -21,7 +20,7 @@ public class User {
     }
     
     /**
-     * creates a user with username and already encryped password
+     * creates a user with username and already encrypted password
      * used for importing from text file
      * @param username
      * @param password

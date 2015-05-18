@@ -12,11 +12,6 @@ public class GameModel {
     private String nextMove;
     private int count = 0;
     
-    public static final String nm = "NEXTMOVE";
-    
-    public static final char MYTOKEN = '*';
-    public static final char THEIRTOKEN = '#';
-    
     public GameModel(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
@@ -138,7 +133,7 @@ public class GameModel {
     
     public void setNextMove(int row, int col, char token){
         StringBuilder sb = new StringBuilder();
-        sb.append(nm + " " + row + " " + col + " " + token);
+        sb.append(GomokuVariables.nm + " " + row + " " + col + " " + token);
         this.nextMove = sb.toString();
     }
     
