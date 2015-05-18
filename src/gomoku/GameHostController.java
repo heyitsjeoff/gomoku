@@ -93,6 +93,11 @@ public class GameHostController implements Runnable{
         returnToLobby();
     }
     
+    public void tie(){
+        JOptionPane.showMessageDialog(null, GomokuVariables.gameOverTie);
+        returnToLobby();
+    }
+    
     public void disableMyMoveCell(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[1]);
@@ -118,6 +123,11 @@ public class GameHostController implements Runnable{
                     myMove = false;
                     win();
                 }
+                else if(theModel.boardFull()){
+                    theGameConnection.write(GomokuVariables.TIE + " " + theModel.getNextMove());
+                    myMove = false;
+                    tie();
+                }
                 else{
                     theGameConnection.write(theModel.getNextMove());
                     myMove = false;
@@ -138,11 +148,13 @@ public class GameHostController implements Runnable{
                 theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.addToCount();
+                theModel.addToTokenCount();
             }
             else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
                 cell.click();
                 theModel.setCell(cell.getRow(), cell.getCol(), ' ');
                 theModel.subtractFromCount();
+                theModel.subtractFromTokenCount();
             }
         }        
     }

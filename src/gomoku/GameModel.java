@@ -11,6 +11,8 @@ public class GameModel {
     private int cols;
     private String nextMove;
     private int count = 0;
+    private int tokenCount = 0;
+    private int maxCount;
     
     public GameModel(int rows, int cols){
         this.rows = rows;
@@ -21,6 +23,7 @@ public class GameModel {
                 grid[i][j]='-';
             }
         }
+        maxCount = rows*cols;
     }
     
     
@@ -50,6 +53,21 @@ public class GameModel {
             return true;
         }
         else if(downDiag(theToken)){
+            return true;
+        }
+        return false;
+    }
+    
+    public void addToTokenCount(){
+        tokenCount++;
+    }
+    
+    public void subtractFromTokenCount(){
+        tokenCount--;
+    }
+    
+    public boolean boardFull(){
+        if(tokenCount==maxCount){
             return true;
         }
         return false;

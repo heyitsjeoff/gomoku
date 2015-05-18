@@ -50,6 +50,10 @@ public class GameConnection extends Thread{
                         theGameHostController.updateBoard(split[2] +" "+ split[3]);
                         this.theGameHostController.lose();
                     }
+                    else if(code.equals(GomokuVariables.TIE)){
+                        this.theGameHostController.updateBoard(split[2] +" "+ split[3]);
+                        this.theGameHostController.tie();
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(GameConnection.class.getName()).log(Level.SEVERE, null, ex);

@@ -64,6 +64,10 @@ public class ConnectionForGame implements Runnable {
                         this.theGameClientController.updateBoard(split[2] +" "+ split[3]);
                         this.theGameClientController.lose();
                     }
+                    else if(code.equals(GomokuVariables.TIE)){
+                        this.theGameClientController.updateBoard(split[2] +" "+ split[3]);
+                        this.theGameClientController.tie();
+                    }
                 }//connected
                 else {
                     connected = false;

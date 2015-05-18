@@ -58,9 +58,11 @@ public class GomokuVariables {
     public static final int col = 30;
     public static final String nm = "NEXTMOVE";
     public static final String YOULOSE = "YOULOSE";
+    public static final String TIE = "TIE";
     public static final String makeMove = "Please make a valid move";
     public static final String gameOverWin =  "You have won!\n Returning to the lobby";
     public static final String gameOverLose =  "You have lost!\n Returning to the lobby";
+    public static final String gameOverTie = "The game has ended in a tie.\n Returning to the lobby";
     public static final String oGameOverWin =  "You have defeated Ultron!\n Returning to the main menu";
     public static final String oGameOverLose =  "You have been defeated by Ultron!\n Returning to the main menu";
     public static final char MYTOKEN = '*';
