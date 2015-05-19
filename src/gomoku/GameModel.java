@@ -60,10 +60,12 @@ public class GameModel {
     
     public void addToTokenCount(){
         tokenCount++;
+        System.out.println(tokenCount);
     }
     
     public void subtractFromTokenCount(){
         tokenCount--;
+        System.out.println(tokenCount);
     }
     
     public boolean boardFull(){

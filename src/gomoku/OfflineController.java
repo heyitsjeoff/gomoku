@@ -49,6 +49,11 @@ public class OfflineController {
         returnToMainView();
     }
     
+    public void tie(){
+        JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverTie);
+        returnToMainView();
+    }
+    
     public void returnToMainView(){
         MainView theMainView = new MainView();
         AuthController theAuthController = new AuthController(theMainView);
@@ -66,8 +71,11 @@ public class OfflineController {
     class MoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(theModel.gameOver('*')){
+            if(theModel.gameOver(GomokuVariables.MYTOKEN)){
                 win();
+            }
+            else if(theModel.boardFull()){
+                tie();
             }
             else{
                 if(theModel.getCount()==0){
@@ -80,8 +88,12 @@ public class OfflineController {
                     int col = theMoveCoordinates[1];
                     theModel.setCell(row, col, GomokuVariables.THEIRTOKEN);
                     theView.updateCell(row, col, GomokuVariables.enemyColor);
+                    theModel.addToTokenCount();
                     if(theModel.gameOver(GomokuVariables.THEIRTOKEN)){
                         lose();
+                    }
+                    else if(theModel.boardFull()){
+                        tie();
                     }
                     else
                         theModel.resetCount();
@@ -99,11 +111,13 @@ public class OfflineController {
                 theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
                 theModel.addToCount();
+                theModel.addToTokenCount();
             }
             else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue))){
                 cell.click();
                 theModel.setCell(cell.getRow(), cell.getCol(), ' ');
                 theModel.subtractFromCount();
+                theModel.subtractFromTokenCount();
             }
         }        
     }

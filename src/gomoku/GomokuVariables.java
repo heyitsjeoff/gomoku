@@ -65,6 +65,7 @@ public class GomokuVariables {
     public static final String gameOverTie = "The game has ended in a tie.\n Returning to the lobby";
     public static final String oGameOverWin =  "You have defeated Ultron!\n Returning to the main menu";
     public static final String oGameOverLose =  "You have been defeated by Ultron!\n Returning to the main menu";
+    public static final String oGameOverTie = "The game has ended in a tie.\n Returning th the main menu";
     public static final char MYTOKEN = '*';
     public static final char THEIRTOKEN = '#';
     public static final String IMADEAMOVEAT = "I made a move at row ";
