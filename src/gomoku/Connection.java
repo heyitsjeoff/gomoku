@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Connection implements Runnable{
     //Variables for Connection
     private String ip = GomokuVariables.initialIP;
@@ -34,6 +33,11 @@ public class Connection implements Runnable{
     private GameHostController theGameHostController;
     private GameClientController theGameClientController;
     
+    /**
+     * makes a new connection object
+     * @param ip ip to be used for the connection
+     * @param port port to be used for the connection
+     */
     public Connection(String ip, int port){
         this.ip = ip;
         this.port = port;
@@ -117,26 +121,50 @@ public class Connection implements Runnable{
         }
     }
     
+    /**
+     * sets the username of the connection
+     * @param username
+     */
     public void setUsername(String username){
         this.username = username;
     }
     
+    /**
+     * gets the username of the connection
+     * @return username
+     */
     public String getUsername(){
         return this.username;
     }
     
+    /**
+     * creates a reference to the authcontroller
+     * @param theAuthController the authcontroller to be used
+     */
     public void setAuthController(AuthController theAuthController){
         this.theAuthController = theAuthController;
     }
     
+    /**
+     * creates a reference to the createAccountController
+     * @param theCreateAccountController the createAccountController to be used
+     */
     public void setCreateAccountController(CreateAccountController theCreateAccountController){
         this.theCreateAccountController = theCreateAccountController;
     }
     
+    /**
+     * creates a reference to the lobbyController
+     * @param theLobbyController the lobbyController to be used
+     */
     public void setLobbyController(LobbyController theLobbyController){
         this.theLobbyController= theLobbyController;
     }
     
+    /**
+     * sends byte array of a string to the outputstream
+     * @param message message being sent
+     */
     public void write(String message){
         byte[] buffOut;
         try {
@@ -148,11 +176,17 @@ public class Connection implements Runnable{
         }
     }
     
+    /**
+     * starts the tread
+     */
     public void startThread(){
         this.worker = new Thread(this);
         worker.start();
     }
     
+    /**
+     * connects to the server
+     */
     public void connect(){
         try {
             this.socket = new Socket(InetAddress.getByName(ip), port);
@@ -164,10 +198,18 @@ public class Connection implements Runnable{
         }
     }
     
+    /**
+     *  sets the ip to be used for connecting to the server
+     * @param number ip of the server
+     */
     public void setIP(String number){
         this.ip = number;
     }
     
+    /**
+     * sets the port to be used for connecting to the server
+     * @param number port of the server
+     */
     public void setPort(int number){
         this.port = number;
     }

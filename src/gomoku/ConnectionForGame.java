@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import java.io.BufferedReader;
@@ -15,12 +10,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author jeffthechef14
- */
 public class ConnectionForGame implements Runnable {
-    
     private String ip = GomokuVariables.initialIP;
     private int port = GomokuVariables.initialPort;
     private Socket socket;
@@ -42,11 +32,17 @@ public class ConnectionForGame implements Runnable {
     private GameHostController theGameController;
     private GameClientController theGameClientController;
     
-    
+    /**
+     * creates a connectionForGame object for the client to the host
+     * @param ip ip of host
+     */
     public ConnectionForGame(String ip){
         this.ip = ip;
     }
 
+    /**
+     * handles the messages sent in and acts on the controller
+     */
     @Override
     public void run() {
         boolean connected = true;
@@ -78,6 +74,10 @@ public class ConnectionForGame implements Runnable {
         }
     }
     
+    /**
+     * sends a byte array of a string to the output stream
+     * @param message string being sent
+     */
     public void write(String message){
         byte[] buffOut;
         try {
@@ -89,15 +89,25 @@ public class ConnectionForGame implements Runnable {
         }
     }
     
+    /**
+     * 
+     * @param theGameClientController
+     */
     public void setGameClientController(GameClientController theGameClientController){
         this.theGameClientController = theGameClientController;
     }
     
+    /**
+     * starts the thread
+     */
     public void startThread(){
         this.worker = new Thread(this);
         worker.start();
     }
     
+    /**
+     * sets the streams for the host
+     */
     public void connect(){
         try {
             this.socket = new Socket(InetAddress.getByName(ip), port);
@@ -109,6 +119,9 @@ public class ConnectionForGame implements Runnable {
         }
     }
     
+    /**
+     * disconnects from the host
+     */
     public void disconnect(){
         try {
             this.inputStream.close();
@@ -120,10 +133,18 @@ public class ConnectionForGame implements Runnable {
         
     }
     
+    /**
+     * sets the ip to connect to the hose
+     * @param number the ip number
+     */
     public void setIP(String number){
         this.ip = number;
     }
     
+    /**
+     * sets the port number to connect to the host
+     * @param number the port number
+     */
     public void setPort(int number){
         this.port = number;
     }
