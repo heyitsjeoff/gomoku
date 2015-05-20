@@ -3,10 +3,6 @@ package gomoku;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class MainView extends javax.swing.JFrame {
 
     /**
@@ -215,13 +211,17 @@ public class MainView extends javax.swing.JFrame {
         loginBTN.addActionListener(listenerForLoginBTN);
     }
     
+    /**
+     * adds a listener for the offline button
+     * @param listenerForOfflineBTN listener being added
+     */
     public void offlineListener(ActionListener listenerForOfflineBTN){
         aiBTN.addActionListener(listenerForOfflineBTN);
     }
     
     /**
      * listener for the createaccount btn
-     * @param listenerForCABTN
+     * @param listenerForCABTN listener being added
      */
     public void createAccountListener(ActionListener listenerForCABTN){
         createAccountBTN.addActionListener(listenerForCABTN);
@@ -229,23 +229,31 @@ public class MainView extends javax.swing.JFrame {
     
     /**
      * listener for the changeIP menu item
-     * @param ipListener
+     * @param ipListener listener being added
      */
     public void changeIPListener(ActionListener ipListener){
         ipMI.addActionListener(ipListener);
     }
     
+    /**
+     * adds an ActionListener to the change port menu item
+     * @param portListener listener being added
+     */
     public void changePortListener(ActionListener portListener){
         changePortMI.addActionListener(portListener);
     }
     
+    /**
+     * adds an actionListener for the anon button
+     * @param anonListener listener being added
+     */
     public void anonListener(ActionListener anonListener){
         anonBTN.addActionListener(anonListener);
     }
     
     /**
-     * listener for a KeyEvent
-     * @param listen 
+     * adds an actionlistener keyeven to the password field
+     * @param listen listener being added
      */
     void passwordPFListener(KeyListener listen){
         passwordPF.addKeyListener(listen);

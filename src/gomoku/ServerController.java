@@ -11,10 +11,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class ServerController implements Runnable{
     
     private Thread worker;
@@ -28,8 +24,9 @@ public class ServerController implements Runnable{
     
     /**
      * Creates a ServerController object 
-     * @param theModel
-     * @param theView
+     * @param theModel model for the server
+     * @param theView view for the server
+     * @param theServerPort port number for the server
      */
     public ServerController(ServerModel theModel, ServerGUI theView, int theServerPort){
         try {
@@ -84,9 +81,12 @@ public class ServerController implements Runnable{
         }
     }//authenticate
     
+    /**
+     * updates a user's list
+     * @param message list of the online users in string form
+     */
     public void updateAllOnlineList(String message){
         theModel.updateAllOnlineList(message);
-        //this.theClient.sendMessage("REQUESTLIST");
     }
     
     /**
@@ -100,7 +100,7 @@ public class ServerController implements Runnable{
 	
     /**
      * checks to see if a user with a specific username exists
-     * @param check user in question
+     * @param username
      * @return true if username is being used
      */
     public boolean checkUsers(String username){

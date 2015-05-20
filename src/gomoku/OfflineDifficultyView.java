@@ -1,17 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gomoku;
 
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author PLUCSCE
- */
 public class OfflineDifficultyView extends javax.swing.JFrame {
     
     /**
@@ -120,10 +110,18 @@ public class OfflineDifficultyView extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * adds an actionLIstener to the start button
+     * @param listenerForStartBTN listener being added
+     */
     public void startListener(ActionListener listenerForStartBTN){
         startBTN.addActionListener(listenerForStartBTN);
     }
     
+    /**
+     * gets the difficulty selected
+     * @return the difficulty selected for the AI
+     */
     public double getDiff(){
         String selectedDiff =  (String) diffBOX.getSelectedItem();
         if(selectedDiff.equals(GomokuVariables.EASY)){

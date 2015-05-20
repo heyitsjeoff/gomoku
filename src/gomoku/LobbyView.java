@@ -1,15 +1,8 @@
-/*
- * Source: https://www.youtube.com/watch?v=oA_kcVaJQ3E
- */
 package gomoku;
 
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class LobbyView extends javax.swing.JFrame {
 
     /**
@@ -218,58 +211,113 @@ public class LobbyView extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * adds an actionLIstener to the stats button
+     * @param listenerForOpponentStatsBTN actionlistener being added
+     */
     public void opponentStatsListener(ActionListener listenerForOpponentStatsBTN){
         opponentStatsBTN.addActionListener(listenerForOpponentStatsBTN);
     }
     
+    /**
+     * adds an actionLIstener to the challenge button
+     * @param listenerForChallengeBTN actionLIstener being added
+     */
     public void challengePlayerListener(ActionListener listenerForChallengeBTN){
         challengeBTN.addActionListener(listenerForChallengeBTN);
     }
     
+    /**
+     * adds an actionListener to the accept buttn
+     * @param listenerForAcceptBTN actionLIstener being added
+     */
     public void acceptListener(ActionListener listenerForAcceptBTN){
         acceptPendingBT.addActionListener(listenerForAcceptBTN);
     }
     
+    /**
+     * adds an actionListener to the reject button
+     * @param listenerForRejectBTN actionListener being added
+     */
     public void rejectListener(ActionListener listenerForRejectBTN){
         declinePendingBT.addActionListener(listenerForRejectBTN);
     }
     
+    /**
+     * adds an actionLIstner to the withdraw buttn
+     * @param listenerForWithdrawBTN actionLIstener being added
+     */
     public void withdrawListener(ActionListener listenerForWithdrawBTN){
         revokeBT.addActionListener(listenerForWithdrawBTN);
     }
     
+    /**
+     * gets the username of the selected user in the onlineList
+     * @return username of selected value
+     */
     public String getSelectedUsername(){
         return onlineList.getSelectedValue();
     }
     
+    /**
+     * gets the username of the selected user in the incomingList
+     * @return username of selected value
+     */
     public String getIncomingUsername(){
         return incomingList.getSelectedValue();
     }
     
+    /**
+     * gets the username of the selected user in the outgoingList
+     * @return username of the select value
+     */
     public String getOutgoingUsername(){
         return outgoingRequests.getSelectedValue();
     }
     
+    /**
+     * updates the online list
+     * @param dlm default list model for the online list
+     */
     public void updateOnlineList(DefaultListModel<String> dlm){
         onlineList.setModel(dlm);
     }
     
+    /**
+     * updates the incoming list
+     * @param idlm defualt list model of the incoming list
+     */
     public void updateIncomingList(DefaultListModel<String> idlm){
         incomingList.setModel(idlm);
     }
     
+    /**
+     * updates the outgoing list
+     * @param odlm default list model of the outgoing list
+     */
     public void updateOutgoingList(DefaultListModel<String> odlm){
         outgoingRequests.setModel(odlm);
     }
 
+    /**
+     * displays the stats of a player
+     * @param stats string representation of the stats
+     */
     public void displayMyStats(String stats){
         myStatsTA.append(stats+"\n");
     }
 
+    /**
+     * clears the opponent stats view
+     */
     public void clearOppStats(){
         otherPlayersStatsTA.setText("");
     }
 
+    /**
+     * displays the stats of an opponent
+     * @param stats string representation of the stats of the opponent
+     */
     public void displayOppStats(String stats){
         otherPlayersStatsTA.append(stats+"\n");
     }

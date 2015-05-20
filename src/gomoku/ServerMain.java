@@ -8,8 +8,8 @@ public class ServerMain {
     private static int initialPort = 8080;
 
     /**
-     *
-     * @param args
+     * sets the port number for the server
+     * @param args port number
      * @throws IOException
      */
     public static void main(String[] args) throws IOException{

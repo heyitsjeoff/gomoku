@@ -3,10 +3,6 @@ package gomoku;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class ServerGUI extends javax.swing.JPanel {
 
     /**
@@ -67,6 +63,10 @@ public class ServerGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * appends a string to the text area
+     * @param text string being appended
+     */
     public void append(String text){
         this.feedTA.append(text+"\n");
     }

@@ -5,10 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author PLUCSCE
- */
 public class OfflineController {
     
     private OfflineDifficultyView theDiffView;
@@ -19,12 +15,20 @@ public class OfflineController {
     private int row = GomokuVariables.row;
     private int col = GomokuVariables.col;
     
+    /**
+     * creates the controller for offline
+     * @param theDiffView difficulty view
+     * @param theModel game model
+     */
     public OfflineController(OfflineDifficultyView theDiffView, GameModel theModel){
         this.theDiffView = theDiffView;
         this.theModel = theModel;
         this.theDiffView.startListener(new StartListener());
     }
     
+    /**
+     * ActionListener for the start button
+     */
     class StartListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -39,21 +43,33 @@ public class OfflineController {
         }
     }
     
+    /**
+     * win popup and returns to the main view
+     */
     public void win(){
         JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverWin);
         returnToMainView();
     }
     
+    /**
+     * lose popup and returns to the main view
+     */
     public void lose(){
         JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverLose);
         returnToMainView();
     }
     
+    /**
+     * tie popup and returns to the main view
+     */
     public void tie(){
         JOptionPane.showMessageDialog(null, GomokuVariables.oGameOverTie);
         returnToMainView();
     }
     
+    /**
+     * returns to the main view gui
+     */
     public void returnToMainView(){
         MainView theMainView = new MainView();
         AuthController theAuthController = new AuthController(theMainView);
@@ -61,6 +77,10 @@ public class OfflineController {
         theMainView.setVisible(true);
     }
     
+    /**
+     * disables the move made by the user
+     * @param move locatiton of the cell
+     */
     public void disableMyMoveCell(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[1]);
@@ -68,6 +88,10 @@ public class OfflineController {
         theView.disableCell(row, col);
     }
     
+    /**
+     * ActionListener for the cell
+     * calls the AI to make a move
+     */
     class MoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -102,6 +126,9 @@ public class OfflineController {
         }
     }
     
+    /**
+     * ActionListener for the cells
+     */
     class CellListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

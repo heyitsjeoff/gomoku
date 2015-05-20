@@ -13,7 +13,7 @@ public class ServerModel {
     private ArrayList<Score> theScore;
     
     /**
-     * creates a servermodel and imports stored users from data.txt
+     * creates a servermodel and imports stored users and scores
      */
     public ServerModel(){
         this.userList = new ArrayList<User>();
@@ -22,8 +22,6 @@ public class ServerModel {
         readFile(GomokuVariables.fileName);
         readScoreFile(GomokuVariables.scoreFileName);
     }
-    
-    //User methods
     
     /**
      * gets username of User object
@@ -43,12 +41,20 @@ public class ServerModel {
         return theUser.getPassword();
     }
     
+    /**
+     * sends a string of the online users to the output stream
+     * @param message string of the online users
+     */
     public void updateAllOnlineList(String message){
         for(int i=0; i<this.onlineUsers.size(); i++){
             onlineUsers.get(i).sendMessage(message);
         }
     }
     
+    /**
+     * gets the stats of a player
+     * @return string representation of the stats
+     */
     public String getStats(){
         String stats = "";
         for(int i=0; i<theScore.size();i++){
@@ -68,6 +74,10 @@ public class ServerModel {
         return onlineUsers;
     }
     
+    /**
+     * returns a string representaiton of the online users
+     * @return string of online users
+     */
     public String getOnlineUsernames(){
         StringBuilder sb = new StringBuilder();
         for(int i =0; i<this.onlineUsers.size(); i++){
@@ -96,7 +106,7 @@ public class ServerModel {
 
     /**
      * checks if a user with a specific username exists
-     * @param check user in question
+     * @param username
      * @return true if username is already used
      */
     public boolean userExists(String username){
@@ -135,8 +145,11 @@ public class ServerModel {
         writeFile(GomokuVariables.fileName);
     }//addUser
     
-    //score methods
-    
+    /**
+     * increments a score based on the option
+     * @param username username of the player 
+     * @param option the option for which part of a score to modify
+     */  
     public void updateUserScore(String username, int option){
         if(userScoreLocation(username)!=-1){
             int location = userScoreLocation(username);
@@ -152,6 +165,11 @@ public class ServerModel {
         }
     }
     
+    /**
+     * gets the index of a user's score
+     * @param username username of the user
+     * @return index in theScore of the user
+     */
     public int userScoreLocation(String username){
         for(int i=0; i<theScore.size(); i++){
             if(theScore.get(i).getUsername().equals(username)){
@@ -161,7 +179,6 @@ public class ServerModel {
         return -1;
     }
 
-    //file methods
     /**
     * Reads in a file, and imports the users into a list
     * @param filename the name of the file that is being used to import data
@@ -200,6 +217,12 @@ public class ServerModel {
 		e.printStackTrace();
             }
 	}//writeFile
+
+    /**
+     * checks to see if a user account exists
+     * @param check user object being checked
+     * @return true if the user exists, false otherwise
+     */
     public boolean userExists(User check){
         for(int i=0; i<userList.size(); i++){
             if(userList.get(i).getUsername().equalsIgnoreCase(check.getUsername())){
@@ -209,6 +232,10 @@ public class ServerModel {
         return false;
     }//userExists
     
+    /**
+     * reads in a file, and imports the scores
+     * @param filename name of the score file
+     */
     public void readScoreFile(String filename){
     Scanner infile = null;
 	try{
@@ -226,6 +253,10 @@ public class ServerModel {
         }//while
     }//getFile
     
+    /**
+     * writes to a file the scores
+     * @param filename name of the score file
+     */
     public void writeScoreFile(String filename){
         try {
         	PrintWriter outfile = new PrintWriter(filename + ".txt");
