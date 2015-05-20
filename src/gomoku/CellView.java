@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gomoku;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-/**
- *
- * @author jeffthechef14
- */
 public class CellView extends javax.swing.JPanel {
     
     //vars
@@ -28,6 +20,11 @@ public class CellView extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Constructs a cell view
+     * @param row the row of the cell
+     * @param col the col of the cell
+     */
     public CellView(int row, int col) {
         initComponents();
         this.row = row;
@@ -82,38 +79,56 @@ public class CellView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cellBTNActionPerformed
   
+    /**
+     * gets the row of the cell
+     * @return Cell row
+     */
     public int getRow(){
         return this.row;
     }
     
+    /**
+     * gets the col of the cell
+     * @return Cell col
+     */
     public int getCol(){
         return this.col;
     }
     
+    /**
+     * sets the boolean locked to true
+     */
     public void lockCell(){
         this.locked = true;
     }
     
+    /**
+     * checks to see if the cell is locked
+     * @return true if cell is locked, else false
+     */
     public boolean isLocked(){
         return this.locked;
     }
     
+    /**
+     * checks to see if the cell has been clicked
+     * @return true if clicked, else false
+     */
     public boolean isClicked(){
         return this.clicked;
     }
     
+    /**
+     * adds a listener to the cell view
+     * @param listenerForClick
+     */
     public void cellListener(ActionListener listenerForClick){
         cellBTN.addActionListener(listenerForClick);
     }
     
-    public void setText(String text){
-        cellBTN.setText(text);
-    }
-    
-    public void eraseText(){
-        cellBTN.setText(null);
-    }
-    
+    /**
+     * clicks the cell ? if not clicked: if clicked
+     */
     public void click(){
         if(this.clicked = true){
             setCellColor(GomokuVariables.blank);
@@ -125,6 +140,10 @@ public class CellView extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * sets the background of the cell button
+     * @param theColor the color that the background will be set to
+     */
     public void setCellColor(Color theColor){
         this.theColor = theColor;
         cellBTN.setBackground(theColor);

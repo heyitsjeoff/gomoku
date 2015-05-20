@@ -4,10 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class Cell extends JButton{
     private int row, col;
     private boolean locked;
@@ -15,9 +11,10 @@ public class Cell extends JButton{
     private boolean clicked;
     
     /**
-     *
-     * @param row
-     * @param col
+     * Constructs a cell object with a reference to the location of the
+     * cell within a 2d array
+     * @param row the row of the cell
+     * @param col the col of the cell
      */
     public Cell(int row, int col) {
         this.row = row;
@@ -31,46 +28,46 @@ public class Cell extends JButton{
     }
     
     /**
-     *
-     * @return
+     * gets the row of the cell
+     * @return Cell row
      */
     public int getRow(){
         return this.row;
     }
     
     /**
-     *
-     * @return
+     * gets the col of the cell
+     * @return Cell col
      */
     public int getCol(){
         return this.col;
     }
     
     /**
-     *
+     * sets the boolean locked to true
      */
     public void lockCell(){
         this.locked = true;
     }
     
     /**
-     *
-     * @return
+     * checks to see if the cell is locked
+     * @return true if cell is locked, else false
      */
     public boolean isLocked(){
         return this.locked;
     }
     
     /**
-     *
-     * @return
+     * checks to see if the cell has been clicked
+     * @return true if clicked, else false
      */
     public boolean isClicked(){
         return this.clicked;
     }
         
     /**
-     *
+     * clicks the cell ? if not clicked: if clicked
      */
     public void click(){
         if(this.clicked){
@@ -84,8 +81,8 @@ public class Cell extends JButton{
     }
         
     /**
-     *
-     * @param listenerForCell
+     * adds a listener to the cell object
+     * @param listenerForCell listener being added
      */
     public void cellListener(ActionListener listenerForCell){
         this.addActionListener(listenerForCell);
