@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import java.awt.Color;
@@ -10,11 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-
-/**
- *
- * @author jeffthechef14
- */
 public class GameClientController {
     
     private GameView2 theView;
@@ -24,15 +14,25 @@ public class GameClientController {
     private LobbyController theLobbyController;
     private ConnectionForGame theConnection;
     
+    /**
+     * creates the controler for the client of the game
+     * @param theView
+     * @param theModel
+     * @param theConnection
+     * @param theLobbyController
+     */
     public GameClientController(GameView2 theView, GameModel theModel, ConnectionForGame theConnection, LobbyController theLobbyController){
         this.theView=theView;
-        //this.theView.setMyMove(false);
         this.theModel=theModel;
         this.theConnection=theConnection;
         this.theView.sendMoveListener(new SendMoveListener());
         this.theLobbyController = theLobbyController;
     }
     
+    /**
+     * updates the board from the opponent move
+     * @param move opponent move in string form
+     */
     public void updateBoard(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[0]);
@@ -45,21 +45,34 @@ public class GameClientController {
         this.myMove = true;
     }
     
+    /**
+     * lose pop up and returns to the lobby
+     */
     public void lose(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverLose);
         returnToLobby();
     }
     
+    /**
+     * win pop up and returns to the lobby
+     */
     public void win(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverWin);
         returnToLobby();
     }
     
+    /**
+     * tie pop up and returns to the lobby
+     */
     public void tie(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverTie);
         returnToLobby();
     }
     
+    /**
+     *  disables the cell move made by the player
+     * @param move string representation of the move
+     */
     public void disableMyMoveCell(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[1]);
@@ -67,18 +80,27 @@ public class GameClientController {
         theView.disableCell(row, col);
     }
     
+    /**
+     * returns to the lobby view
+     */
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.setView(true);
         this.theLobbyController.writeToConnection(GomokuVariables.REQUESTLIST);
     }
     
+    /**
+     * initially draws the board
+     */
     public void drawBoard(){
         CellListener listener = new CellListener();
         this.theView.drawBoard(this.theModel.getRows(), this.theModel.getCols(), listener);
         this.theView.setVisible(true);
     }
     
+    /**
+     * ActionListener for the send move button
+     */
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -107,6 +129,9 @@ public class GameClientController {
         }        
     }
     
+    /**
+     * ActionListener for the cells of the board
+     */
     class CellListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

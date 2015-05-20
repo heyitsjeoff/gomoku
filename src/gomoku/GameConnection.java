@@ -1,4 +1,3 @@
-
 package gomoku;
 
 import java.io.BufferedReader;
@@ -9,7 +8,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class GameConnection extends Thread{
     
@@ -23,6 +21,12 @@ public class GameConnection extends Thread{
     private byte[] byteArray = new byte[2000];
     private String connectionIP;
     
+    /**
+     * creates a gameConnection object for the client player
+     * @param player2 socket of player2
+     * @param theGameHostController the controller of the host
+     * @throws IOException
+     */
     public GameConnection(Socket player2, GameHostController theGameHostController) throws IOException{
         this.player2 = player2;
         this.theGameHostController = theGameHostController;
@@ -32,6 +36,9 @@ public class GameConnection extends Thread{
         this.connectionIP = this.player2.getRemoteSocketAddress().toString().substring(1);
     }
     
+    /**
+     * handles the messages sent in and acts on the controller
+     */
     public void run(){
         boolean connected = true;
         String message = "";
@@ -61,6 +68,10 @@ public class GameConnection extends Thread{
         }
     }
     
+    /**
+     * sends a byte array of a string to the output stream
+     * @param message string being sent
+     */
     public void write(String message){
         byte[] buffOut;
         try {

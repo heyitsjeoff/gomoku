@@ -3,10 +3,6 @@ package gomoku;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class CreateAccountView extends javax.swing.JFrame {
 
     /**

@@ -25,7 +25,12 @@ public class GameHostController implements Runnable{
     
     private boolean myMove;
     
-
+    /**
+     * creates the host controller for the game
+     * @param theModel board model for the game
+     * @param theView GUI to be used for the game
+     * @param theLobbyController controller for the lobby
+     */
     public GameHostController(GameModel theModel, GameView2 theView, LobbyController theLobbyController){
         try {
             serverSocket = new ServerSocket(8081);
@@ -39,11 +44,17 @@ public class GameHostController implements Runnable{
         this.theLobbyController = theLobbyController;
     }
     
+    /**
+     * starts the thread
+     */
     public void listen(){
         worker = new Thread(this);
         worker.start();
     }
 
+    /**
+     * accepts a new gameConnection
+     */
     @Override
     public void run() {
          boolean accepting = true;
@@ -60,6 +71,10 @@ public class GameHostController implements Runnable{
         //play
     }
     
+    /**
+     * updates the board from the opponent move
+     * @param move
+     */
     public void updateBoard(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[0]);
@@ -72,6 +87,9 @@ public class GameHostController implements Runnable{
         this.myMove = true;
     }
     
+    /**
+     * returns to the lobby view
+     */
     public void returnToLobby(){
         theView.dispose();
         this.theLobbyController.setView(true);
@@ -83,21 +101,34 @@ public class GameHostController implements Runnable{
         }
     }
     
+    /**
+     * lose pop up and returns to the lobby view
+     */
     public void lose(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverLose);
         returnToLobby();
     }
     
+    /**
+     * win popup and returns to the lobby view
+     */
     public void win(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverWin);
         returnToLobby();
     }
     
+    /**
+     * tie popup and returns to the lobby view
+     */
     public void tie(){
         JOptionPane.showMessageDialog(null, GomokuVariables.gameOverTie);
         returnToLobby();
     }
     
+    /**
+     * disables the cell move made by the player
+     * @param move string representation of the move
+     */
     public void disableMyMoveCell(String move){
         String[] split = move.split("\\s+");
         int row = Integer.parseInt(split[1]);
@@ -105,12 +136,18 @@ public class GameHostController implements Runnable{
         theView.disableCell(row, col);
     }
     
+    /**
+     * initally draws the board
+     */
     public void drawBoard(){
         CellListener listener = new CellListener();
         this.theView.drawBoard(this.theModel.getRows(), this.theModel.getCols(), listener);
         this.theView.setVisible(true);
     }
     
+    /**
+     * Action listener for the cells of the board
+     */
     class CellListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -133,6 +170,9 @@ public class GameHostController implements Runnable{
         }        
     }
 
+    /**
+     * ActionListener for the send move button
+     */
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -165,7 +205,5 @@ public class GameHostController implements Runnable{
             }
         }        
     }
-    
-    
     
 }
