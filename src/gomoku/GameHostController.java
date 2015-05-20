@@ -110,24 +110,51 @@ public class GameHostController implements Runnable{
         this.theView.drawBoard(this.theModel.getRows(), this.theModel.getCols(), listener);
         this.theView.setVisible(true);
     }
+    
+    class CellListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Cell cell  = (Cell) e.getSource();
+            //A
+            if(theModel.getCount()==0 && myMove==true){
+                cell.click();
+                theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
+                theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
+                theModel.addToCount();
+                theModel.addToTokenCount();
+            }
+            //B
+            else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
+                cell.click();
+                theModel.setCell(cell.getRow(), cell.getCol(), ' ');
+                theModel.subtractFromCount();
+                theModel.subtractFromTokenCount();
+            }
+        }        
+    }
 
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            //C
             if(theModel.getCount()==0){
                 theView.append(GomokuVariables.makeMove);
             }
+            //D
             else{
+                //E
                 if(theModel.gameOver(GomokuVariables.MYTOKEN)){
                     theGameConnection.write(GomokuVariables.YOULOSE + " " + theModel.getNextMove());
                     myMove = false;
                     win();
                 }
+                //F
                 else if(theModel.boardFull()){
                     theGameConnection.write(GomokuVariables.TIE + " " + theModel.getNextMove());
                     myMove = false;
                     tie();
                 }
+                //G
                 else{
                     theGameConnection.write(theModel.getNextMove());
                     myMove = false;
@@ -139,24 +166,6 @@ public class GameHostController implements Runnable{
         }        
     }
     
-    class CellListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Cell cell  = (Cell) e.getSource();
-            if(theModel.getCount()==0 && myMove==true){
-                cell.click();
-                theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
-                theModel.setNextMove(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
-                theModel.addToCount();
-                theModel.addToTokenCount();
-            }
-            else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
-                cell.click();
-                theModel.setCell(cell.getRow(), cell.getCol(), ' ');
-                theModel.subtractFromCount();
-                theModel.subtractFromTokenCount();
-            }
-        }        
-    }
+    
     
 }

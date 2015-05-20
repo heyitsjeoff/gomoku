@@ -39,8 +39,7 @@ public class AuthController{
     private int port = GomokuVariables.initialPort;
     
     /**
-     * Creates the main controller for Gomoku
-     * class name is deceiving 
+     * Creates the Authorization controller for Gomoku
      * @param theView view for the controller
      */
     public AuthController (MainView theView){
@@ -55,6 +54,10 @@ public class AuthController{
         theConnection = new Connection(ip, port);
     }
     
+    /**
+     * Logs the user in by instantiating the variables 
+     * for the lobby and setting the views
+     */
     public void login(){
         this.theLobbyModel = new LobbyModel();
         this.theLobbyModel.setUsername(theView.getUsername());
@@ -64,6 +67,9 @@ public class AuthController{
         this.theLobbyController = new LobbyController(theLobbyView, this.theLobbyModel, theConnection);
     }
     
+    /**
+     * Displays in the view that the user has not logged in
+     */
     public void notLogin(){
         this.theView.appendMSG(GomokuVariables.invalid);
     }
@@ -112,6 +118,10 @@ public class AuthController{
         this.theConnection.setPort(number);
     }//setPort
     
+    /**
+     * establishes the streams to the server, if they have not been already
+     * @return true if streams are created
+     */
     public boolean checkConnection(){
         if(this.streamsConnected==false){
             if(ipChanged){
@@ -128,6 +138,9 @@ public class AuthController{
         return false;
     }
     
+    /**
+     * attempts a login a from the main view
+     */
     public void tryLogin(){
         if(!theView.getUsername().isEmpty() && !theView.getPassword().isEmpty()){
             String enteredUsername = theView.getUsername();
@@ -140,6 +153,9 @@ public class AuthController{
         }
     }
     
+    /**
+     * logs in using an anon account
+     */
     public void anon(){
         theCAView = new CreateAccountView();
         caController = new CreateAccountController(theCAView, theConnection, theView);
@@ -152,6 +168,10 @@ public class AuthController{
     }
     
     //---Listeners----------------------------------------------------
+    
+    /**
+     * ActionListener for the anon button
+     */
     class AnonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -160,6 +180,9 @@ public class AuthController{
         }
     }
     
+    /**
+     * ActionListener for the offline button
+     */
     class OfflineListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -195,6 +218,10 @@ public class AuthController{
         }//actionPerformed
     }//IPListener
     
+    /**
+     * ActionListener for the change port menu item
+     * prompts the user for a new server port
+     */
     class PortListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
