@@ -1,7 +1,3 @@
-/*
- * Source: Modified code of Jeoff Villanueva's submission for Lab 1 of CSCE 270 in Spring 2014
-http://stackoverflow.com/questions/6835682/how-to-disable-gui-button-in-java
- */
 package gomoku;
 
 import java.awt.BorderLayout;

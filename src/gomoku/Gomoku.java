@@ -1,8 +1,7 @@
 /**
  * Program to play Gomoku
- * Usage: java Gomoku <ip of server>
- * ip not required
- * http://www.quora.com/How-do-I-generate-a-positive-7-digit-random-number-in-Java
+ * Usage: java Gomoku <ip of server> <port of server>
+ * ip and port required for connecting to the server
  */
 
 /*
@@ -11,11 +10,10 @@ Chase Luplow
 Junhao Zeng
 John Lyon
 Jeoff Villanueva
-Authentication
+Final Submissions
 CSCE 320 Spring
 Date 20 May 2015
 Java used in Netbeans
-Sources: cipherspeak.tk - for encryption
 */
 
 package gomoku;
@@ -25,13 +23,10 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author heyitsjeoff
- */
 public class Gomoku {
     
     /**
+     * starts the game controller
      * @param args the command line arguments
      */
     public static void main(String[] args) {

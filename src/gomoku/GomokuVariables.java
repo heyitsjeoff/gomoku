@@ -41,6 +41,9 @@ public class GomokuVariables {
     public static final String DECLINETO = "DECLINETO";
     public static final String DECLINEFROM = "DECLINEFROM";
     public static final String STATSRETURN = "STATSRETURN";
+    public static final String ACCEPTTO = "ACCEPTTO ";
+    public static final String DECLINETOSPACE = "DECLINETO ";
+    public static final String WITHDRAWTO = "WITHDRAWTO ";
     
     //lobby vars
     public static final String welcome = "Welcome to the Lobby ";

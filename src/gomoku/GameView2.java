@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomoku;
 
 import java.awt.Color;
@@ -11,10 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-/**
- *
- * @author jeffthechef14
- */
 public class GameView2 extends javax.swing.JFrame {
 
     private Cell[][] theBoard;
@@ -163,6 +154,12 @@ public class GameView2 extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * draws the board for the game
+     * @param row number of rows for the game
+     * @param col number of cols for the game
+     * @param cellListener ActionListener being added to the cells
+     */
     public void drawBoard(int row, int col, ActionListener cellListener){
         
         this.row = row;
@@ -182,11 +179,22 @@ public class GameView2 extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * updates a cell color
+     * @param row row of the cell
+     * @param col col of the cell
+     * @param theColor color the cell is being updated to
+     */
     public void updateCell(int row, int col, Color theColor){
         theBoard[row][col].setBackground(theColor);
         theBoard[row][col].setEnabled(false);
     }
     
+    /**
+     * clicks the cell
+     * @param row row of the cell
+     * @param col col of the cell
+     */
     public void clickCell(int row, int col){
         if(!theBoard[row][col].isClicked()){
             theBoard[row][col].setBackground(GomokuVariables.myColor);
@@ -198,28 +206,51 @@ public class GameView2 extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * disables the cell button
+     * @param row row of the cell
+     * @param col col of the cell
+     */
     public void disableCell(int row, int col){
         theBoard[row][col].setEnabled(false);
     }
     
+    /**
+     * enables the sendMove button
+     */
     public void enableSend(){
         sendBTN.setEnabled(true);
         turnLabel.setText(GomokuVariables.MYTURN);
     }
     
+    /**
+     * disables the sendMove button
+     */
     public void disableSend(){
         sendBTN.setEnabled(false);
         turnLabel.setText(GomokuVariables.THEIRTURN);
     }
     
+    /**
+     * appends a string to the title
+     * @param message string for the title
+     */
     public void appendTitle(String message){
         this.setTitle(message);
     }
     
+    /**
+     * appends a string to the game feed
+     * @param message string for the game feed
+     */
     public void append(String message){
         this.gameFeedTA.append(message + "\n");
     }
 
+    /**
+     * adds an actionListener for the sendBTN
+     * @param listenerForSendBTN
+     */
     public void sendMoveListener(ActionListener listenerForSendBTN){
         sendBTN.addActionListener(listenerForSendBTN);
     }

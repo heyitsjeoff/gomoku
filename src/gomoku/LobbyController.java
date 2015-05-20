@@ -30,6 +30,12 @@ public class LobbyController{
 
     private ConnectionForGame connectionToGame;
 
+    /**
+     * creates the controller for the lobby
+     * @param theView gui of the lobby
+     * @param theLobbyModel model of the lobby
+     * @param theConnection connection object to write to the stream
+     */
     public LobbyController(LobbyView theView, LobbyModel theLobbyModel, Connection theConnection){
         this.theView = theView;
         this.theView.opponentStatsListener(new StatListener());
@@ -44,10 +50,19 @@ public class LobbyController{
         this.theConnection.write("STATS;");
     }
     
+    /**
+     * writes a connection to the output stream
+     * @param message string of the message
+     */
     public void writeToConnection(String message){
         this.theConnection.write(message);
     }
       
+    /**
+     * constructs the DefaultListModel for the online list
+     * @param onlineUsers string representation of the online users
+     * @return DefualtListModel version of the strings being passed in
+     */
     public DefaultListModel<String> constructOnlineListDLM(String onlineUsers){
         this.dlm = new DefaultListModel<String>();
         String[] usernames = onlineUsers.split("\\s+");
@@ -58,6 +73,11 @@ public class LobbyController{
         return this.dlm;
     }
     
+    /**
+     * constructs the DefualtLIstmodel for incoming invites
+     * @param manyUsernames string representation of the incoming invites
+     * @return DefaultLIstModel version of the string being passed in
+     */
     public DefaultListModel<String> updateIncomingList(String manyUsernames){
         this.idlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
@@ -67,33 +87,58 @@ public class LobbyController{
         return this.idlm;
     }
     
+    /**
+     * empties the incoming and outgoing list
+     */
     public void clearIncomingOutgoing(){
         theLobbyModel.clearIncomingOutgoing();
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
         theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
+    /**
+     * adds a user to the incoming list
+     * @param username username of the a challenger
+     */
     public void addToIncomingList(String username){
         theLobbyModel.addToIncomingList(username);
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
         this.theView.setTitle(GomokuVariables.pendingRequest);
     }
     
+    /**
+     * removes a player from the incoming list
+     * @param username username of the player being removed
+     */
     public void removeFromIncomingList(String username){
         theLobbyModel.removeFromIncomingList(username);
         theView.updateIncomingList(updateIncomingList(theLobbyModel.updateIncomingList()));
     }
     
+    /**
+     *  adds a user to the outgoing list
+     * @param username username of the player being invites
+     */
     public void addToOutgoingList(String username){
         theLobbyModel.addToOutgoingList(username);
         theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
+    /**
+     * removes a player from the outgoing list
+     * @param username username of the player being removed
+     */
     public void removeFromOutgoingList(String username){
         theLobbyModel.removeFromOutgoingList(username);
         theView.updateOutgoingList(updateOutgoingList(theLobbyModel.updateOutgoingList()));
     }
     
+    /**
+     * constructs the DefualtLIstmodel for outgoing invites
+     * @param manyUsernames string representation of the outgoing invites
+     * @return DefaultLIstModel version of the string being passed in
+     * @return DefaultLIstModel version of the string being passed in
+     */
     public DefaultListModel<String> updateOutgoingList(String manyUsernames){
         this.odlm = new DefaultListModel<String>();
         String[] usernames = manyUsernames.split("\\s+");
@@ -103,27 +148,46 @@ public class LobbyController{
         return this.odlm;
     }
     
+    /**
+     * accepts an invite
+     * @param usernameAccepted username of the player being accepted
+     */
     public void acceptRequest(String usernameAccepted){
-        //removeFromIncomingList(usernameAccepted);
-        theConnection.write("ACCEPTTO "+usernameAccepted+";");
+        theConnection.write(GomokuVariables.ACCEPTTO+usernameAccepted+";");
         startGame();
     }
     
+    /**
+     * rejects an invite
+     * @param usernameDeclined username of the player being declined
+     */
     public void rejectRequest(String usernameDeclined){
-        theConnection.write("DECLINETO "+ usernameDeclined+";");
+        theConnection.write(GomokuVariables.DECLINETOSPACE+ usernameDeclined+";");
         removeFromIncomingList(usernameDeclined);
     }
     
+    /**
+     * withdraws an invite
+     * @param usernameWithdrawn username of the player being withdrawn
+     */
     public void withdrawRequest(String usernameWithdrawn){
-        theConnection.write("WITHDRAWTO " + usernameWithdrawn + ";");
+        theConnection.write(GomokuVariables.WITHDRAWTO + usernameWithdrawn + ";");
         removeFromOutgoingList(usernameWithdrawn);
     }
     
-    //adjust views
-   public void setView(boolean value){
+    /**
+     * enables or disables the view
+     * @param value boolean value for the setVisible method
+     */
+       public void setView(boolean value){
        this.theView.setVisible(value);
    }
     
+    /**
+     * clears the incoming and outgoing list
+     * instantiates the model and view
+     * creates the host controller and tells it to start the thread
+     */
     public void startGame(){
         clearIncomingOutgoing();
         this.theView.setVisible(false);
@@ -138,6 +202,12 @@ public class LobbyController{
         this.theGameModel.setPlayerHostName(theConnection.getUsername());
     }
     
+    /**
+     * clears the incoming and outgoing list
+     * instantiates the model and view
+     * connects to the host
+     * @param hostIP ip of the host
+     */
     public void connectToHost(String hostIP){
         clearIncomingOutgoing();
         connectionToGame = new ConnectionForGame(hostIP);
@@ -156,15 +226,27 @@ public class LobbyController{
         connectionToGame.setGameClientController(this.theGameClientController);
     }
     
+    /**
+     * gets a reference to the client controller
+     * @return client controller
+     */
     public GameClientController getClientController(){
         return this.theGameClientController;
     }
     
+    /**
+     * stores the string of the scores to the model
+     * @param fullList
+     */
     public void storeStats(String fullList){
         this.theLobbyModel.storeInitStats(fullList);
         displayMyStats(this.theLobbyModel.getStats(this.theLobbyModel.getUsername()));
     }
     
+    /**
+     * displays this player's stas on the view
+     * @param stats string representation of the score
+     */
     public void displayMyStats(String stats){
         String[] temp = stats.split("\\s+");
         this.theView.displayMyStats("WINS: \t"+temp[0]);
@@ -172,6 +254,10 @@ public class LobbyController{
         this.theView.displayMyStats("DRAWS: \t"+temp[2]);
     }
     
+    /**
+     * displays the oppenent's stats on the view
+     * @param stats string representation of the score
+     */
     public void displayOppStats(String stats){
         String[] temp = stats.split("\\s+");
         this.theView.clearOppStats();
@@ -181,6 +267,9 @@ public class LobbyController{
     }
     
     //Listeners
+    /**
+     * ActionListener for the accept button
+     */
     class AcceptListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -188,6 +277,9 @@ public class LobbyController{
         }
     }
     
+    /**
+     * ActionListener for the reject button
+     */
     class RejectListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -195,6 +287,9 @@ public class LobbyController{
         }
     }
     
+    /**
+     * ActionLIstener for the stats button
+     */
     class StatListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -204,8 +299,7 @@ public class LobbyController{
     }
         
     /**
-     * Listener for the back button of Create Account view
-     * hides the Create Account View and displays the main view
+     * ActionListener for the challenge button
      */
     class ChallengeListener implements ActionListener{
         @Override
@@ -219,7 +313,9 @@ public class LobbyController{
         }//actionPerformed
     }//backListener
     
-    
+    /**
+     * ActionListener for the withdraw button
+     */
     class WithdrawListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
