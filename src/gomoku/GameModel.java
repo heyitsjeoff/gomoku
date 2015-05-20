@@ -87,7 +87,6 @@ public class GameModel {
      */
     public void subtractFromTokenCount(){
         tokenCount--;
-        System.out.println(tokenCount);
     }
     
     /**

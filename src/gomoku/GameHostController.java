@@ -152,7 +152,6 @@ public class GameHostController implements Runnable{
         @Override
         public void actionPerformed(ActionEvent e) {
             Cell cell  = (Cell) e.getSource();
-            //A
             if(theModel.getCount()==0 && myMove==true){
                 cell.click();
                 theModel.setCell(cell.getRow(), cell.getCol(), GomokuVariables.MYTOKEN);
@@ -160,7 +159,6 @@ public class GameHostController implements Runnable{
                 theModel.addToCount();
                 theModel.addToTokenCount();
             }
-            //B
             else if(theModel.getCount()==1 && cell.getBackground().equals((Color.blue)) && myMove == true){
                 cell.click();
                 theModel.setCell(cell.getRow(), cell.getCol(), ' ');
@@ -176,25 +174,20 @@ public class GameHostController implements Runnable{
     class SendMoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //C
             if(theModel.getCount()==0){
                 theView.append(GomokuVariables.makeMove);
             }
-            //D
             else{
-                //E
                 if(theModel.gameOver(GomokuVariables.MYTOKEN)){
                     theGameConnection.write(GomokuVariables.YOULOSE + " " + theModel.getNextMove());
                     myMove = false;
                     win();
                 }
-                //F
                 else if(theModel.boardFull()){
                     theGameConnection.write(GomokuVariables.TIE + " " + theModel.getNextMove());
                     myMove = false;
                     tie();
                 }
-                //G
                 else{
                     theGameConnection.write(theModel.getNextMove());
                     myMove = false;
